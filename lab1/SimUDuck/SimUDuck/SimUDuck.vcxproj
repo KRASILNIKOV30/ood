@@ -131,6 +131,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\DuckFunctions.h" />
+    <ClInclude Include="lib\Duck\Dance\DanceNoWay.h" />
+    <ClInclude Include="lib\Duck\Dance\DancingMinuet.h" />
+    <ClInclude Include="lib\Duck\Dance\DancingWaltz.h" />
+    <ClInclude Include="lib\Duck\Dance\IDanceBehavior.h" />
     <ClInclude Include="lib\Duck\DecoyDuck.h" />
     <ClInclude Include="lib\Duck\Duck.h" />
     <ClInclude Include="lib\Duck\Fly\FlyNoWay.h" />

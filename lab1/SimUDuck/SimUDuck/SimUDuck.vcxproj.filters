@@ -62,5 +62,17 @@
     <ClInclude Include="lib\DuckFunctions.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="lib\Duck\Dance\DancingWaltz.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Duck\Dance\IDanceBehavior.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Duck\Dance\DanceNoWay.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Duck\Dance\DancingMinuet.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
