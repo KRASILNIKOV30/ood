@@ -127,7 +127,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="SimUDuck_tests.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\SimUDuck\lib\DuckFunctions.h" />
+    <ClInclude Include="..\SimUDuck\lib\Duck\DecoyDuck.h" />
+    <ClInclude Include="..\SimUDuck\lib\Duck\Duck.h" />
+    <ClInclude Include="..\SimUDuck\lib\Duck\Fly\FlyNoWay.h" />
+    <ClInclude Include="..\SimUDuck\lib\Duck\Fly\FlyWithWings.h" />
+    <ClInclude Include="..\SimUDuck\lib\Duck\Fly\IFlyBehavior.h" />
+    <ClInclude Include="..\SimUDuck\lib\Duck\MallardDuck.h" />
+    <ClInclude Include="..\SimUDuck\lib\Duck\ModelDuck.h" />
+    <ClInclude Include="..\SimUDuck\lib\Duck\Quack\IQuakBehavior.h" />
+    <ClInclude Include="..\SimUDuck\lib\Duck\Quack\MuteQuackBehavior.h" />
+    <ClInclude Include="..\SimUDuck\lib\Duck\Quack\QuackBehavior.h" />
+    <ClInclude Include="..\SimUDuck\lib\Duck\Quack\SqueakBehavior.h" />
+    <ClInclude Include="..\SimUDuck\lib\Duck\RedheadDuck.h" />
+    <ClInclude Include="..\SimUDuck\lib\Duck\RubberDuck.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
