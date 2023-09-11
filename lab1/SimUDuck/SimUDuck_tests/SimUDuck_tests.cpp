@@ -23,7 +23,7 @@ SCENARIO_METHOD(CoutBufferFixture, "Play with mallard duck")
 
 		THEN("Mallard duck can quack, flying with wings and dancing")
 		{
-			CHECK(buffer.str() == "I'm mallard duck\nQuack Quack!!!\nI'm flying with wings!!\nI'm dancing a waltz\n\n");
+			CHECK(buffer.str() == "I'm mallard duck\nQuack Quack!!!\n1: I'm flying with wings!!\nI'm dancing a waltz\n\n");
 		}
 	}
 }
@@ -37,7 +37,7 @@ SCENARIO_METHOD(CoutBufferFixture, "Play with redhead duck")
 
 		THEN("Redhead duck can quack, flying with wings and dancing")
 		{
-			CHECK(buffer.str() == "I'm redhead duck\nQuack Quack!!!\nI'm flying with wings!!\nI'm dancing a minuet\n\n");
+			CHECK(buffer.str() == "I'm redhead duck\nQuack Quack!!!\n1: I'm flying with wings!!\nI'm dancing a minuet\n\n");
 		}
 	}
 }
@@ -94,7 +94,7 @@ SCENARIO_METHOD(CoutBufferFixture, "Change duck flying")
 
 		THEN("Model duck can quack and flying with wings")
 		{
-			CHECK(buffer.str() == "I'm model duck\nQuack Quack!!!\nI'm flying with wings!!\n\n");
+			CHECK(buffer.str() == "I'm model duck\nQuack Quack!!!\n1: I'm flying with wings!!\n\n");
 		}
 	}
 }

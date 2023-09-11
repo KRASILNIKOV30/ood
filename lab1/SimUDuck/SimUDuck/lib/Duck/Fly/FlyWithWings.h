@@ -2,14 +2,15 @@
 #define FLYWITHWINGS_H
 
 #include "IFlyBehavior.h"
-#include <iostream>
+#include "FlyCounter.h"
 
-class FlyWithWings : public IFlyBehavior
+class FlyWithWings : public FlyCounter 
 {
 public:
-	void Fly() override
+	void Fly()
 	{
-		std::cout << "I'm flying with wings!!" << std::endl;
+		FlyCounter::Fly();
+		std::cout << m_flyCounter << ": I'm flying with wings!!" << std::endl;
 	}
 };
 

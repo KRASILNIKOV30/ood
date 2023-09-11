@@ -137,6 +137,7 @@
     <ClInclude Include="lib\Duck\Dance\IDanceBehavior.h" />
     <ClInclude Include="lib\Duck\DecoyDuck.h" />
     <ClInclude Include="lib\Duck\Duck.h" />
+    <ClInclude Include="lib\Duck\Fly\FlyCounter.h" />
     <ClInclude Include="lib\Duck\Fly\FlyNoWay.h" />
     <ClInclude Include="lib\Duck\Fly\FlyWithWings.h" />
     <ClInclude Include="lib\Duck\Fly\IFlyBehavior.h" />
