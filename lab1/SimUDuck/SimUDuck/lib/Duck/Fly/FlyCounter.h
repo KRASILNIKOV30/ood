@@ -10,6 +10,11 @@ public:
 		m_flyCounter++;
 	}
 
-protected:
+	int GetFlyCounter() const
+	{
+		return m_flyCounter;
+	}
+
+private:
 	int m_flyCounter = 0;
 };

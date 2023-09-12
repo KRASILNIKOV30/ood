@@ -1,8 +1,9 @@
 #ifndef LAB01_SIMUDUCK_IFLYBEHAVIOR_H
 #define LAB01_SIMUDUCK_IFLYBEHAVIOR_H
 
-struct IFlyBehavior
+class IFlyBehavior
 {
+public:
 	virtual ~IFlyBehavior(){};
 	virtual void Fly() = 0;
 };

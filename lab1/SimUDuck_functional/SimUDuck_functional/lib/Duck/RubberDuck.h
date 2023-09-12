@@ -19,8 +19,6 @@ public:
 	{
 		std::cout << "I'm rubber duck" << std::endl;
 	}
-
-	void Dance() override {}
 };
 
 #endif

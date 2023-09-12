@@ -1,8 +1,9 @@
 #ifndef IQUAKBEHAVIOR_H
 #define IQUAKBEHAVIOR_H
 
-struct IQuackBehavior
+class IQuackBehavior
 {
+public:
 	virtual ~IQuackBehavior(){};
 	virtual void Quack() = 0;
 };

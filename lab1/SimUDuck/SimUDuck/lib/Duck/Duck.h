@@ -22,7 +22,9 @@ public:
 		: m_quackBehavior(std::move(quackBehavior))
 		, m_danceBehavior(std::move(danceBehavior))
 	{
+		//Добавить assert на полет и танцы
 		assert(m_quackBehavior);
+		assert(m_danceBehavior);
 		SetFlyBehavior(std::move(flyBehavior));
 	}
 

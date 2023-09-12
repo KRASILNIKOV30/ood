@@ -13,7 +13,7 @@ class Duck
 public:
 	Duck
 	(
-		FlyStrategy&& flyBehavior,
+		Strategy&& flyBehavior,
 		Strategy&& quackBehavior,
 		Strategy&& danceBehavior
 	)
@@ -21,6 +21,8 @@ public:
 		, m_danceBehavior(std::move(danceBehavior))
 	{
 		assert(m_quackBehavior);
+		assert(m_danceBehavior);
+		//Добавить assert
 		SetFlyBehavior(std::move(flyBehavior));
 	}
 
@@ -36,7 +38,7 @@ public:
 
 	void Fly()
 	{
-		m_flyBehavior(m_flycounter);
+		m_flyBehavior();
 	}
 
 	virtual void Dance()
@@ -44,7 +46,7 @@ public:
 		m_danceBehavior();
 	}
 
-	void SetFlyBehavior(FlyStrategy&& flyBehavior)
+	void SetFlyBehavior(Strategy&& flyBehavior)
 	{
 		assert(flyBehavior);
 		m_flyBehavior = std::move(flyBehavior);
@@ -54,10 +56,9 @@ public:
 	virtual ~Duck() = default;
 
 private:
-	FlyStrategy m_flyBehavior;
+	Strategy m_flyBehavior;
 	Strategy m_quackBehavior;
 	Strategy m_danceBehavior;
-	int m_flycounter = 0;
 };
 
 #endif

@@ -4,14 +4,16 @@
 #include "IFlyBehavior.h"
 #include "FlyCounter.h"
 
-class FlyWithWings : public FlyCounter 
+class FlyWithWings : public IFlyBehavior 
 {
 public:
 	void Fly()
 	{
-		FlyCounter::Fly();
-		std::cout << m_flyCounter << ": I'm flying with wings!!" << std::endl;
+		std::cout << ++m_flyCounter << ": I'm flying with wings!!" << std::endl;
 	}
+
+private:
+	int m_flyCounter = 0;
 };
 
 #endif

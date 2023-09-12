@@ -12,6 +12,16 @@ struct CoutBufferFixture
 {
 	std::stringstream buffer;
 	std::streambuf* old = std::cout.rdbuf(buffer.rdbuf());
+
+	std::string Get()
+	{
+		return buffer.str();
+	}
+
+	std::string Clear()
+	{
+		buffer.str(std::string());
+	}
 };
 
 SCENARIO_METHOD(CoutBufferFixture, "Play with mallard duck")
@@ -95,6 +105,31 @@ SCENARIO_METHOD(CoutBufferFixture, "Change duck flying")
 		THEN("Model duck can quack and flying with wings")
 		{
 			CHECK(buffer.str() == "I'm model duck\nQuack Quack!!!\n1: I'm flying with wings!!\n\n");
+		}
+	}
+}
+
+SCENARIO_METHOD(CoutBufferFixture, "Mallard duck fly many times")
+{
+	WHEN("Play with mallard duck for the first time")
+	{
+		MallardDuck mallardDuck;
+		PlayWithDuck(mallardDuck);
+
+		THEN("Mallard duck fly for the first time")
+		{
+			CHECK(buffer.str() == "I'm mallard duck\nQuack Quack!!!\n1: I'm flying with wings!!\nI'm dancing a waltz\n\n");
+		}
+
+		AND_WHEN("Play with mallard duck for the second time")
+		{
+			buffer.str(std::string());
+			PlayWithDuck(mallardDuck);
+
+			THEN("Mallard duck fly for the second time")
+			{
+				CHECK(buffer.str() == "I'm mallard duck\nQuack Quack!!!\n2: I'm flying with wings!!\nI'm dancing a waltz\n\n");
+			}
 		}
 	}
 }
