@@ -10,7 +10,7 @@ class MallardDuck : public Duck
 {
 public:
 	MallardDuck()
-		: Duck(FlyWithWings, QuackBehavior, DanceWaltz)
+		: Duck(MakeFlyWithWings(), QuackBehavior, DanceWaltz)
 	{
 	}
 

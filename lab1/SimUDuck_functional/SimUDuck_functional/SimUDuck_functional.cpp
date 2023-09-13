@@ -22,7 +22,7 @@ int main()
 	ModelDuck modelDuck;
 	PlayWithDuck(modelDuck);
 
-	modelDuck.SetFlyBehavior(std::make_unique<FlyWithWings>());
+	modelDuck.SetFlyBehavior(std::make_unique<MakeFlyWithWings>());
 	PlayWithDuck(modelDuck);
 
 	return EXIT_SUCCESS;

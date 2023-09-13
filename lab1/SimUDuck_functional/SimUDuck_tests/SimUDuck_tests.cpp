@@ -12,16 +12,6 @@ struct CoutBufferFixture
 {
 	std::stringstream buffer;
 	std::streambuf* old = std::cout.rdbuf(buffer.rdbuf());
-
-	std::string Get()
-	{
-		return buffer.str();
-	}
-
-	std::string Clear()
-	{
-		buffer.str(std::string());
-	}
 };
 
 SCENARIO_METHOD(CoutBufferFixture, "Play with mallard duck")
@@ -99,7 +89,7 @@ SCENARIO_METHOD(CoutBufferFixture, "Change duck flying")
 	WHEN("Create model duck and change duck flying")
 	{
 		ModelDuck modelDuck;
-		modelDuck.SetFlyBehavior(FlyWithWings);
+		modelDuck.SetFlyBehavior(MakeFlyWithWings());
 		PlayWithDuck(modelDuck);
 
 		THEN("Model duck can quack and flying with wings")

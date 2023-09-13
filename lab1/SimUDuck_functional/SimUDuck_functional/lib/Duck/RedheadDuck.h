@@ -12,7 +12,7 @@ class RedheadDuck : public Duck
 {
 public:
 	RedheadDuck()
-		: Duck(FlyWithWings, QuackBehavior, DanceMinuet)
+		: Duck(MakeFlyWithWings(), QuackBehavior, DanceMinuet)
 	{
 	}
 
