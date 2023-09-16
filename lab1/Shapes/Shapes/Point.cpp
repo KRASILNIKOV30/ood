@@ -1,0 +1,18 @@
+#pragma once
+#include "Point.h"
+#include "Common.h"
+
+bool Point::operator==(Point const& right) const
+{
+	return IsEquals(x, right.x) && IsEquals(y, right.y);
+}
+
+Point& Point::operator+=(Point const& right)
+{
+	return *this = *this + right;
+}
+
+Point operator+(Point const left, Point const right)
+{
+	return Point{ left.x + right.x, left.y + right.y };
+}
