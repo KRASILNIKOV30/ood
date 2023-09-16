@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Исходные файлы\DrawingStrategy">
+      <UniqueIdentifier>{7117ab00-faaa-49b8-ac0a-6228ecb99dcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\DrawingStrategy">
+      <UniqueIdentifier>{94ead5e0-3bf3-44a8-a536-4d5af00ca570}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Shapes.cpp">
@@ -26,6 +32,9 @@
     </ClCompile>
     <ClCompile Include="CCanvas.cpp">
       <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="TriangleDrawingStrategy.cpp">
+      <Filter>Исходные файлы\DrawingStrategy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -43,6 +52,12 @@
     </ClInclude>
     <ClInclude Include="CCanvas.h">
       <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="IDrawingStrategy.h">
+      <Filter>Файлы заголовков\DrawingStrategy</Filter>
+    </ClInclude>
+    <ClInclude Include="TriangleDrawingStrategy.h">
+      <Filter>Файлы заголовков\DrawingStrategy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
