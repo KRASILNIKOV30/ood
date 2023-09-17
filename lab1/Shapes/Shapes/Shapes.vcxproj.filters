@@ -36,6 +36,21 @@
     <ClCompile Include="TriangleDrawingStrategy.cpp">
       <Filter>Исходные файлы\DrawingStrategy</Filter>
     </ClCompile>
+    <ClCompile Include="CircleDrawingStrategy.cpp">
+      <Filter>Исходные файлы\DrawingStrategy</Filter>
+    </ClCompile>
+    <ClCompile Include="RectangleDrawingStrategy.cpp">
+      <Filter>Исходные файлы\DrawingStrategy</Filter>
+    </ClCompile>
+    <ClCompile Include="LineDrawingStrategy.cpp">
+      <Filter>Исходные файлы\DrawingStrategy</Filter>
+    </ClCompile>
+    <ClCompile Include="TextDrawingStrategy.cpp">
+      <Filter>Исходные файлы\DrawingStrategy</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ICanvas.h">
@@ -58,6 +73,21 @@
     </ClInclude>
     <ClInclude Include="TriangleDrawingStrategy.h">
       <Filter>Файлы заголовков\DrawingStrategy</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleDrawingStrategy.h">
+      <Filter>Файлы заголовков\DrawingStrategy</Filter>
+    </ClInclude>
+    <ClInclude Include="RectangleDrawingStrategy.h">
+      <Filter>Файлы заголовков\DrawingStrategy</Filter>
+    </ClInclude>
+    <ClInclude Include="LineDrawingStrategy.h">
+      <Filter>Файлы заголовков\DrawingStrategy</Filter>
+    </ClInclude>
+    <ClInclude Include="TextDrawingStrategy.h">
+      <Filter>Файлы заголовков\DrawingStrategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -128,18 +128,28 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CCanvas.cpp" />
+    <ClCompile Include="CircleDrawingStrategy.cpp" />
     <ClCompile Include="Common.cpp" />
+    <ClCompile Include="LineDrawingStrategy.cpp" />
     <ClCompile Include="Point.cpp" />
+    <ClCompile Include="RectangleDrawingStrategy.cpp" />
+    <ClCompile Include="Shape.cpp" />
     <ClCompile Include="Shapes.cpp" />
+    <ClCompile Include="TextDrawingStrategy.cpp" />
     <ClCompile Include="TriangleDrawingStrategy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCanvas.h" />
+    <ClInclude Include="CircleDrawingStrategy.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="ICanvas.h" />
     <ClInclude Include="IDrawingStrategy.h" />
+    <ClInclude Include="LineDrawingStrategy.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="RectangleDrawingStrategy.h" />
+    <ClInclude Include="Shape.h" />
+    <ClInclude Include="TextDrawingStrategy.h" />
     <ClInclude Include="TriangleDrawingStrategy.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

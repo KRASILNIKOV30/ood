@@ -127,18 +127,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Shapes\CCanvas.cpp" />
+    <ClCompile Include="..\Shapes\CircleDrawingStrategy.cpp" />
     <ClCompile Include="..\Shapes\Common.cpp" />
+    <ClCompile Include="..\Shapes\LineDrawingStrategy.cpp" />
     <ClCompile Include="..\Shapes\Point.cpp" />
+    <ClCompile Include="..\Shapes\RectangleDrawingStrategy.cpp" />
+    <ClCompile Include="..\Shapes\Shape.cpp" />
+    <ClCompile Include="..\Shapes\TextDrawingStrategy.cpp" />
+    <ClCompile Include="..\Shapes\TriangleDrawingStrategy.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Point_tests.cpp" />
-    <ClCompile Include="Shapes_tests.cpp" />
+    <ClCompile Include="Shape_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Shapes\CCanvas.h" />
+    <ClInclude Include="..\Shapes\CircleDrawingStrategy.h" />
+    <ClInclude Include="..\Shapes\Color.h" />
     <ClInclude Include="..\Shapes\Common.h" />
+    <ClInclude Include="..\Shapes\ICanvas.h" />
+    <ClInclude Include="..\Shapes\IDrawingStrategy.h" />
+    <ClInclude Include="..\Shapes\LineDrawingStrategy.h" />
     <ClInclude Include="..\Shapes\Point.h" />
+    <ClInclude Include="..\Shapes\RectangleDrawingStrategy.h" />
+    <ClInclude Include="..\Shapes\Shape.h" />
+    <ClInclude Include="..\Shapes\TextDrawingStrategy.h" />
+    <ClInclude Include="..\Shapes\TriangleDrawingStrategy.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
