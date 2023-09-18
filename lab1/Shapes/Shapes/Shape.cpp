@@ -19,3 +19,8 @@ void Shape::SetColor(Color color)
 {
 	m_color = color;
 }
+
+void Shape::SetDrawingStrategy(std::unique_ptr<IDrawingStrategy>&& drawingStrategy)
+{
+	m_drawingStrategy = std::move(drawingStrategy);
+}

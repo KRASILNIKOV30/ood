@@ -146,3 +146,40 @@ SCENARIO_METHOD(MockCanvasFixture, "Text drawing")
 		}
 	}
 }
+
+SCENARIO_METHOD(MockCanvasFixture, "Change Shapes drawing strategy")
+{
+	GIVEN("Shape with triangle drawing strategy")
+	{
+		TriangleDrawingStrategy triangleDrawingStrategy(Point{ 1, 1 }, Point{ 2, 2 }, Point{ 3, 3 });
+		Shape shape(std::make_unique<TriangleDrawingStrategy>(triangleDrawingStrategy));
+
+		WHEN("Draw shape")
+		{
+			shape.Draw(mockCanvas.get());
+
+			THEN("Three lines drawn at canvas")
+			{
+				CHECK(output.str() ==
+					"Move to (1, 1)\n"
+					"Line to (2, 2)\n"
+					"Line to (3, 3)\n"
+					"Line to (1, 1)\n"
+				);
+			}
+
+			AND_WHEN("Draw shape with another drawing strategy")
+			{
+				CircleDrawingStrategy circleDrawingStrategy(Point{ 5, 7 }, 3);
+				shape.SetDrawingStrategy(std::make_unique<CircleDrawingStrategy>(circleDrawingStrategy));
+				output = std::stringstream();
+				shape.Draw(mockCanvas.get());
+
+				THEN("Ellipse drawn at canvas")
+				{
+					CHECK(output.str() == "Draw ellipse in (5, 7) with rx 3 and ry 3\n");
+				}
+			}
+		}
+	}
+}
