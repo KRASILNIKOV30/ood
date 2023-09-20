@@ -13,5 +13,4 @@ public:
 	virtual void SetColor(Color color) = 0;
 	virtual void DrawEllipse(Point center, double rx, double ry) = 0;
 	virtual void DrawText(Point leftTop, double fontSize, std::string text) = 0;
-	virtual void Render() = 0;
 };

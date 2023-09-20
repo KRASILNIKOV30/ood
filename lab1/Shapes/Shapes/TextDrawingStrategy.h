@@ -5,6 +5,9 @@ class TextDrawingStrategy : public IDrawingStrategy
 public:
 	TextDrawingStrategy(Point leftTop, double fontSize, std::string text);
 	void Draw(ICanvas& canvas) const final;
+	std::string GetType() const final;
+	ShapeParameters GetParams() const final;
+	void Move(Point vector) final;
 
 private:
 	Point m_leftTop;

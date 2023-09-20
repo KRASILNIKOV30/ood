@@ -16,3 +16,18 @@ void RectangleDrawingStrategy::Draw(ICanvas& canvas) const
 	canvas.LineTo(m_leftTop);
 
 }
+
+std::string RectangleDrawingStrategy::GetType() const
+{
+	return "rectangle";
+}
+
+ShapeParameters RectangleDrawingStrategy::GetParams() const
+{
+	return ShapeParameters{ {m_leftTop.x, m_leftTop.y, m_width, m_height} };
+}
+
+void RectangleDrawingStrategy::Move(Point vector)
+{
+	m_leftTop += vector;
+}

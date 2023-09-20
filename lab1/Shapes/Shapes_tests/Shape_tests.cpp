@@ -1,22 +1,11 @@
 ﻿#include "../../../external/catch2/catch.hpp"
-#include "../Shapes/Common.h"
 #include "../Shapes/Shape.h"
 #include "../Shapes/CircleDrawingStrategy.h"
 #include "../Shapes/TriangleDrawingStrategy.h"
 #include "../Shapes/TextDrawingStrategy.h"
 #include "../Shapes/RectangleDrawingStrategy.h"
 #include "../Shapes/LineDrawingStrategy.h"
-
-struct MockCanvasFixture
-{
-	fakeit::Mock<ICanvas> mockCanvas;
-	std::stringstream output = std::stringstream();
-
-	MockCanvasFixture()
-	{
-		DefineMockCanvasBehavior(mockCanvas, output);
-	}
-};
+#include "MockCanvasFixture.h"
 
 SCENARIO_METHOD(MockCanvasFixture, "Shape tests")
 {

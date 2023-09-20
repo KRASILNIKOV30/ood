@@ -24,3 +24,22 @@ void Shape::SetDrawingStrategy(std::unique_ptr<IDrawingStrategy>&& drawingStrate
 {
 	m_drawingStrategy = std::move(drawingStrategy);
 }
+
+Shape::Shape(Shape const& rhs)
+{
+}
+
+std::string Shape::GetType() const
+{
+	return m_drawingStrategy->GetType();
+}
+
+ShapeParameters Shape::GetParams() const
+{
+	return m_drawingStrategy->GetParams();
+}
+
+void Shape::Move(Point vector)
+{
+	m_drawingStrategy->Move(vector);
+}
