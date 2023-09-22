@@ -1,5 +1,5 @@
 #pragma once
-#include <set>
+#include <map>
 
 /*
 Шаблонный интерфейс IObserver. Его должен реализовывать класс,
@@ -24,7 +24,7 @@ class IObservable
 {
 public:
 	virtual ~IObservable() = default;
-	virtual void RegisterObserver(IObserver<T>& observer) = 0;
+	virtual void RegisterObserver(IObserver<T>& observer, int priority = -std::numeric_limits<int>::infinity()) = 0;
 	virtual void NotifyObservers() = 0;
 	virtual void RemoveObserver(IObserver<T>& observer) = 0;
 };
@@ -36,16 +36,21 @@ class CObservable : public IObservable<T>
 public:
 	typedef IObserver<T> ObserverType;
 
-	void RegisterObserver(ObserverType& observer) override
+	void RegisterObserver(ObserverType& observer, int priority = 0) override
 	{
-		m_observers.insert(&observer);
+		m_observers.push_back(std::make_pair(priority, &observer));
 	}
 
 	void NotifyObservers() override
 	{
 		T data = GetChangedData();
-		std::set<ObserverType*> observersCopy = m_observers;
-		for (auto& observer : observersCopy)
+		Observers observersCopy = m_observers;
+		std::sort(observersCopy.begin(), observersCopy.end(), [](auto& left, auto& right)
+		{
+			return left.first > right.first;
+		});
+
+		for (auto& [priority, observer] : observersCopy)
 		{
 			observer->Update(data);
 		}
@@ -53,7 +58,14 @@ public:
 
 	void RemoveObserver(ObserverType& observer) override
 	{
-		m_observers.erase(&observer);
+		for (auto it = m_observers.begin(); it != m_observers.end(); it++)
+		{
+			if (it->second == std::addressof(observer))
+			{
+				m_observers.erase(it);
+				return;
+			}
+		}
 	}
 
 protected:
@@ -62,5 +74,7 @@ protected:
 	virtual T GetChangedData()const = 0;
 
 private:
-	std::set<ObserverType*> m_observers;
+	using ObserverWithPrioriting = std::pair<int, ObserverType*>;
+	using Observers = std::vector<ObserverWithPrioriting>;
+	Observers m_observers;
 };
