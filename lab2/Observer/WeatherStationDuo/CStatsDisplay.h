@@ -3,6 +3,7 @@
 #include "Observer.h"
 #include <iostream>
 #include "Statistics.h"
+#include "WeatherData.h"
 
 class CStatsDisplay : public IObserver<SWeatherInfo>
 {
@@ -13,10 +14,6 @@ public:
 	{}
 
 private:
-	/* Метод Update сделан приватным, чтобы ограничить возможность его вызова напрямую
-	Классу CObservable он будет доступен все равно, т.к. в интерфейсе IObserver он
-	остается публичным
-	*/
 	void Update(SWeatherInfo const& data, IObservable& observable)
 	{
 		m_temperatureStats.AddValue(data.temperature);

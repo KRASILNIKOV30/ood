@@ -3,10 +3,6 @@
 #pragma once
 #include <map>
 
-/*
-Шаблонный интерфейс IObservable. Позволяет подписаться и отписаться на оповещения, а также
-инициировать рассылку уведомлений зарегистрированным наблюдателям.
-*/
 class IObservable
 {
 public:
@@ -14,12 +10,6 @@ public:
 	virtual void NotifyObservers() = 0;
 };
 
-/*
-Шаблонный интерфейс IObserver. Его должен реализовывать класс,
-желающий получать уведомления от соответствующего IObservable
-Параметром шаблона является тип аргумента,
-передаваемого Наблюдателю в метод Update
-*/
 template <typename T>
 class IObserver
 {
@@ -28,7 +18,6 @@ public:
 	virtual ~IObserver() = default;
 };
 
-// Реализация интерфейса IObservable
 template <class T>
 class CObservable : public IObservable
 {
@@ -68,8 +57,6 @@ public:
 	}
 
 protected:
-	// Классы-наследники должны перегрузить данный метод, 
-	// в котором возвращать информацию об изменениях в объекте
 	virtual T GetChangedData()const = 0;
 
 private:

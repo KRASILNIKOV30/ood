@@ -11,7 +11,7 @@ int main()
 	inStation.RegisterObserver(display);
 	outStation.RegisterObserver(display);
 
-	CStatsDisplay statsDisplay(inStation, outStation);;
+	CStatsDisplay statsDisplay(inStation, outStation);
 	inStation.RegisterObserver(statsDisplay);
 	outStation.RegisterObserver(statsDisplay);
 

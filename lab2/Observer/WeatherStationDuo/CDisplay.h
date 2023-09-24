@@ -16,14 +16,23 @@ private:
 		Классу CObservable он будет доступен все равно, т.к. в интерфейсе IObserver он
 		остается публичным
 	*/
-	void Update(SWeatherInfo const& data, IObservable& observable) override
+	void Update(SWeatherInfo const& data, IObservable& subject) override
 	{
+		if (&subject == &m_inStation)
+		{
+			std::cout << "Weather inside:" << std::endl;
+		}
+		if (&subject == &m_outStation)
+		{
+			std::cout << "Weather outside:" << std::endl;
+		}
 		std::cout << "Current Temp " << data.temperature << std::endl;
 		std::cout << "Current Hum " << data.humidity << std::endl;
 		std::cout << "Current Pressure " << data.pressure << std::endl;
 		std::cout << "----------------" << std::endl;
 	}
 
-	CWeatherData& m_inStation, m_outStation;
+	CWeatherData& m_inStation;
+	CWeatherData& m_outStation;
 };
 
