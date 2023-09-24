@@ -6,12 +6,18 @@
 
 class CStatsDisplay : public IObserver<SWeatherInfo>
 {
+public:
+	CStatsDisplay(CWeatherData& inStation, CWeatherData& outStation)
+		: m_inStation(inStation)
+		, m_outStation(outStation)
+	{}
+
 private:
 	/* Метод Update сделан приватным, чтобы ограничить возможность его вызова напрямую
 	Классу CObservable он будет доступен все равно, т.к. в интерфейсе IObserver он
 	остается публичным
 	*/
-	void Update(SWeatherInfo const& data) override
+	void Update(SWeatherInfo const& data, IObservable& observable)
 	{
 		m_temperatureStats.AddValue(data.temperature);
 		m_humidityStats.AddValue(data.humidity);
@@ -22,7 +28,9 @@ private:
 		m_preassureStats.Display();
 	}
 
-	Statistics m_temperatureStats{"Temp"};
-	Statistics m_humidityStats{"Humidity"};
-	Statistics m_preassureStats{"Preassure"};
+	Statistics m_temperatureStats{ "Temp" };
+	Statistics m_humidityStats{ "Humidity" };
+	Statistics m_preassureStats{ "Preassure" };
+
+	CWeatherData& m_inStation, m_outStation;
 };
