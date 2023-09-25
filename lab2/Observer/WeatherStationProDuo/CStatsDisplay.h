@@ -5,6 +5,7 @@
 #include "Statistics.h"
 #include "WeatherData.h"
 #include "AngleStatistics.h"
+#include "WeatherDataPro.h"
 
 class CStatsDisplay : public IObserver<SWeatherInfo>
 {
