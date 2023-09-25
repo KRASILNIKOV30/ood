@@ -30,21 +30,23 @@ public:
 protected:
 	double GetAvg() const override
 	{
-		double best_so_far = 360;
-		for (int i = 0; i < m_angles.size(); i++)
+		double scalingFactor = 2 * PI / MAX_ANGLE;
+
+		std::vector<double> sines;
+		std::vector<double> cosines;
+
+		double radians;
+		for (auto const& angle : m_angles)
 		{
-			double sum = 0;
-			for (int j = 0; j < m_angles.size(); j++)
-			{
-				sum += std::fmod(std::abs(m_angles[i] - m_angles[j]), 360);
-			}
-			if (sum < best_so_far)
-			{
-				best_so_far = sum;
-			}
+			radians = angle * scalingFactor;
+			sines.push_back(std::sin(radians));
+			cosines.push_back(std::cos(radians));
 		}
 
-		return best_so_far;
+		double atan = std::atan2(GetVectorMedian(sines), GetVectorMedian(cosines));
+		double result = atan / scalingFactor;
+
+		return result < 0 ? result + MAX_ANGLE : result;
 	}
 
 private:
