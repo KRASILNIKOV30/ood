@@ -12,8 +12,8 @@ int main()
 	CStatsDisplay statsDisplay;
 	wd.RegisterObserver(statsDisplay);
 
-	wd.SetMeasurements(3, 0.7, 760, 10, 0);
-	wd.SetMeasurements(4, 0.8, 761, 20, 270);
+	wd.SetMeasurements(3, 0.7, 760, 10, 210);
+	wd.SetMeasurements(4, 0.8, 761, 20, 180);
 	//wd.SetMeasurements(10, 0.8, 761, 5, 90);
 	//wd.SetMeasurements(-10, 0.8, 761, 10, 180);
 	return 0;
