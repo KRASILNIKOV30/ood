@@ -1,6 +1,6 @@
 #include "Shape.h"
 
-Shape::Shape(std::unique_ptr<IDrawingStrategy>&& drawingStrategy, Color color)
+Shape::Shape(std::unique_ptr<IShapeBehavior>&& drawingStrategy, Color color)
 	: m_drawingStrategy(std::move(drawingStrategy))
 	, m_color(color)
 {
@@ -22,7 +22,7 @@ void Shape::SetColor(Color color)
 	m_color = color;
 }
 
-void Shape::SetDrawingStrategy(std::unique_ptr<IDrawingStrategy>&& drawingStrategy)
+void Shape::SetDrawingStrategy(std::unique_ptr<IShapeBehavior>&& drawingStrategy)
 {
 	m_drawingStrategy = std::move(drawingStrategy);
 }

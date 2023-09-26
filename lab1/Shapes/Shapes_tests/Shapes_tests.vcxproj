@@ -132,15 +132,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Shapes\CCanvas.cpp" />
-    <ClCompile Include="..\Shapes\CircleDrawingStrategy.cpp" />
+    <ClCompile Include="..\Shapes\CircleBehavior.cpp" />
     <ClCompile Include="..\Shapes\Common.cpp" />
-    <ClCompile Include="..\Shapes\LineDrawingStrategy.cpp" />
+    <ClCompile Include="..\Shapes\LineBehavior.cpp" />
     <ClCompile Include="..\Shapes\Picture.cpp" />
     <ClCompile Include="..\Shapes\Point.cpp" />
-    <ClCompile Include="..\Shapes\RectangleDrawingStrategy.cpp" />
+    <ClCompile Include="..\Shapes\RectangleBehavior.cpp" />
     <ClCompile Include="..\Shapes\Shape.cpp" />
-    <ClCompile Include="..\Shapes\TextDrawingStrategy.cpp" />
-    <ClCompile Include="..\Shapes\TriangleDrawingStrategy.cpp" />
+    <ClCompile Include="..\Shapes\TextBehavior.cpp" />
+    <ClCompile Include="..\Shapes\TriangleBehavior.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Picture_tests.cpp" />
     <ClCompile Include="Point_tests.cpp" />
@@ -151,18 +151,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Shapes\CCanvas.h" />
-    <ClInclude Include="..\Shapes\CircleDrawingStrategy.h" />
+    <ClInclude Include="..\Shapes\CircleBehavior.h" />
     <ClInclude Include="..\Shapes\Color.h" />
     <ClInclude Include="..\Shapes\Common.h" />
     <ClInclude Include="..\Shapes\ICanvas.h" />
-    <ClInclude Include="..\Shapes\IDrawingStrategy.h" />
-    <ClInclude Include="..\Shapes\LineDrawingStrategy.h" />
+    <ClInclude Include="..\Shapes\IShapeBehavior.h" />
+    <ClInclude Include="..\Shapes\LineBehavior.h" />
     <ClInclude Include="..\Shapes\Picture.h" />
     <ClInclude Include="..\Shapes\Point.h" />
-    <ClInclude Include="..\Shapes\RectangleDrawingStrategy.h" />
+    <ClInclude Include="..\Shapes\RectangleBehavior.h" />
     <ClInclude Include="..\Shapes\Shape.h" />
-    <ClInclude Include="..\Shapes\TextDrawingStrategy.h" />
-    <ClInclude Include="..\Shapes\TriangleDrawingStrategy.h" />
+    <ClInclude Include="..\Shapes\TextBehavior.h" />
+    <ClInclude Include="..\Shapes\TriangleBehavior.h" />
     <ClInclude Include="MockCanvasFixture.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

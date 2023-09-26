@@ -1,21 +1,21 @@
 #pragma once
-#include "IDrawingStrategy.h"
+#include "IShapeBehavior.h"
 #include <memory>
 
 class Shape
 {
 public:
-	Shape(std::unique_ptr<IDrawingStrategy>&& drawingStrategy, Color color);
+	Shape(std::unique_ptr<IShapeBehavior>&& drawingStrategy, Color color);
 	void Draw(ICanvas& canvas);
 	Color GetColor();
 	void SetColor(Color color);
-	void SetDrawingStrategy(std::unique_ptr<IDrawingStrategy>&& drawingStrategy);
+	void SetDrawingStrategy(std::unique_ptr<IShapeBehavior>&& drawingStrategy);
 	std::string GetType() const;
 	ShapeParameters GetParams() const;
 	void Move(Point vector);
 
 private:
-	std::unique_ptr<IDrawingStrategy> m_drawingStrategy;
+	std::unique_ptr<IShapeBehavior> m_drawingStrategy;
 	Color m_color = 0;
 };
 

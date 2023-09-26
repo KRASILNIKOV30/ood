@@ -132,34 +132,34 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CCanvas.cpp" />
-    <ClCompile Include="CircleDrawingStrategy.cpp" />
+    <ClCompile Include="CircleBehavior.cpp" />
     <ClCompile Include="CommandHandler.cpp" />
     <ClCompile Include="Common.cpp" />
-    <ClCompile Include="LineDrawingStrategy.cpp" />
+    <ClCompile Include="LineBehavior.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Picture.cpp" />
     <ClCompile Include="Point.cpp" />
-    <ClCompile Include="RectangleDrawingStrategy.cpp" />
+    <ClCompile Include="RectangleBehavior.cpp" />
     <ClCompile Include="Shape.cpp" />
-    <ClCompile Include="TextDrawingStrategy.cpp" />
-    <ClCompile Include="TriangleDrawingStrategy.cpp" />
+    <ClCompile Include="TextBehavior.cpp" />
+    <ClCompile Include="TriangleBehavior.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCanvas.h" />
-    <ClInclude Include="CircleDrawingStrategy.h" />
+    <ClInclude Include="CircleBehavior.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="CommandHandler.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="ICanvas.h" />
-    <ClInclude Include="IDrawingStrategy.h" />
-    <ClInclude Include="LineDrawingStrategy.h" />
+    <ClInclude Include="IShapeBehavior.h" />
+    <ClInclude Include="LineBehavior.h" />
     <ClInclude Include="Picture.h" />
     <ClInclude Include="Point.h" />
-    <ClInclude Include="RectangleDrawingStrategy.h" />
+    <ClInclude Include="RectangleBehavior.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="ShapeParameters.h" />
-    <ClInclude Include="TextDrawingStrategy.h" />
-    <ClInclude Include="TriangleDrawingStrategy.h" />
+    <ClInclude Include="TextBehavior.h" />
+    <ClInclude Include="TriangleBehavior.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shapes.svg" />

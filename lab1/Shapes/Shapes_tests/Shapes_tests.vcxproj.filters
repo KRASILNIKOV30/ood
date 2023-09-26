@@ -39,28 +39,28 @@
     <ClCompile Include="..\Shapes\CCanvas.cpp">
       <Filter>Исходные файлы\Components</Filter>
     </ClCompile>
-    <ClCompile Include="..\Shapes\CircleDrawingStrategy.cpp">
-      <Filter>Исходные файлы\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shapes\LineDrawingStrategy.cpp">
-      <Filter>Исходные файлы\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shapes\RectangleDrawingStrategy.cpp">
-      <Filter>Исходные файлы\Components</Filter>
-    </ClCompile>
     <ClCompile Include="..\Shapes\Shape.cpp">
-      <Filter>Исходные файлы\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shapes\TextDrawingStrategy.cpp">
-      <Filter>Исходные файлы\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Shapes\TriangleDrawingStrategy.cpp">
       <Filter>Исходные файлы\Components</Filter>
     </ClCompile>
     <ClCompile Include="Picture_tests.cpp">
       <Filter>Исходные файлы\tests</Filter>
     </ClCompile>
     <ClCompile Include="..\Shapes\Picture.cpp">
+      <Filter>Исходные файлы\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Shapes\CircleBehavior.cpp">
+      <Filter>Исходные файлы\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Shapes\LineBehavior.cpp">
+      <Filter>Исходные файлы\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Shapes\RectangleBehavior.cpp">
+      <Filter>Исходные файлы\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Shapes\TextBehavior.cpp">
+      <Filter>Исходные файлы\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Shapes\TriangleBehavior.cpp">
       <Filter>Исходные файлы\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,37 +77,37 @@
     <ClInclude Include="..\Shapes\CCanvas.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="..\Shapes\CircleDrawingStrategy.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="..\Shapes\Color.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="..\Shapes\ICanvas.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="..\Shapes\IDrawingStrategy.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shapes\LineDrawingStrategy.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shapes\RectangleDrawingStrategy.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="..\Shapes\Shape.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shapes\TextDrawingStrategy.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Shapes\TriangleDrawingStrategy.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="MockCanvasFixture.h">
       <Filter>Исходные файлы\tests</Filter>
     </ClInclude>
     <ClInclude Include="..\Shapes\Picture.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shapes\CircleBehavior.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shapes\IShapeBehavior.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shapes\LineBehavior.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shapes\RectangleBehavior.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shapes\TextBehavior.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shapes\TriangleBehavior.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

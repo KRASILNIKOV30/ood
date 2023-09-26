@@ -3,11 +3,11 @@
 #include "../Shapes/Picture.h"
 #include <vector>
 #include "../Shapes/ShapeParameters.h"
-#include "../Shapes/TriangleDrawingStrategy.h"
-#include "../Shapes/CircleDrawingStrategy.h"
-#include "../Shapes/LineDrawingStrategy.h"
-#include "../Shapes/RectangleDrawingStrategy.h"
-#include "../Shapes/TextDrawingStrategy.h"
+#include "../Shapes/TriangleBehavior.h"
+#include "../Shapes/CircleBehavior.h"
+#include "../Shapes/LineBehavior.h"
+#include "../Shapes/RectangleBehavior.h"
+#include "../Shapes/TextBehavior.h"
 
 SCENARIO("Add and list shape")
 {
@@ -22,7 +22,7 @@ SCENARIO("Add and list shape")
 
 		WHEN("Add shape")
 		{
-			CHECK(picture.AddShape("1", 0, ShapeType::CIRCLE, std::make_unique<CircleDrawingStrategy>(Point{ 5, 7 }, 3)));
+			CHECK(picture.AddShape("1", 0, ShapeType::CIRCLE, std::make_unique<CircleBehavior>(Point{ 5, 7 }, 3)));
 
 
 			THEN("Picture has one shape")
@@ -32,8 +32,8 @@ SCENARIO("Add and list shape")
 
 			AND_WHEN("Add another shapes")
 			{
-				CHECK(picture.AddShape("2", 0, ShapeType::TRIANGLE, std::make_unique<TriangleDrawingStrategy>(Point{ 1, 1 }, Point{ 2, 2 }, Point{ 3, 3 })));
-				CHECK(picture.AddShape("3", 0, ShapeType::TEXT, std::make_unique<TextDrawingStrategy>(Point{ 6, 8 }, 14.5, "Hello world")));
+				CHECK(picture.AddShape("2", 0, ShapeType::TRIANGLE, std::make_unique<TriangleBehavior>(Point{ 1, 1 }, Point{ 2, 2 }, Point{ 3, 3 })));
+				CHECK(picture.AddShape("3", 0, ShapeType::TEXT, std::make_unique<TextBehavior>(Point{ 6, 8 }, 14.5, "Hello world")));
 
 				THEN("Picture list shapes in correct order")
 				{
@@ -53,11 +53,11 @@ SCENARIO("Move shapes")
 	GIVEN("Picture with all type of shapes")
 	{
 		Picture picture;
-		CHECK(picture.AddShape("cr", 0, ShapeType::CIRCLE, std::make_unique<CircleDrawingStrategy>(Point{ 5, 7 }, 3)));
-		CHECK(picture.AddShape("tr", 0, ShapeType::TRIANGLE, std::make_unique<TriangleDrawingStrategy>(Point{ 1, 1 }, Point{ 2, 2 }, Point{ 3, 3 })));
-		CHECK(picture.AddShape("txt", 0, ShapeType::TEXT, std::make_unique<TextDrawingStrategy>(Point{ 6, 8 }, 14.5, "Hello world")));
-		CHECK(picture.AddShape("ln", 0, ShapeType::LINE, std::make_unique<LineDrawingStrategy>(Point{ 1,2 }, Point{ 3, 4 })));
-		CHECK(picture.AddShape("rc", 0, ShapeType::RECTANGLE, std::make_unique<RectangleDrawingStrategy>(Point{ 10, 10 }, 12, 4)));
+		CHECK(picture.AddShape("cr", 0, ShapeType::CIRCLE, std::make_unique<CircleBehavior>(Point{ 5, 7 }, 3)));
+		CHECK(picture.AddShape("tr", 0, ShapeType::TRIANGLE, std::make_unique<TriangleBehavior>(Point{ 1, 1 }, Point{ 2, 2 }, Point{ 3, 3 })));
+		CHECK(picture.AddShape("txt", 0, ShapeType::TEXT, std::make_unique<TextBehavior>(Point{ 6, 8 }, 14.5, "Hello world")));
+		CHECK(picture.AddShape("ln", 0, ShapeType::LINE, std::make_unique<LineBehavior>(Point{ 1,2 }, Point{ 3, 4 })));
+		CHECK(picture.AddShape("rc", 0, ShapeType::RECTANGLE, std::make_unique<RectangleBehavior>(Point{ 10, 10 }, 12, 4)));
 
 		WHEN("Move shape with id cr")
 		{
@@ -115,9 +115,9 @@ SCENARIO("Delete shape")
 	GIVEN("Picture with 3 shapes")
 	{
 		Picture picture;
-		CHECK(picture.AddShape("cr", 0, ShapeType::CIRCLE, std::make_unique<CircleDrawingStrategy>(Point{ 5, 7 }, 3)));
-		CHECK(picture.AddShape("tr", 0, ShapeType::TRIANGLE, std::make_unique<TriangleDrawingStrategy>(Point{ 1, 1 }, Point{ 2, 2 }, Point{ 3, 3 })));
-		CHECK(picture.AddShape("txt", 0, ShapeType::TEXT, std::make_unique<TextDrawingStrategy>(Point{ 6, 8 }, 14.5, "Hello world")));
+		CHECK(picture.AddShape("cr", 0, ShapeType::CIRCLE, std::make_unique<CircleBehavior>(Point{ 5, 7 }, 3)));
+		CHECK(picture.AddShape("tr", 0, ShapeType::TRIANGLE, std::make_unique<TriangleBehavior>(Point{ 1, 1 }, Point{ 2, 2 }, Point{ 3, 3 })));
+		CHECK(picture.AddShape("txt", 0, ShapeType::TEXT, std::make_unique<TextBehavior>(Point{ 6, 8 }, 14.5, "Hello world")));
 
 		WHEN("Delete shape in the middle")
 		{
@@ -153,7 +153,7 @@ SCENARIO("Change shapes color")
 	GIVEN("Picture with one black shape")
 	{
 		Picture picture;
-		CHECK(picture.AddShape("cr", 0, ShapeType::CIRCLE, std::make_unique<CircleDrawingStrategy>(Point{ 5, 7 }, 3)));
+		CHECK(picture.AddShape("cr", 0, ShapeType::CIRCLE, std::make_unique<CircleBehavior>(Point{ 5, 7 }, 3)));
 
 		WHEN("Change shapes color")
 		{
@@ -182,11 +182,11 @@ SCENARIO("Change shape")
 	GIVEN("Picture with circle")
 	{
 		Picture picture;
-		CHECK(picture.AddShape("cr", 0, ShapeType::CIRCLE, std::make_unique<CircleDrawingStrategy>(Point{ 5, 7 }, 3)));
+		CHECK(picture.AddShape("cr", 0, ShapeType::CIRCLE, std::make_unique<CircleBehavior>(Point{ 5, 7 }, 3)));
 
 		WHEN("Change shape")
 		{
-			CHECK(picture.ChangeShape("cr", ShapeType::RECTANGLE, std::make_unique<RectangleDrawingStrategy>(Point{ 10, 10 }, 12, 4)));
+			CHECK(picture.ChangeShape("cr", ShapeType::RECTANGLE, std::make_unique<RectangleBehavior>(Point{ 10, 10 }, 12, 4)));
 
 			THEN("Shape has been changed")
 			{
@@ -196,7 +196,7 @@ SCENARIO("Change shape")
 
 		WHEN("Change shape with id that is not exist")
 		{
-			CHECK_FALSE(picture.ChangeShape("not-existing-id", ShapeType::RECTANGLE, std::make_unique<RectangleDrawingStrategy>(Point{ 10, 10 }, 12, 4)));
+			CHECK_FALSE(picture.ChangeShape("not-existing-id", ShapeType::RECTANGLE, std::make_unique<RectangleBehavior>(Point{ 10, 10 }, 12, 4)));
 
 			THEN("Shape has not been changed")
 			{
@@ -211,11 +211,11 @@ SCENARIO_METHOD(MockCanvasFixture, "Drawing")
 	GIVEN("Picture with all type of shapes")
 	{
 		Picture picture;
-		CHECK(picture.AddShape("cr", 0, ShapeType::CIRCLE, std::make_unique<CircleDrawingStrategy>(Point{ 5, 7 }, 3)));
-		CHECK(picture.AddShape("tr", 0, ShapeType::TRIANGLE, std::make_unique<TriangleDrawingStrategy>(Point{ 1, 1 }, Point{ 2, 2 }, Point{ 3, 3 })));
-		CHECK(picture.AddShape("txt", 0, ShapeType::TEXT, std::make_unique<TextDrawingStrategy>(Point{ 6, 8 }, 14.5, "Hello world")));
-		CHECK(picture.AddShape("ln", 0, ShapeType::LINE, std::make_unique<LineDrawingStrategy>(Point{ 1,2 }, Point{ 3, 4 })));
-		CHECK(picture.AddShape("rc", 0, ShapeType::RECTANGLE, std::make_unique<RectangleDrawingStrategy>(Point{ 10, 10 }, 12, 4)));
+		CHECK(picture.AddShape("cr", 0, ShapeType::CIRCLE, std::make_unique<CircleBehavior>(Point{ 5, 7 }, 3)));
+		CHECK(picture.AddShape("tr", 0, ShapeType::TRIANGLE, std::make_unique<TriangleBehavior>(Point{ 1, 1 }, Point{ 2, 2 }, Point{ 3, 3 })));
+		CHECK(picture.AddShape("txt", 0, ShapeType::TEXT, std::make_unique<TextBehavior>(Point{ 6, 8 }, 14.5, "Hello world")));
+		CHECK(picture.AddShape("ln", 0, ShapeType::LINE, std::make_unique<LineBehavior>(Point{ 1,2 }, Point{ 3, 4 })));
+		CHECK(picture.AddShape("rc", 0, ShapeType::RECTANGLE, std::make_unique<RectangleBehavior>(Point{ 10, 10 }, 12, 4)));
 
 		WHEN("Draw one shape")
 		{

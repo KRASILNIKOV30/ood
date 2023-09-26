@@ -1,12 +1,12 @@
 #include "Picture.h"
-#include "TriangleDrawingStrategy.h"
-#include "CircleDrawingStrategy.h"
-#include "LineDrawingStrategy.h"
-#include "RectangleDrawingStrategy.h"
-#include "TextDrawingStrategy.h"
+#include "TriangleBehavior.h"
+#include "CircleBehavior.h"
+#include "LineBehavior.h"
+#include "RectangleBehavior.h"
+#include "TextBehavior.h"
 #include "Common.h"
 
-bool Picture::AddShape(std::string const& id, Color color, ShapeType type, std::unique_ptr<IDrawingStrategy>&& shapeBehavior)
+bool Picture::AddShape(std::string const& id, Color color, ShapeType type, std::unique_ptr<IShapeBehavior>&& shapeBehavior)
 {
 	if (!TryInsertShape(id, color, type, std::move(shapeBehavior)))
 	{
@@ -81,7 +81,7 @@ bool Picture::ChangeColor(std::string const& id, Color color)
 	return true;
 }
 
-bool Picture::ChangeShape(std::string const& id, ShapeType type, std::unique_ptr<IDrawingStrategy>&& shapeBehavior)
+bool Picture::ChangeShape(std::string const& id, ShapeType type, std::unique_ptr<IShapeBehavior>&& shapeBehavior)
 {
 	if (!m_shapes.contains(id))
 	{
@@ -111,7 +111,7 @@ void Picture::DrawPicture(ICanvas& canvas) const
 	}
 }
 
-bool Picture::TryInsertShape(std::string const& id, Color color, ShapeType type, std::unique_ptr<IDrawingStrategy>&& shapeBehavior)
+bool Picture::TryInsertShape(std::string const& id, Color color, ShapeType type, std::unique_ptr<IShapeBehavior>&& shapeBehavior)
 {
 	return m_shapes.try_emplace(id, std::make_unique<Shape>(std::move(shapeBehavior), color)).second;
 }

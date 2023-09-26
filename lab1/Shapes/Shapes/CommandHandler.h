@@ -25,7 +25,7 @@ private:
 	bool DrawShape(std::istream& args);
 	bool DrawPicture(std::istream& args);
 	std::optional<ShapeType> MakeShapeType(std::string type) const;
-	std::optional<std::unique_ptr<IDrawingStrategy>> MakeDrawingStrategy(ShapeType type) const;
+	std::optional<std::unique_ptr<IShapeBehavior>> MakeDrawingStrategy(ShapeType type) const;
 
 
 private:

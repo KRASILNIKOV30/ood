@@ -1,18 +1,18 @@
 ﻿#include "../../../external/catch2/catch.hpp"
 #include "../Shapes/Shape.h"
-#include "../Shapes/CircleDrawingStrategy.h"
-#include "../Shapes/TriangleDrawingStrategy.h"
-#include "../Shapes/TextDrawingStrategy.h"
-#include "../Shapes/RectangleDrawingStrategy.h"
-#include "../Shapes/LineDrawingStrategy.h"
+#include "../Shapes/CircleBehavior.h"
+#include "../Shapes/TriangleBehavior.h"
+#include "../Shapes/TextBehavior.h"
+#include "../Shapes/RectangleBehavior.h"
+#include "../Shapes/LineBehavior.h"
 #include "MockCanvasFixture.h"
 
 SCENARIO_METHOD(MockCanvasFixture, "Shape tests")
 {
 	WHEN("Create some shape")
 	{
-		CircleDrawingStrategy circleDrawingStrategy(Point{ 5, 7 }, 3);
-		Shape shape(std::make_unique<CircleDrawingStrategy>(circleDrawingStrategy), 0);
+		CircleBehavior circleDrawingStrategy(Point{ 5, 7 }, 3);
+		Shape shape(std::make_unique<CircleBehavior>(circleDrawingStrategy), 0);
 
 		THEN("Shape has black color")
 		{
@@ -31,8 +31,8 @@ SCENARIO_METHOD(MockCanvasFixture, "Triangle drawing")
 {
 	GIVEN("Shape with triangle drawing strategy")
 	{
-		TriangleDrawingStrategy triangleDrawingStrategy(Point{ 1, 1 }, Point{ 2, 2 }, Point{ 3, 3 });
-		Shape shape(std::make_unique<TriangleDrawingStrategy>(triangleDrawingStrategy), 0);
+		TriangleBehavior triangleDrawingStrategy(Point{ 1, 1 }, Point{ 2, 2 }, Point{ 3, 3 });
+		Shape shape(std::make_unique<TriangleBehavior>(triangleDrawingStrategy), 0);
 
 		WHEN("Draw shape")
 		{
@@ -56,8 +56,8 @@ SCENARIO_METHOD(MockCanvasFixture, "Circle drawing")
 {
 	GIVEN("Shape with circle drawing strategy")
 	{
-		CircleDrawingStrategy circleDrawingStrategy(Point{ 5, 7 }, 3);
-		Shape shape(std::make_unique<CircleDrawingStrategy>(circleDrawingStrategy), 0);
+		CircleBehavior circleDrawingStrategy(Point{ 5, 7 }, 3);
+		Shape shape(std::make_unique<CircleBehavior>(circleDrawingStrategy), 0);
 
 		WHEN("Draw shape")
 		{
@@ -75,8 +75,8 @@ SCENARIO_METHOD(MockCanvasFixture, "Line drawing")
 {
 	GIVEN("Shape with line drawing strategy")
 	{
-		LineDrawingStrategy lineDrawingStrategy(Point{ 1, 1 }, Point{ 2, 2 });
-		Shape shape(std::make_unique<LineDrawingStrategy>(lineDrawingStrategy), 0);
+		LineBehavior lineDrawingStrategy(Point{ 1, 1 }, Point{ 2, 2 });
+		Shape shape(std::make_unique<LineBehavior>(lineDrawingStrategy), 0);
 
 		WHEN("Draw shape")
 		{
@@ -98,8 +98,8 @@ SCENARIO_METHOD(MockCanvasFixture, "Rectangle drawing")
 {
 	GIVEN("Shape with rectangle drawing strategy")
 	{
-		RectangleDrawingStrategy rectangleDrawingStrategy(Point{ 1, 1 }, 5, 3);
-		Shape shape(std::make_unique<RectangleDrawingStrategy>(rectangleDrawingStrategy), 0);
+		RectangleBehavior rectangleDrawingStrategy(Point{ 1, 1 }, 5, 3);
+		Shape shape(std::make_unique<RectangleBehavior>(rectangleDrawingStrategy), 0);
 
 		WHEN("Draw shape")
 		{
@@ -124,8 +124,8 @@ SCENARIO_METHOD(MockCanvasFixture, "Text drawing")
 {
 	GIVEN("Text with rectangle drawing strategy")
 	{
-		TextDrawingStrategy textDrawingStrategy(Point{ 1, 1 }, 14, "Hello world!");
-		Shape shape(std::make_unique<TextDrawingStrategy>(textDrawingStrategy), 0);
+		TextBehavior textDrawingStrategy(Point{ 1, 1 }, 14, "Hello world!");
+		Shape shape(std::make_unique<TextBehavior>(textDrawingStrategy), 0);
 
 		WHEN("Draw shape")
 		{
@@ -143,8 +143,8 @@ SCENARIO_METHOD(MockCanvasFixture, "Change Shapes drawing strategy")
 {
 	GIVEN("Shape with triangle drawing strategy")
 	{
-		TriangleDrawingStrategy triangleDrawingStrategy(Point{ 1, 1 }, Point{ 2, 2 }, Point{ 3, 3 });
-		Shape shape(std::make_unique<TriangleDrawingStrategy>(triangleDrawingStrategy), 0);
+		TriangleBehavior triangleDrawingStrategy(Point{ 1, 1 }, Point{ 2, 2 }, Point{ 3, 3 });
+		Shape shape(std::make_unique<TriangleBehavior>(triangleDrawingStrategy), 0);
 
 		WHEN("Draw shape")
 		{
@@ -163,8 +163,8 @@ SCENARIO_METHOD(MockCanvasFixture, "Change Shapes drawing strategy")
 
 			AND_WHEN("Draw shape with another drawing strategy")
 			{
-				CircleDrawingStrategy circleDrawingStrategy(Point{ 5, 7 }, 3);
-				shape.SetDrawingStrategy(std::make_unique<CircleDrawingStrategy>(circleDrawingStrategy));
+				CircleBehavior circleDrawingStrategy(Point{ 5, 7 }, 3);
+				shape.SetDrawingStrategy(std::make_unique<CircleBehavior>(circleDrawingStrategy));
 				output = std::stringstream();
 				shape.Draw(mockCanvas.get());
 

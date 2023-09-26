@@ -1,11 +1,11 @@
 #include "CommandHandler.h"
 #include <sstream>
 #include "Common.h"
-#include "CircleDrawingStrategy.h"
-#include "TriangleDrawingStrategy.h"
-#include "LineDrawingStrategy.h"
-#include "TextDrawingStrategy.h"
-#include "RectangleDrawingStrategy.h"
+#include "CircleBehavior.h"
+#include "TriangleBehavior.h"
+#include "LineBehavior.h"
+#include "TextBehavior.h"
+#include "RectangleBehavior.h"
 
 CommandHandler::CommandHandler(std::istream& input, std::ostream& output, Picture& picture, std::ostream& svgFile)
 	: m_input(input)
@@ -210,7 +210,7 @@ std::optional<ShapeType> CommandHandler::MakeShapeType(std::string type) const
 	return std::nullopt;
 }
 
-std::optional<std::unique_ptr<IDrawingStrategy>> CommandHandler::MakeDrawingStrategy(ShapeType type) const
+std::optional<std::unique_ptr<IShapeBehavior>> CommandHandler::MakeDrawingStrategy(ShapeType type) const
 {
 	switch (type)
 	{
@@ -221,7 +221,7 @@ std::optional<std::unique_ptr<IDrawingStrategy>> CommandHandler::MakeDrawingStra
 		{
 			return std::nullopt;
 		}
-		return  std::make_unique<CircleDrawingStrategy>(Point{ cx, cy }, r);
+		return  std::make_unique<CircleBehavior>(Point{ cx, cy }, r);
 	}
 	case ShapeType::TRIANGLE:
 	{
@@ -230,7 +230,7 @@ std::optional<std::unique_ptr<IDrawingStrategy>> CommandHandler::MakeDrawingStra
 		{
 			return std::nullopt;
 		}
-		return std::make_unique<TriangleDrawingStrategy>(Point{ x1, y1 }, Point{ x2, y2 }, Point{ x3, y3 });
+		return std::make_unique<TriangleBehavior>(Point{ x1, y1 }, Point{ x2, y2 }, Point{ x3, y3 });
 	}
 	case ShapeType::LINE:
 	{
@@ -239,7 +239,7 @@ std::optional<std::unique_ptr<IDrawingStrategy>> CommandHandler::MakeDrawingStra
 		{
 			return std::nullopt;
 		}
-		return std::make_unique<LineDrawingStrategy>(Point{ x1, y1 }, Point{ x2, y2 });
+		return std::make_unique<LineBehavior>(Point{ x1, y1 }, Point{ x2, y2 });
 	}
 	case ShapeType::RECTANGLE:
 	{
@@ -248,7 +248,7 @@ std::optional<std::unique_ptr<IDrawingStrategy>> CommandHandler::MakeDrawingStra
 		{
 			return std::nullopt;
 		}
-		return std::make_unique<RectangleDrawingStrategy>(Point{ x1, y1 }, w, h);
+		return std::make_unique<RectangleBehavior>(Point{ x1, y1 }, w, h);
 	}
 	case ShapeType::TEXT:
 	{
@@ -258,7 +258,7 @@ std::optional<std::unique_ptr<IDrawingStrategy>> CommandHandler::MakeDrawingStra
 		{
 			return std::nullopt;
 		}
-		return std::make_unique<TextDrawingStrategy>(Point{ x1, y1 }, s, text);
+		return std::make_unique<TextBehavior>(Point{ x1, y1 }, s, text);
 	}
 	}
 }

@@ -13,11 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Исходные файлы\DrawingStrategy">
-      <UniqueIdentifier>{7117ab00-faaa-49b8-ac0a-6228ecb99dcb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы заголовков\DrawingStrategy">
+    <Filter Include="Файлы заголовков\ShapeBehavior">
       <UniqueIdentifier>{94ead5e0-3bf3-44a8-a536-4d5af00ca570}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\ShapeBehavior">
+      <UniqueIdentifier>{7117ab00-faaa-49b8-ac0a-6228ecb99dcb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -30,20 +30,20 @@
     <ClCompile Include="CCanvas.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="TriangleDrawingStrategy.cpp">
-      <Filter>Исходные файлы\DrawingStrategy</Filter>
+    <ClCompile Include="TriangleBehavior.cpp">
+      <Filter>Исходные файлы\ShapeBehavior</Filter>
     </ClCompile>
-    <ClCompile Include="CircleDrawingStrategy.cpp">
-      <Filter>Исходные файлы\DrawingStrategy</Filter>
+    <ClCompile Include="CircleBehavior.cpp">
+      <Filter>Исходные файлы\ShapeBehavior</Filter>
     </ClCompile>
-    <ClCompile Include="RectangleDrawingStrategy.cpp">
-      <Filter>Исходные файлы\DrawingStrategy</Filter>
+    <ClCompile Include="RectangleBehavior.cpp">
+      <Filter>Исходные файлы\ShapeBehavior</Filter>
     </ClCompile>
-    <ClCompile Include="LineDrawingStrategy.cpp">
-      <Filter>Исходные файлы\DrawingStrategy</Filter>
+    <ClCompile Include="LineBehavior.cpp">
+      <Filter>Исходные файлы\ShapeBehavior</Filter>
     </ClCompile>
-    <ClCompile Include="TextDrawingStrategy.cpp">
-      <Filter>Исходные файлы\DrawingStrategy</Filter>
+    <ClCompile Include="TextBehavior.cpp">
+      <Filter>Исходные файлы\ShapeBehavior</Filter>
     </ClCompile>
     <ClCompile Include="Shape.cpp">
       <Filter>Исходные файлы</Filter>
@@ -74,23 +74,23 @@
     <ClInclude Include="CCanvas.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="IDrawingStrategy.h">
-      <Filter>Файлы заголовков\DrawingStrategy</Filter>
+    <ClInclude Include="IShapeBehavior.h">
+      <Filter>Файлы заголовков\ShapeBehavior</Filter>
     </ClInclude>
-    <ClInclude Include="TriangleDrawingStrategy.h">
-      <Filter>Файлы заголовков\DrawingStrategy</Filter>
+    <ClInclude Include="TriangleBehavior.h">
+      <Filter>Файлы заголовков\ShapeBehavior</Filter>
     </ClInclude>
-    <ClInclude Include="CircleDrawingStrategy.h">
-      <Filter>Файлы заголовков\DrawingStrategy</Filter>
+    <ClInclude Include="CircleBehavior.h">
+      <Filter>Файлы заголовков\ShapeBehavior</Filter>
     </ClInclude>
-    <ClInclude Include="RectangleDrawingStrategy.h">
-      <Filter>Файлы заголовков\DrawingStrategy</Filter>
+    <ClInclude Include="RectangleBehavior.h">
+      <Filter>Файлы заголовков\ShapeBehavior</Filter>
     </ClInclude>
-    <ClInclude Include="LineDrawingStrategy.h">
-      <Filter>Файлы заголовков\DrawingStrategy</Filter>
+    <ClInclude Include="LineBehavior.h">
+      <Filter>Файлы заголовков\ShapeBehavior</Filter>
     </ClInclude>
-    <ClInclude Include="TextDrawingStrategy.h">
-      <Filter>Файлы заголовков\DrawingStrategy</Filter>
+    <ClInclude Include="TextBehavior.h">
+      <Filter>Файлы заголовков\ShapeBehavior</Filter>
     </ClInclude>
     <ClInclude Include="Shape.h">
       <Filter>Файлы заголовков</Filter>
