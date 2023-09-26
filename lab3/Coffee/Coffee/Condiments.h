@@ -235,3 +235,31 @@ private:
 };
 
 
+enum class LiquorType
+{
+	Chocolate,	
+	Walnut,		
+};
+
+class CLiquor : public CCondimentDecorator
+{
+public:
+	CLiquor(IBeveragePtr&& beverage, LiquorType liquorType)
+		: CCondimentDecorator(move(beverage))
+		, m_liquorType(liquorType)
+	{}
+protected:
+	double GetCondimentCost()const override
+	{
+		return 15;
+	}
+	std::string GetCondimentDescription()const override
+	{
+		return std::string(m_liquorType == LiquorType::Chocolate ? "Chocolate" : "Walnut")
+			+ " syrup";
+	}
+private:
+	LiquorType m_liquorType;
+};
+
+

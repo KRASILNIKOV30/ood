@@ -157,12 +157,12 @@ void DialogWithUser()
 	int condimentChoice;
 	for (;;)
 	{
-		cout << "1 - Lemon, 2 - Cinnamon, 3 - Cream, 0 - Checkout" << endl;
+		cout << "1 - Lemon, 2 - Cinnamon, 3 - Cream, 4 - Chocolate, 0 - Checkout" << endl;
 		cin >> condimentChoice;
 
 		if (condimentChoice == 1)
 		{
-			beverage = move(beverage) << MakeCondiment<CLemon>(2);
+			beverage = move(beverage) << MakeCondiment<CLemon>(1);
 		}
 		else if (condimentChoice == 2)
 		{
@@ -171,6 +171,20 @@ void DialogWithUser()
 		else if (condimentChoice == 3)
 		{
 			beverage = move(beverage) << MakeCondiment<CCream>();
+		}
+		else if (condimentChoice == 4)
+		{
+			int chocolateQuantity;
+			cout << "Enter quantity of chocolate" << endl;
+			cin >> chocolateQuantity;
+			if (chocolateQuantity > 5)
+			{
+				cout << "Too many chocolate, max: 5" << endl;
+			}
+			else
+			{
+				beverage = move(beverage) << MakeCondiment<CChocolate>(chocolateQuantity);
+			}
 		}
 		else if (condimentChoice == 0)
 		{
