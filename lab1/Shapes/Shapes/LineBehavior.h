@@ -7,7 +7,7 @@ public:
 	void Draw(ICanvas& canvas) const final;
 	std::string GetType() const final;
 	ShapeParameters GetParams() const final;
-	void Move(Point vector) final;
+	void Move(double dx, double dy) final;
 
 private:
 	Point m_start;

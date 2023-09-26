@@ -8,6 +8,6 @@ public:
 	virtual void Draw(ICanvas& canvas) const = 0;
 	virtual std::string GetType() const = 0;
 	virtual ShapeParameters GetParams() const = 0;
-	virtual void Move(Point vector) = 0;
+	virtual void Move(double dx, double dy) = 0;
 	~IShapeBehavior() = default;
 };

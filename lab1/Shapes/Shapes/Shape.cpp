@@ -37,7 +37,7 @@ ShapeParameters Shape::GetParams() const
 	return m_drawingStrategy->GetParams();
 }
 
-void Shape::Move(Point vector)
+void Shape::Move(double dx, double dy)
 {
-	m_drawingStrategy->Move(vector);
+	m_drawingStrategy->Move(dx, dy);
 }

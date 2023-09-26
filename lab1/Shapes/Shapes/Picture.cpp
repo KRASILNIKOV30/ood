@@ -17,22 +17,22 @@ bool Picture::AddShape(std::string const& id, Color color, ShapeType type, std::
 	return true;
 }
 
-bool Picture::MoveShape(std::string const& id, Point vector)
+bool Picture::MoveShape(std::string const& id, double dx, double dy)
 {
 	if (!m_shapes.contains(id))
 	{
 		return false;
 	}
 
-	m_shapes[id]->Move(vector);
+	m_shapes[id]->Move(dx, dy);
 	return true;
 }
 
-void Picture::MovePicture(Point vector)
+void Picture::MovePicture(double dx, double dy)
 {
 	for (auto& id : m_shapeIds)
 	{
-		MoveShape(id, vector);
+		MoveShape(id, dx, dy);
 	}
 }
 

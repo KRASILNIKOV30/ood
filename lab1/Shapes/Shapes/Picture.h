@@ -9,8 +9,8 @@ class Picture
 {
 public: 
 	bool AddShape(std::string const& id, Color color, ShapeType type, std::unique_ptr<IShapeBehavior>&& shapeBehavior);
-	bool MoveShape(std::string const& id, Point vector);
-	void MovePicture(Point vector);
+	bool MoveShape(std::string const& id, double dx, double dy);
+	void MovePicture(double dx, double dy);
 	bool DeleteShape(std::string const& id);
 	std::string ListShapes() const;
 	bool ChangeColor(std::string const& id, Color color);

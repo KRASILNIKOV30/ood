@@ -8,11 +8,11 @@ struct ShapeParameters
 	std::string text = "";
 };
 
-enum ShapeType
+enum class ShapeType
 {
-	TRIANGLE,
 	CIRCLE,
-	LINE,
 	RECTANGLE,
-	TEXT
+	TEXT,
+	TRIANGLE,
+	LINE
 };

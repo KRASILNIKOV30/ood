@@ -22,7 +22,8 @@ ShapeParameters TextBehavior::GetParams() const
 	return ShapeParameters{ {m_leftTop.x, m_leftTop.y, m_fontSize}, m_text };
 }
 
-void TextBehavior::Move(Point vector)
+void TextBehavior::Move(double dx, double dy)
 {
-	m_leftTop += vector;
+	m_leftTop.x += dx;
+	m_leftTop.y += dy;
 }

@@ -21,7 +21,8 @@ ShapeParameters CircleBehavior::GetParams() const
 	return ShapeParameters{ {m_center.x, m_center.y, m_radius} };
 }
 
-void CircleBehavior::Move(Point vector)
+void CircleBehavior::Move(double dx, double dy)
 {
-	m_center += vector;
+	m_center.x += dx;
+	m_center.y += dy;
 }

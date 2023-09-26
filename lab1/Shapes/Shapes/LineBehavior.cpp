@@ -22,8 +22,10 @@ ShapeParameters LineBehavior::GetParams() const
 	return ShapeParameters{ {m_start.x, m_start.y, m_end.x, m_end.y} };
 }
 
-void LineBehavior::Move(Point vector)
+void LineBehavior::Move(double dx, double dy)
 {
-	m_start += vector;
-	m_end += vector;
+	m_start.x += dx;
+	m_start.y += dy;
+	m_end.x += dx;
+	m_end.y += dy;
 }

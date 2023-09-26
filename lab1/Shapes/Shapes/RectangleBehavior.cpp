@@ -27,7 +27,8 @@ ShapeParameters RectangleBehavior::GetParams() const
 	return ShapeParameters{ {m_leftTop.x, m_leftTop.y, m_width, m_height} };
 }
 
-void RectangleBehavior::Move(Point vector)
+void RectangleBehavior::Move(double dx, double dy)
 {
-	m_leftTop += vector;
+	m_leftTop.x += dx;
+	m_leftTop.y += dy;
 }

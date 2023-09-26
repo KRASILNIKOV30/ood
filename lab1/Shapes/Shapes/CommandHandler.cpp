@@ -86,7 +86,7 @@ bool CommandHandler::MoveShape(std::istream& args)
 		return false;
 	}
 
-	return m_picture.MoveShape(id, Point(dx, dy));
+	return m_picture.MoveShape(id, dx, dy);
 }
 
 bool CommandHandler::MovePicture(std::istream& args)
@@ -97,7 +97,7 @@ bool CommandHandler::MovePicture(std::istream& args)
 		return false;
 	}
 
-	m_picture.MovePicture(Point(dx, dy));
+	m_picture.MovePicture(dx, dy);
 	return true;
 }
 

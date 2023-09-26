@@ -61,7 +61,7 @@ SCENARIO("Move shapes")
 
 		WHEN("Move shape with id cr")
 		{
-			picture.MoveShape("cr", Point{ 2, 3 });
+			picture.MoveShape("cr", 2, 3);
 
 			THEN("One shape has been moved")
 			{
@@ -76,7 +76,7 @@ SCENARIO("Move shapes")
 
 			AND_WHEN("Move picture")
 			{
-				picture.MovePicture(Point{ 1, 1 });
+				picture.MovePicture(1, 1);
 
 				THEN("All shapes has been moved")
 				{
@@ -94,7 +94,7 @@ SCENARIO("Move shapes")
 
 		WHEN("Move shape witn id that is not exist")
 		{
-			CHECK_FALSE(picture.MoveShape("not-existing-id", Point{ 1, 1 }));
+			CHECK_FALSE(picture.MoveShape("not-existing-id", 1, 1));
 
 			THEN("No one shape has benn moved")
 			{

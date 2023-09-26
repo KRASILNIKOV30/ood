@@ -12,7 +12,7 @@ public:
 	void SetDrawingStrategy(std::unique_ptr<IShapeBehavior>&& drawingStrategy);
 	std::string GetType() const;
 	ShapeParameters GetParams() const;
-	void Move(Point vector);
+	void Move(double dx, double dy);
 
 private:
 	std::unique_ptr<IShapeBehavior> m_drawingStrategy;

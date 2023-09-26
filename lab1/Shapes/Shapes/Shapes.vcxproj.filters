@@ -98,10 +98,10 @@
     <ClInclude Include="Picture.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="ShapeParameters.h">
+    <ClInclude Include="CommandHandler.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="CommandHandler.h">
+    <ClInclude Include="ShapeParameters.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

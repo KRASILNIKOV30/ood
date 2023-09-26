@@ -1,4 +1,11 @@
-﻿  CommandHandler.cpp
+﻿  CircleBehavior.cpp
+  CommandHandler.cpp
+  LineBehavior.cpp
+  Main.cpp
+  Picture.cpp
+  RectangleBehavior.cpp
+  Shape.cpp
+  TextBehavior.cpp
   TriangleBehavior.cpp
   Создание кода...
 C:\Users\bkras\source\repos\ood\lab1\Shapes\Shapes\CommandHandler.cpp(264): warning C4715: CommandHandler::MakeDrawingStrategy: значение возвращается не при всех путях выполнения
