@@ -254,7 +254,7 @@ std::optional<std::unique_ptr<IDrawingStrategy>> CommandHandler::MakeDrawingStra
 	{
 		double x1, y1, s;
 		std::string text;
-		if (!(m_input >> x1 && m_input >> y1 && m_input >> s && m_input >> text))
+		if (!(m_input >> x1 && m_input >> y1 && m_input >> s && std::getline(m_input, text)))
 		{
 			return std::nullopt;
 		}
