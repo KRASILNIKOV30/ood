@@ -1,1 +1,0 @@
-C:\Users\bkras\source\repos\ood\lab1\Shapes\Shapes_tests\x64\Debug\Shapes_tests.vcxproj.CopyComplete

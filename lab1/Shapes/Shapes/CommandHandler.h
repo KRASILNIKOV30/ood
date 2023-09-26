@@ -6,6 +6,7 @@
 #include "Picture.h"
 #include "ShapeParameters.h"
 #include <optional>
+#include "CCanvas.h"
 
 class CommandHandler
 {
@@ -24,6 +25,7 @@ private:
 	bool DrawShape(std::istream& args);
 	bool DrawPicture(std::istream& args);
 	std::optional<ShapeType> MakeShapeType(std::string type) const;
+	std::optional<std::unique_ptr<IDrawingStrategy>> MakeDrawingStrategy(ShapeType type) const;
 
 
 private:
@@ -34,5 +36,6 @@ private:
 	const ActionMap m_actionMap;
 	std::ostream& m_svgFile;
 	Picture& m_picture;
+	CCanvas m_canvas;
 };
 

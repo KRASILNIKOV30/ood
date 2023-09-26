@@ -6,9 +6,9 @@
 #include "TextDrawingStrategy.h"
 #include "Common.h"
 
-bool Picture::AddShape(std::string const& id, Color color, ShapeType type, ShapeParameters const& params)
+bool Picture::AddShape(std::string const& id, Color color, ShapeType type, std::unique_ptr<IDrawingStrategy>&& shapeBehavior)
 {
-	if (!TryInsertShape(id, color, type, params))
+	if (!TryInsertShape(id, color, type, std::move(shapeBehavior)))
 	{
 		return false;
 	}
@@ -81,14 +81,14 @@ bool Picture::ChangeColor(std::string const& id, Color color)
 	return true;
 }
 
-bool Picture::ChangeShape(std::string const& id, ShapeType type, ShapeParameters params)
+bool Picture::ChangeShape(std::string const& id, ShapeType type, std::unique_ptr<IDrawingStrategy>&& shapeBehavior)
 {
 	if (!m_shapes.contains(id))
 	{
 		return false;
 	}
 
-	m_shapes[id]->SetDrawingStrategy(MakeDrawingStrategy(type, params));
+	m_shapes[id]->SetDrawingStrategy(std::move(shapeBehavior));
 	return true;
 }
 
@@ -111,51 +111,8 @@ void Picture::DrawPicture(ICanvas& canvas) const
 	}
 }
 
-bool Picture::TryInsertShape(std::string const& id, Color color, ShapeType type, ShapeParameters const& params)
+bool Picture::TryInsertShape(std::string const& id, Color color, ShapeType type, std::unique_ptr<IDrawingStrategy>&& shapeBehavior)
 {
-	return m_shapes.try_emplace(id, std::make_unique<Shape>(MakeDrawingStrategy(type, params))).second;
+	return m_shapes.try_emplace(id, std::make_unique<Shape>(std::move(shapeBehavior), color)).second;
 }
 
-std::unique_ptr<IDrawingStrategy> Picture::MakeDrawingStrategy(ShapeType type, ShapeParameters const& params)
-{
-	switch (type)
-	{
-	case ShapeType::CIRCLE:
-		return  std::make_unique<CircleDrawingStrategy>
-			(
-				Point{ params.layoutParams[0], params.layoutParams[1] },
-				params.layoutParams[2]
-			);
-
-	case ShapeType::TRIANGLE:
-		return std::make_unique<TriangleDrawingStrategy>
-			(
-				Point{ params.layoutParams[0], params.layoutParams[1] },
-				Point{ params.layoutParams[2], params.layoutParams[3] },
-				Point{ params.layoutParams[4], params.layoutParams[5] }
-			);
-
-	case ShapeType::LINE:
-		return std::make_unique<LineDrawingStrategy>
-			(
-				Point{ params.layoutParams[0], params.layoutParams[1] },
-				Point{ params.layoutParams[2], params.layoutParams[3] }
-			);
-
-	case ShapeType::RECTANGLE:
-		return std::make_unique<RectangleDrawingStrategy>
-			(
-				Point{ params.layoutParams[0], params.layoutParams[1] },
-				params.layoutParams[2],
-				params.layoutParams[3]
-			);
-
-	case ShapeType::TEXT:
-		return std::make_unique<TextDrawingStrategy>
-			(
-				Point{ params.layoutParams[0], params.layoutParams[1] },
-				params.layoutParams[2],
-				params.text
-			);
-	}
-}

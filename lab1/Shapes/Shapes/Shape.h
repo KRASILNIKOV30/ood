@@ -5,12 +5,11 @@
 class Shape
 {
 public:
-	Shape(std::unique_ptr<IDrawingStrategy>&& drawingStrategy);
+	Shape(std::unique_ptr<IDrawingStrategy>&& drawingStrategy, Color color);
 	void Draw(ICanvas& canvas);
 	Color GetColor();
 	void SetColor(Color color);
 	void SetDrawingStrategy(std::unique_ptr<IDrawingStrategy>&& drawingStrategy);
-	Shape(Shape const& rhs);
 	std::string GetType() const;
 	ShapeParameters GetParams() const;
 	void Move(Point vector);

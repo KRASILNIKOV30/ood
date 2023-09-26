@@ -1,6 +1,3 @@
 ﻿  CommandHandler.cpp
-  Main.cpp
-  Picture.cpp
-  Создание кода...
-C:\Users\bkras\source\repos\ood\lab1\Shapes\Shapes\Picture.cpp(161): warning C4715: Picture::MakeDrawingStrategy: значение возвращается не при всех путях выполнения
+C:\Users\bkras\source\repos\ood\lab1\Shapes\Shapes\CommandHandler.cpp(264): warning C4715: CommandHandler::MakeDrawingStrategy: значение возвращается не при всех путях выполнения
   Shapes.vcxproj -> C:\Users\bkras\source\repos\ood\lab1\Shapes\x64\Debug\Shapes.exe

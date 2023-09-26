@@ -1,13 +1,18 @@
 #include "CommandHandler.h"
 #include <sstream>
 #include "Common.h"
-#include "CCanvas.h"
+#include "CircleDrawingStrategy.h"
+#include "TriangleDrawingStrategy.h"
+#include "LineDrawingStrategy.h"
+#include "TextDrawingStrategy.h"
+#include "RectangleDrawingStrategy.h"
 
 CommandHandler::CommandHandler(std::istream& input, std::ostream& output, Picture& picture, std::ostream& svgFile)
 	: m_input(input)
 	, m_output(output)
 	, m_svgFile(svgFile)
 	, m_picture(picture)
+	, m_canvas(CCanvas(svgFile))
 	, m_actionMap({
 			{ "AddShape", bind(&CommandHandler::AddShape, this, std::placeholders::_1) },
 			{ "MoveShape", bind(&CommandHandler::MoveShape, this, std::placeholders::_1) },
@@ -50,20 +55,6 @@ bool CommandHandler::AddShape(std::istream& args)
 	{
 		return false;
 	}
-
-	std::vector<double> params;
-	double x;
-	
-	m_input >> x;
-	params.push_back(x);
-	m_input >> x;
-	params.push_back(x);
-	m_input >> x;
-	params.push_back(x);
-
-	std::string text = "";
-	//m_input >> text;
-
 	ShapeType type;
 	auto optType = MakeShapeType(typeStr);
 	if (!optType.has_value())
@@ -71,62 +62,122 @@ bool CommandHandler::AddShape(std::istream& args)
 		return false;
 	}
 	type = optType.value();
+
 	Color color;
 	StringToUint32(colorStr, color);
 
-	m_picture.AddShape(id, color, type, ShapeParameters{ params, text });
+	auto optShape = MakeDrawingStrategy(type);
+	if (!optShape.has_value())
+	{
+		return false;
+	}
+
+	m_picture.AddShape(id, color, type, std::move(optShape.value()));
 
 	return true;
 }
 
 bool CommandHandler::MoveShape(std::istream& args)
 {
-	return false;
+	std::string id;
+	double dx, dy;
+	if (!(m_input >> id && m_input >> dx && m_input >> dy))
+	{
+		return false;
+	}
+
+	return m_picture.MoveShape(id, Point(dx, dy));
 }
 
 bool CommandHandler::MovePicture(std::istream& args)
 {
-	return false;
+	double dx, dy;
+	if (!(m_input >> dx && m_input >> dy))
+	{
+		return false;
+	}
+
+	m_picture.MovePicture(Point(dx, dy));
+	return true;
 }
 
 bool CommandHandler::DeleteShape(std::istream& args)
 {
-	return false;
-}
-
-bool CommandHandler::ListShapes(std::istream& args) const
-{
-	return false;
-}
-
-bool CommandHandler::ChangeColor(std::istream& args)
-{
-	return false;
-}
-
-bool CommandHandler::ChangeShape(std::istream& args)
-{
-	return false;
-}
-
-bool CommandHandler::DrawShape(std::istream& args)
-{
-	CCanvas canvas(m_svgFile);
-
 	std::string id;
 	if (!(m_input >> id))
 	{
 		return false;
 	}
 
-	m_picture.DrawShape(id, canvas);
+	return m_picture.DeleteShape(id);
+}
+
+bool CommandHandler::ListShapes(std::istream& args) const
+{
+	std::cout << m_picture.ListShapes() << std::endl;
+	return true;
+}
+
+bool CommandHandler::ChangeColor(std::istream& args)
+{
+	std::string id;
+	std::string colorStr;
+	if (!(m_input >> id && m_input >> colorStr))
+	{
+		return false;
+	}
+	Color color;
+	StringToUint32(colorStr, color);
+
+	m_picture.ChangeColor(id, color);
+	return true;
+}
+
+bool CommandHandler::ChangeShape(std::istream& args)
+{
+	std::string id;
+	std::string typeStr;
+
+	if (!(m_input >> id && m_input >> typeStr))
+	{
+		return false;
+	}
+	ShapeType type;
+	auto optType = MakeShapeType(typeStr);
+	if (!optType.has_value())
+	{
+		return false;
+	}
+	type = optType.value();
+
+	auto optShape = MakeDrawingStrategy(type);
+	if (!optShape.has_value())
+	{
+		return false;
+	}
+
+	m_picture.ChangeShape(id, type, std::move(optShape.value()));
+
+	return true;
+}
+
+bool CommandHandler::DrawShape(std::istream& args)
+{
+	std::string id;
+	if (!(m_input >> id))
+	{
+		return false;
+	}
+
+	m_picture.DrawShape(id, m_canvas);
 
 	return true;
 }
 
 bool CommandHandler::DrawPicture(std::istream& args)
 {
-	return false;
+	m_picture.DrawPicture(m_canvas);
+	return true;
 }
 
 std::optional<ShapeType> CommandHandler::MakeShapeType(std::string type) const
@@ -157,4 +208,57 @@ std::optional<ShapeType> CommandHandler::MakeShapeType(std::string type) const
 	}
 
 	return std::nullopt;
+}
+
+std::optional<std::unique_ptr<IDrawingStrategy>> CommandHandler::MakeDrawingStrategy(ShapeType type) const
+{
+	switch (type)
+	{
+	case ShapeType::CIRCLE:
+	{
+		double cx, cy, r;
+		if (!(m_input >> cx && m_input >> cy && m_input >> r))
+		{
+			return std::nullopt;
+		}
+		return  std::make_unique<CircleDrawingStrategy>(Point{ cx, cy }, r);
+	}
+	case ShapeType::TRIANGLE:
+	{
+		double x1, y1, x2, y2, x3, y3;
+		if (!(m_input >> x1 && m_input >> y1 && m_input >> x2 && m_input >> y2 && m_input >> x3 && m_input >> y3))
+		{
+			return std::nullopt;
+		}
+		return std::make_unique<TriangleDrawingStrategy>(Point{ x1, y1 }, Point{ x2, y2 }, Point{ x3, y3 });
+	}
+	case ShapeType::LINE:
+	{
+		double x1, y1, x2, y2;
+		if (!(m_input >> x1 && m_input >> y1 && m_input >> x2 && m_input >> y2))
+		{
+			return std::nullopt;
+		}
+		return std::make_unique<LineDrawingStrategy>(Point{ x1, y1 }, Point{ x2, y2 });
+	}
+	case ShapeType::RECTANGLE:
+	{
+		double x1, y1, w, h;
+		if (!(m_input >> x1 && m_input >> y1 && m_input >> w && m_input >> h))
+		{
+			return std::nullopt;
+		}
+		return std::make_unique<RectangleDrawingStrategy>(Point{ x1, y1 }, w, h);
+	}
+	case ShapeType::TEXT:
+	{
+		double x1, y1, s;
+		std::string text;
+		if (!(m_input >> x1 && m_input >> y1 && m_input >> s && m_input >> text))
+		{
+			return std::nullopt;
+		}
+		return std::make_unique<TextDrawingStrategy>(Point{ x1, y1 }, s, text);
+	}
+	}
 }

@@ -12,9 +12,9 @@ SCENARIO_METHOD(MockCanvasFixture, "Shape tests")
 	WHEN("Create some shape")
 	{
 		CircleDrawingStrategy circleDrawingStrategy(Point{ 5, 7 }, 3);
-		Shape shape(std::make_unique<CircleDrawingStrategy>(circleDrawingStrategy));
+		Shape shape(std::make_unique<CircleDrawingStrategy>(circleDrawingStrategy), 0);
 
-		THEN("Shape has default black color")
+		THEN("Shape has black color")
 		{
 			CHECK(shape.GetColor() == 0);
 		}
@@ -32,7 +32,7 @@ SCENARIO_METHOD(MockCanvasFixture, "Triangle drawing")
 	GIVEN("Shape with triangle drawing strategy")
 	{
 		TriangleDrawingStrategy triangleDrawingStrategy(Point{ 1, 1 }, Point{ 2, 2 }, Point{ 3, 3 });
-		Shape shape(std::make_unique<TriangleDrawingStrategy>(triangleDrawingStrategy));
+		Shape shape(std::make_unique<TriangleDrawingStrategy>(triangleDrawingStrategy), 0);
 
 		WHEN("Draw shape")
 		{
@@ -41,6 +41,7 @@ SCENARIO_METHOD(MockCanvasFixture, "Triangle drawing")
 			THEN("Three lines drawn at canvas")
 			{
 				CHECK(output.str() ==
+					"Set color 0\n"
 					"Move to (1, 1)\n"
 					"Line to (2, 2)\n"
 					"Line to (3, 3)\n"
@@ -56,7 +57,7 @@ SCENARIO_METHOD(MockCanvasFixture, "Circle drawing")
 	GIVEN("Shape with circle drawing strategy")
 	{
 		CircleDrawingStrategy circleDrawingStrategy(Point{ 5, 7 }, 3);
-		Shape shape(std::make_unique<CircleDrawingStrategy>(circleDrawingStrategy));
+		Shape shape(std::make_unique<CircleDrawingStrategy>(circleDrawingStrategy), 0);
 
 		WHEN("Draw shape")
 		{
@@ -64,7 +65,7 @@ SCENARIO_METHOD(MockCanvasFixture, "Circle drawing")
 
 			THEN("Ellipse drawn at canvas")
 			{
-				CHECK(output.str() == "Draw ellipse in (5, 7) with rx 3 and ry 3\n");
+				CHECK(output.str() == "Set color 0\nDraw ellipse in (5, 7) with rx 3 and ry 3\n");
 			}
 		}
 	}
@@ -75,7 +76,7 @@ SCENARIO_METHOD(MockCanvasFixture, "Line drawing")
 	GIVEN("Shape with line drawing strategy")
 	{
 		LineDrawingStrategy lineDrawingStrategy(Point{ 1, 1 }, Point{ 2, 2 });
-		Shape shape(std::make_unique<LineDrawingStrategy>(lineDrawingStrategy));
+		Shape shape(std::make_unique<LineDrawingStrategy>(lineDrawingStrategy), 0);
 
 		WHEN("Draw shape")
 		{
@@ -84,6 +85,7 @@ SCENARIO_METHOD(MockCanvasFixture, "Line drawing")
 			THEN("Three lines drawn at canvas")
 			{
 				CHECK(output.str() ==
+					"Set color 0\n"
 					"Move to (1, 1)\n"
 					"Line to (2, 2)\n"
 				);
@@ -97,7 +99,7 @@ SCENARIO_METHOD(MockCanvasFixture, "Rectangle drawing")
 	GIVEN("Shape with rectangle drawing strategy")
 	{
 		RectangleDrawingStrategy rectangleDrawingStrategy(Point{ 1, 1 }, 5, 3);
-		Shape shape(std::make_unique<RectangleDrawingStrategy>(rectangleDrawingStrategy));
+		Shape shape(std::make_unique<RectangleDrawingStrategy>(rectangleDrawingStrategy), 0);
 
 		WHEN("Draw shape")
 		{
@@ -106,6 +108,7 @@ SCENARIO_METHOD(MockCanvasFixture, "Rectangle drawing")
 			THEN("Four lines drawn at canvas")
 			{
 				CHECK(output.str() ==
+					"Set color 0\n"
 					"Move to (1, 1)\n"
 					"Line to (6, 1)\n"
 					"Line to (6, 4)\n"
@@ -122,7 +125,7 @@ SCENARIO_METHOD(MockCanvasFixture, "Text drawing")
 	GIVEN("Text with rectangle drawing strategy")
 	{
 		TextDrawingStrategy textDrawingStrategy(Point{ 1, 1 }, 14, "Hello world!");
-		Shape shape(std::make_unique<TextDrawingStrategy>(textDrawingStrategy));
+		Shape shape(std::make_unique<TextDrawingStrategy>(textDrawingStrategy), 0);
 
 		WHEN("Draw shape")
 		{
@@ -130,7 +133,7 @@ SCENARIO_METHOD(MockCanvasFixture, "Text drawing")
 
 			THEN("Text drawn at canvas")
 			{
-				CHECK(output.str() == "Draw text 'Hello world!' with font size 14 in (1, 1)\n");
+				CHECK(output.str() == "Set color 0\nDraw text 'Hello world!' with font size 14 in (1, 1)\n");
 			}
 		}
 	}
@@ -141,7 +144,7 @@ SCENARIO_METHOD(MockCanvasFixture, "Change Shapes drawing strategy")
 	GIVEN("Shape with triangle drawing strategy")
 	{
 		TriangleDrawingStrategy triangleDrawingStrategy(Point{ 1, 1 }, Point{ 2, 2 }, Point{ 3, 3 });
-		Shape shape(std::make_unique<TriangleDrawingStrategy>(triangleDrawingStrategy));
+		Shape shape(std::make_unique<TriangleDrawingStrategy>(triangleDrawingStrategy), 0);
 
 		WHEN("Draw shape")
 		{
@@ -150,6 +153,7 @@ SCENARIO_METHOD(MockCanvasFixture, "Change Shapes drawing strategy")
 			THEN("Three lines drawn at canvas")
 			{
 				CHECK(output.str() ==
+					"Set color 0\n"
 					"Move to (1, 1)\n"
 					"Line to (2, 2)\n"
 					"Line to (3, 3)\n"
@@ -166,7 +170,7 @@ SCENARIO_METHOD(MockCanvasFixture, "Change Shapes drawing strategy")
 
 				THEN("Ellipse drawn at canvas")
 				{
-					CHECK(output.str() == "Draw ellipse in (5, 7) with rx 3 and ry 3\n");
+					CHECK(output.str() == "Set color 0\nDraw ellipse in (5, 7) with rx 3 and ry 3\n");
 				}
 			}
 		}

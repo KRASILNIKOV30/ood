@@ -1,12 +1,14 @@
 #include "Shape.h"
 
-Shape::Shape(std::unique_ptr<IDrawingStrategy>&& drawingStrategy)
+Shape::Shape(std::unique_ptr<IDrawingStrategy>&& drawingStrategy, Color color)
 	: m_drawingStrategy(std::move(drawingStrategy))
+	, m_color(color)
 {
 }
 
 void Shape::Draw(ICanvas& canvas)
 {
+	canvas.SetColor(m_color);
 	m_drawingStrategy->Draw(canvas);
 }
 
@@ -23,10 +25,6 @@ void Shape::SetColor(Color color)
 void Shape::SetDrawingStrategy(std::unique_ptr<IDrawingStrategy>&& drawingStrategy)
 {
 	m_drawingStrategy = std::move(drawingStrategy);
-}
-
-Shape::Shape(Shape const& rhs)
-{
 }
 
 std::string Shape::GetType() const
