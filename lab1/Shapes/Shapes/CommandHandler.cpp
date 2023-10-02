@@ -210,6 +210,7 @@ std::optional<ShapeType> CommandHandler::MakeShapeType(std::string type) const
 	return std::nullopt;
 }
 
+//Выделить в отдельный класс
 std::optional<std::unique_ptr<IShapeBehavior>> CommandHandler::MakeDrawingStrategy(ShapeType type) const
 {
 	switch (type)

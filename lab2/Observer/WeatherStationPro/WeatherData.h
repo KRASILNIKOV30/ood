@@ -1,36 +1,34 @@
 #pragma once
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <climits>
 #include "Observer.h"
 #include "SWeatherInfo.h"
 
-class CWeatherData : public CObservable<SWeatherInfo>
+class CWeatherData final : public CObservable<SWeatherInfo>
 {
 public:
 	// Температура в градусах Цельсия
-	double GetTemperature()const
+	double GetTemperature() const
 	{
 		return m_temperature;
 	}
+
 	// Относительная влажность (0...100)
-	double GetHumidity()const
+	double GetHumidity() const
 	{
 		return m_humidity;
 	}
+
 	// Атмосферное давление (в мм.рт.ст)
-	double GetPressure()const
+	double GetPressure() const
 	{
 		return m_pressure;
 	}
 
-	double GetWindSpeed()const
+	double GetWindSpeed() const
 	{
 		return m_windSpeed;
 	}
 
-	double GetWindDirection()const
+	double GetWindDirection() const
 	{
 		return m_windDirection;
 	}
@@ -42,11 +40,11 @@ public:
 
 	void SetMeasurements
 	(
-		double temp, 
-		double humidity,
-		double pressure,
-		double windSpeed, 
-		double windDirection
+		const double temp,
+		const double humidity,
+		const double pressure,
+		const double windSpeed,
+		const double windDirection
 	)
 	{
 		m_humidity = humidity;
@@ -59,7 +57,7 @@ public:
 	}
 
 protected:
-	SWeatherInfo GetChangedData()const override
+	SWeatherInfo GetChangedData() const override
 	{
 		SWeatherInfo info;
 		info.temperature = GetTemperature();

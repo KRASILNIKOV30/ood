@@ -6,13 +6,13 @@
 class CCondimentDecorator : public IBeverage
 {
 public:
-	std::string GetDescription()const override
+	std::string GetDescription() const override
 	{
 		// Описание декорированного напитка добавляется к описанию оборачиваемого напитка
 		return m_beverage->GetDescription() + ", " + GetCondimentDescription();
 	}
 
-	double GetCost()const override
+	double GetCost() const override
 	{
 		// Стоимость складывается из стоимости добавки и стоимости декорируемого напитка
 		return m_beverage->GetCost() + GetCondimentCost();
@@ -94,7 +94,7 @@ protected:
 		// Сухой лед стоит дороже
 		return (m_type == IceCubeType::Dry ? 10 : 5) * m_quantity;
 	}
-	std::string GetCondimentDescription()const override
+	std::string GetCondimentDescription() const override
 	{
 		return std::string(m_type == IceCubeType::Dry ? "Dry" : "Water")
 			+ " ice cubes x " + std::to_string(m_quantity);
@@ -178,6 +178,7 @@ private:
 	unsigned m_mass;
 };
 
+//Нельзя поменять цену 
 class CDouble : public CCondimentDecorator
 {
 public:

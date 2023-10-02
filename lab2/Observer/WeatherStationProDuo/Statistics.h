@@ -5,12 +5,14 @@
 class Statistics
 {
 public:
-	Statistics(std::string const& name)
+	explicit Statistics(std::string const& name)
 		: m_name(name)
 	{
 	}
 
-	virtual void AddValue(double value)
+	virtual ~Statistics() = default;
+
+	virtual void AddValue(const double value)
 	{
 		if (m_minValue > value)
 		{
@@ -24,7 +26,7 @@ public:
 		m_countAcc++;
 	}
 
-	void Display()
+	void Display() const
 	{
 		std::cout << "Max " << m_name << " " << m_maxValue << std::endl;
 		std::cout << "Min " << m_name << " " << m_minValue << std::endl;
@@ -33,10 +35,11 @@ public:
 	}
 
 protected:
-	virtual double GetAvg() const
+	[[nodiscard]] virtual double GetAvg() const
 	{
 		return m_accValue / m_countAcc;
 	}
+
 	double m_minValue = std::numeric_limits<double>::infinity();
 	double m_maxValue = -std::numeric_limits<double>::infinity();
 

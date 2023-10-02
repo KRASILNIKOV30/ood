@@ -24,6 +24,7 @@ public:
 		m_countAcc++;
 	}
 
+	//Возвращать значения а не отображать
 	void Display()
 	{
 		std::cout << "Max " << m_name << " " << m_maxValue << std::endl;

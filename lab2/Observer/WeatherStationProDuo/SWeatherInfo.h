@@ -1,5 +1,5 @@
 #pragma once
-
+//выделить pro версию
 struct SWeatherInfo
 {
 	double temperature = 0;

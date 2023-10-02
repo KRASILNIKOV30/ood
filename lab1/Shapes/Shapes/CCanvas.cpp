@@ -5,7 +5,7 @@ CCanvas::CCanvas(std::ostream& svgFile)
     : m_svgFile(svgFile)
 {
     SetColor(m_color);
-    m_svgFile << "<svg width=\"800\" height=\"600\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">" << std::endl;
+    m_svgFile << "<svg width=\"1200\" height=\"800\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">" << std::endl;
 }
 
 CCanvas::~CCanvas()

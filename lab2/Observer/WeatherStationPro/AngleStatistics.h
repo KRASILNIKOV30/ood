@@ -28,6 +28,7 @@ public:
 	}
 
 protected:
+	//Можно хранить сумму синусоы и косинусов
 	double GetAvg() const override
 	{
 		double scalingFactor = 2 * PI / MAX_ANGLE;

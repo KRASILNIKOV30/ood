@@ -43,6 +43,7 @@ public:
 
 	void NotifyObservers() override
 	{
+		//Ускорить уведомления и другие методы
 		T data = GetChangedData();
 		Observers observersCopy = m_observers;
 		std::sort(observersCopy.begin(), observersCopy.end(), [](auto& left, auto& right)
