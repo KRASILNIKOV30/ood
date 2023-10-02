@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 enum class Color
 {
@@ -9,3 +10,17 @@ enum class Color
 	Pink,
 	Black
 };
+
+inline std::string to_string(const Color e)
+{
+	switch (e)
+	{
+	case Color::Green: return "green";
+	case Color::Red: return "red";
+	case Color::Blue: return "blue";
+	case Color::Yellow: return "yellow";
+	case Color::Pink: return "pink";
+	case Color::Black: return "black";
+	default: return "unknown";
+	}
+}

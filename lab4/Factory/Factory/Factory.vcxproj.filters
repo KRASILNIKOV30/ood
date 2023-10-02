@@ -16,9 +16,18 @@
     <Filter Include="Файлы заголовков\Common">
       <UniqueIdentifier>{c97df657-9943-41fa-a655-93f12fa6b71f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Shapes">
+      <UniqueIdentifier>{9d1392ef-7efc-4576-986a-71bc7f680f04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Canvas">
+      <UniqueIdentifier>{fa6e5f47-9e36-4b7c-92a5-3e5893400500}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Factory.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="CCanvas.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -28,6 +37,15 @@
     </ClInclude>
     <ClInclude Include="Point.h">
       <Filter>Файлы заголовков\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="CShape.h">
+      <Filter>Файлы заголовков\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="ICanvas.h">
+      <Filter>Файлы заголовков\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="CCanvas.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
