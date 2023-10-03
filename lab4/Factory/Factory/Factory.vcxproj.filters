@@ -25,11 +25,11 @@
     <Filter Include="Исходные файлы\Canvas">
       <UniqueIdentifier>{bcf9a2cd-919d-4a9a-9f99-fdf5164f4f4a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Factory">
+      <UniqueIdentifier>{82dbee1b-74c0-4b66-91d4-c78ad14c92ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Factory.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="CCanvas.cpp">
       <Filter>Исходные файлы\Canvas</Filter>
     </ClCompile>
@@ -70,6 +70,12 @@
     </ClInclude>
     <ClInclude Include="CRegularPolygon.h">
       <Filter>Файлы заголовков\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="IShapeFactory.h">
+      <Filter>Файлы заголовков\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="CShapeFactory.h">
+      <Filter>Файлы заголовков\Factory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
