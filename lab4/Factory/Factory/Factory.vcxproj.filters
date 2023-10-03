@@ -53,5 +53,8 @@
     <ClInclude Include="CRectangle.h">
       <Filter>Файлы заголовков\Shapes</Filter>
     </ClInclude>
+    <ClInclude Include="CTrinagle.h">
+      <Filter>Файлы заголовков\Shapes</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
