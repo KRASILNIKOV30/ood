@@ -33,6 +33,9 @@
     <ClCompile Include="CCanvas.cpp">
       <Filter>Исходные файлы\Canvas</Filter>
     </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h">
@@ -47,13 +50,25 @@
     <ClInclude Include="ICanvas.h">
       <Filter>Файлы заголовков\Canvas</Filter>
     </ClInclude>
-    <ClInclude Include="CCanvas.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="CRectangle.h">
       <Filter>Файлы заголовков\Shapes</Filter>
     </ClInclude>
     <ClInclude Include="CTrinagle.h">
+      <Filter>Файлы заголовков\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="CCanvas.h">
+      <Filter>Файлы заголовков\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="MockCanvas.h">
+      <Filter>Файлы заголовков\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Файлы заголовков\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="CEllipse.h">
+      <Filter>Файлы заголовков\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="CRegularPolygon.h">
       <Filter>Файлы заголовков\Shapes</Filter>
     </ClInclude>
   </ItemGroup>

@@ -127,7 +127,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Factory_tests.cpp" />
+    <ClCompile Include="..\Factory\Point.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Shape_tests.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Factory\CEllipse.h" />
+    <ClInclude Include="..\Factory\Color.h" />
+    <ClInclude Include="..\Factory\Common.h" />
+    <ClInclude Include="..\Factory\CRectangle.h" />
+    <ClInclude Include="..\Factory\CRegularPolygon.h" />
+    <ClInclude Include="..\Factory\CShape.h" />
+    <ClInclude Include="..\Factory\CTrinagle.h" />
+    <ClInclude Include="..\Factory\ICanvas.h" />
+    <ClInclude Include="..\Factory\MockCanvas.h" />
+    <ClInclude Include="..\Factory\Point.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
