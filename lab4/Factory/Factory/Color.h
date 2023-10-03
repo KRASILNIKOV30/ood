@@ -11,7 +11,7 @@ enum class Color
 	Black
 };
 
-inline std::string to_string(const Color e)
+inline std::string ColorToStr(const Color e)
 {
 	switch (e)
 	{
