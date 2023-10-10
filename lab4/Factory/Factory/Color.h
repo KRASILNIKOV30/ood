@@ -27,14 +27,29 @@ inline std::string ColorToStr(const Color e)
 
 inline Color StrToColor(std::string const& s)
 {
-	switch (s)
+	if (s == "green")
 	{
-	case "green": return Color::Green;
-	case "red": return Color::Red;
-	case "blue": return Color::Blue;
-	case "yellow": return Color::Yellow;
-	case "pink": return Color::Pink;
-	case "black": return Color::Black;
-	default: throw std::exception("Unknown color");
+		return Color::Green;
 	}
+	if (s == "red")
+	{
+		return Color::Red;
+	}
+	if (s == "blue")
+	{
+		return Color::Blue;
+	}
+	if (s == "yellow")
+	{
+		return Color::Yellow;
+	}
+	if (s == "pink")
+	{
+		return Color::Pink;
+	}
+	if (s == "black")
+	{
+		return Color::Black;
+	}
+	throw std::exception("Unknown color");
 }

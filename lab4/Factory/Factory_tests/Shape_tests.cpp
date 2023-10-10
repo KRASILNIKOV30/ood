@@ -5,7 +5,7 @@
 #include "../Factory/CShape.h"
 #include "../Factory/CRectangle.h"
 #include "../Factory/CRegularPolygon.h"
-#include "../Factory/CTrinagle.h"
+#include "../Factory/CTriangle.h"
 #include "../Factory/MockCanvas.h"
 #include "../Factory/Point.h"
 
@@ -81,7 +81,7 @@ SCENARIO_METHOD(CoutBufferFixture, "Drawing figures")
 
 		WHEN("Drawing regular polygon")
 		{
-			CRegulaPolygon polygon(Point{ 5, 5 }, 5, 4, Color::Blue);
+			CRegularPolygon polygon(Point{ 5, 5 }, 5, 4, Color::Blue);
 			polygon.Draw(canvas);
 
 			THEN("Canvas draw regular polygon")

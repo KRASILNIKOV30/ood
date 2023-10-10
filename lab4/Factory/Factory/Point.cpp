@@ -32,4 +32,3 @@ std::ostream& operator<<(std::ostream& stream, Point const point)
 	stream << "(" << point.x << ", " << point.y << ")";
 	return stream;
 }
-

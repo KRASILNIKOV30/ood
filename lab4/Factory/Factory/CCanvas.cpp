@@ -26,7 +26,7 @@ void CCanvas::SetColor(const Color color)
 
 void CCanvas::DrawEllipse(const Point leftTop, const double w, const double h)
 {
-    const Point center = leftTop + Point{ w / 2, h / 2 };
+    const auto center = leftTop + Point{ w / 2, h / 2 };
     const double rx = w / 2;
     const double ry = h / 2;
     m_svgFile << "<ellipse cx=\"" << center.x << "\" cy=\"" << center.y << "\" ";

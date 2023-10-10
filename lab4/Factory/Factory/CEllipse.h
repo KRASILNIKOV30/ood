@@ -28,7 +28,7 @@ public:
 	}
 
 private:
-	void DrawLayout(ICanvas& canvas) override
+	void DrawLayout(ICanvas& canvas) const override
 	{
 		canvas.DrawEllipse(m_leftTop, m_width, m_height);
 	}

@@ -12,7 +12,7 @@ public:
 
 	virtual ~CShape() = default;
 
-	void Draw(ICanvas& canvas)
+	void Draw(ICanvas& canvas) const
 	{
 		canvas.SetColor(m_color);
 		DrawLayout(canvas);
@@ -24,6 +24,6 @@ public:
 	}
 
 private:
-	virtual void DrawLayout(ICanvas& canvas) = 0;
+	virtual void DrawLayout(ICanvas& canvas) const = 0;
 	Color m_color;
 };

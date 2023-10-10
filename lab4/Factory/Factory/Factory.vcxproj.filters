@@ -28,12 +28,18 @@
     <Filter Include="Файлы заголовков\Factory">
       <UniqueIdentifier>{82dbee1b-74c0-4b66-91d4-c78ad14c92ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Designer">
+      <UniqueIdentifier>{5d55cb15-b67e-443b-afdb-35bc49e81de9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CCanvas.cpp">
       <Filter>Исходные файлы\Canvas</Filter>
     </ClCompile>
     <ClCompile Include="Point.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,7 +59,7 @@
     <ClInclude Include="CRectangle.h">
       <Filter>Файлы заголовков\Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="CTrinagle.h">
+    <ClInclude Include="CTriangle.h">
       <Filter>Файлы заголовков\Shapes</Filter>
     </ClInclude>
     <ClInclude Include="CCanvas.h">
@@ -77,5 +83,25 @@
     <ClInclude Include="CShapeFactory.h">
       <Filter>Файлы заголовков\Factory</Filter>
     </ClInclude>
+    <ClInclude Include="IDesigner.h">
+      <Filter>Файлы заголовков\Designer</Filter>
+    </ClInclude>
+    <ClInclude Include="CPictureDraft.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="CDesigner.h">
+      <Filter>Файлы заголовков\Designer</Filter>
+    </ClInclude>
+    <ClInclude Include="CPainter.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="CClient.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="picture.svg">
+      <Filter>Исходные файлы</Filter>
+    </None>
   </ItemGroup>
 </Project>

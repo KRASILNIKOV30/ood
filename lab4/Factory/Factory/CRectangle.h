@@ -24,7 +24,7 @@ public:
 	}
 
 private:
-	void DrawLayout(ICanvas& canvas) override
+	void DrawLayout(ICanvas& canvas) const override
 	{
 		canvas.DrawLine(m_leftTop, m_leftTop + Point{ m_width, 0 });
 		canvas.DrawLine(m_leftTop + Point{ m_width, 0 }, m_leftTop + Point{ m_width, m_height });

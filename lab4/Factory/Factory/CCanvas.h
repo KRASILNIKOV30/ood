@@ -1,5 +1,6 @@
 #pragma once
 #include "ICanvas.h"
+#include <sstream>
 
 class CCanvas final : public ICanvas
 {

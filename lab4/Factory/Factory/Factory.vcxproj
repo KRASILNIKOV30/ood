@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,6 +119,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,22 +130,31 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CCanvas.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Point.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCanvas.h" />
+    <ClInclude Include="CClient.h" />
+    <ClInclude Include="CDesigner.h" />
     <ClInclude Include="CEllipse.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Common.h" />
+    <ClInclude Include="CPainter.h" />
+    <ClInclude Include="CPictureDraft.h" />
     <ClInclude Include="CRectangle.h" />
     <ClInclude Include="CRegularPolygon.h" />
     <ClInclude Include="CShape.h" />
     <ClInclude Include="CShapeFactory.h" />
-    <ClInclude Include="CTrinagle.h" />
+    <ClInclude Include="CTriangle.h" />
     <ClInclude Include="ICanvas.h" />
+    <ClInclude Include="IDesigner.h" />
     <ClInclude Include="IShapeFactory.h" />
     <ClInclude Include="MockCanvas.h" />
     <ClInclude Include="Point.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="picture.svg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
