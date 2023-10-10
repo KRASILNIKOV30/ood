@@ -1,16 +1,1 @@
 <svg width="1200" height="800" version="1.1" xmlns="http://www.w3.org/2000/svg">
-<line x1="300" y1="400" x2 ="700" y2="400" style="stroke:red;stroke-width:3"/>
-<line x1="700" y1="400" x2 ="700" y2="700" style="stroke:red;stroke-width:3"/>
-<line x1="700" y1="700" x2 ="300" y2="700" style="stroke:red;stroke-width:3"/>
-<line x1="300" y1="700" x2 ="300" y2="400" style="stroke:red;stroke-width:3"/>
-<ellipse cx="130" cy="210" rx="75" ry="150" style="fill:transparent;stroke:green;stroke-width:3"/>
-<line x1="350" y1="100" x2 ="450" y2="70" style="stroke:blue;stroke-width:3"/>
-<line x1="450" y1="70" x2 ="400" y2="300" style="stroke:blue;stroke-width:3"/>
-<line x1="400" y1="300" x2 ="350" y2="100" style="stroke:blue;stroke-width:3"/>
-<line x1="400" y1="300" x2 ="350" y2="386.603" style="stroke:pink;stroke-width:3"/>
-<line x1="350" y1="386.603" x2 ="250" y2="386.603" style="stroke:pink;stroke-width:3"/>
-<line x1="250" y1="386.603" x2 ="200" y2="300" style="stroke:pink;stroke-width:3"/>
-<line x1="200" y1="300" x2 ="250" y2="213.397" style="stroke:pink;stroke-width:3"/>
-<line x1="250" y1="213.397" x2 ="350" y2="213.397" style="stroke:pink;stroke-width:3"/>
-<line x1="350" y1="213.397" x2 ="400" y2="300" style="stroke:pink;stroke-width:3"/>
-</svg>

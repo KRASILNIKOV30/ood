@@ -6,6 +6,7 @@ class CCanvas final : public ICanvas
 {
 public:
 	explicit CCanvas(std::ostream& svgFile);
+	//Не закрывать тег в деструкторе
 	~CCanvas() override;
 	void DrawLine(const Point from, const Point to) override;
 	void SetColor(const Color color) override;
