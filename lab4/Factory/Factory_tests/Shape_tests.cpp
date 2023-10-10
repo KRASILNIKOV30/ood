@@ -24,6 +24,11 @@ struct CoutBufferFixture
 	{
 		buffer.str(std::string());
 	}
+
+	~CoutBufferFixture()
+	{
+		std::cout.rdbuf(old);
+	}
 };
 
 SCENARIO_METHOD(CoutBufferFixture, "Drawing figures")
