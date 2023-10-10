@@ -1,27 +1,7 @@
 #include "../../../external/catch2/catch.hpp"
+#include "../Factory/Common.h"
 #include "../Factory/CShapeFactory.h"
 #include "../Factory/MockCanvas.h"
-
-struct CoutBufferFixture
-{
-	std::stringstream buffer;
-	std::streambuf* old = std::cout.rdbuf(buffer.rdbuf());
-
-	std::string GetOutput() const
-	{
-		return buffer.str();
-	}
-
-	void ClearOutput()
-	{
-		buffer.str(std::string());
-	}
-
-	~CoutBufferFixture()
-	{
-		std::cout.rdbuf(old);
-	}
-};
 
 SCENARIO_METHOD(CoutBufferFixture, "Shape factory tests")
 {

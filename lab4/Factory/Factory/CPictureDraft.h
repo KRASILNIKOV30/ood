@@ -15,6 +15,10 @@ public:
 
 	std::shared_ptr<CShape> GetShape(const int index)
 	{
+		if (index >= GetShapeCount())
+		{
+			throw std::out_of_range("");
+		}
 		return m_shapes[index];
 	}
 

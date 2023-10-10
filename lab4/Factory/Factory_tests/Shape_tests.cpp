@@ -2,34 +2,13 @@
 #include <sstream>
 #include "../../../external/catch2/catch.hpp"
 #include "../Factory/CEllipse.h"
+#include "../Factory/Common.h"
 #include "../Factory/CShape.h"
 #include "../Factory/CRectangle.h"
 #include "../Factory/CRegularPolygon.h"
 #include "../Factory/CTriangle.h"
 #include "../Factory/MockCanvas.h"
 #include "../Factory/Point.h"
-
-
-struct CoutBufferFixture
-{
-	std::stringstream buffer;
-	std::streambuf* old = std::cout.rdbuf(buffer.rdbuf());
-
-	std::string GetOutput() const
-	{
-		return buffer.str();
-	}
-
-	void ClearOutput()
-	{
-		buffer.str(std::string());
-	}
-
-	~CoutBufferFixture()
-	{
-		std::cout.rdbuf(old);
-	}
-};
 
 SCENARIO_METHOD(CoutBufferFixture, "Drawing figures")
 {

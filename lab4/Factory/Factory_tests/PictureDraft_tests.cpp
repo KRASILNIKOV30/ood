@@ -27,6 +27,7 @@ SCENARIO("Picture draft tests")
 
 			THEN("Draft can represent number of shapes")
 			{
+				//Протестировать получение фигуры по индексы вне массива
 				CHECK(draft.GetShapeCount() == 4);
 			}
 
@@ -35,6 +36,11 @@ SCENARIO("Picture draft tests")
 				auto const shape = draft.GetShape(2).get();
 				CHECK_NOTHROW(dynamic_cast<CEllipse*>(shape));
 				CHECK(shape->GetColor() == Color::Pink);
+			}
+
+			AND_THEN("Draft can throw out of range exception while getting non existing shape")
+			{
+				CHECK_THROWS_AS(draft.GetShape(4), std::out_of_range);
 			}
 		}
 	}
