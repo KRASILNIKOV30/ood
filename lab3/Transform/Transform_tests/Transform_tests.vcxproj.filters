@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\Streams">
+      <UniqueIdentifier>{4ae3282d-b6f8-4b06-a931-ef44db27a26c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Streams">
+      <UniqueIdentifier>{530f30b8-074d-45b7-8029-6bbb571dcd2f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CFileInputStream_tests.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="CMemoryInputStream_tests.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Transform\CFileInputStream.cpp">
+      <Filter>Исходные файлы\Streams</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Transform\CMemoryInputStream.cpp">
+      <Filter>Исходные файлы\Streams</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Transform\CFileOutputStream.cpp">
+      <Filter>Исходные файлы\Streams</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Transform\CMemoryOutputStream.cpp">
+      <Filter>Исходные файлы\Streams</Filter>
+    </ClCompile>
+    <ClCompile Include="CFileOutputStream_tests.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="CMemoryOutputStream_tests.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Transform\CFileInputStream.h">
+      <Filter>Файлы заголовков\Streams</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Transform\IDataStreams.h">
+      <Filter>Файлы заголовков\Streams</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Transform\CMemoryInputStream.h">
+      <Filter>Файлы заголовков\Streams</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Transform\CFileOutputStream.h">
+      <Filter>Файлы заголовков\Streams</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Transform\CMemoryOutputStream.h">
+      <Filter>Файлы заголовков\Streams</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="test.txt">
+      <Filter>Исходные файлы</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

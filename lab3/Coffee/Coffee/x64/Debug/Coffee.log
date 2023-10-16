@@ -1,11 +1,2 @@
 ﻿  main.cpp
-C:\Users\bkras\source\repos\ood\lab3\Coffee\Coffee\Condiments.h(22,14): error C2253: CCondimentDecorator::GetCondimentDescription: в виртуальной функции допускаются только чистый спецификатор или абстрактный спецификатор переопределения
-C:\Users\bkras\source\repos\ood\lab3\Coffee\Coffee\Condiments.h(46,14): error C3668: CCinnamon::GetCondimentDescription: метод со спецификатором переопределения "override" не переопределяет какие-либо методы базового класса
-C:\Users\bkras\source\repos\ood\lab3\Coffee\Coffee\Condiments.h(65,14): error C3668: CLemon::GetCondimentDescription: метод со спецификатором переопределения "override" не переопределяет какие-либо методы базового класса
-C:\Users\bkras\source\repos\ood\lab3\Coffee\Coffee\Condiments.h(97,14): error C3668: CIceCubes::GetCondimentDescription: метод со спецификатором переопределения "override" не переопределяет какие-либо методы базового класса
-C:\Users\bkras\source\repos\ood\lab3\Coffee\Coffee\Condiments.h(127,14): error C3668: CSyrup::GetCondimentDescription: метод со спецификатором переопределения "override" не переопределяет какие-либо методы базового класса
-C:\Users\bkras\source\repos\ood\lab3\Coffee\Coffee\Condiments.h(151,14): error C3668: CChocolateCrumbs::GetCondimentDescription: метод со спецификатором переопределения "override" не переопределяет какие-либо методы базового класса
-C:\Users\bkras\source\repos\ood\lab3\Coffee\Coffee\Condiments.h(173,14): error C3668: CCoconutFlakes::GetCondimentDescription: метод со спецификатором переопределения "override" не переопределяет какие-либо методы базового класса
-C:\Users\bkras\source\repos\ood\lab3\Coffee\Coffee\Condiments.h(193,14): error C3668: CDouble::GetCondimentDescription: метод со спецификатором переопределения "override" не переопределяет какие-либо методы базового класса
-C:\Users\bkras\source\repos\ood\lab3\Coffee\Coffee\Condiments.h(211,14): error C3668: CCream::GetCondimentDescription: метод со спецификатором переопределения "override" не переопределяет какие-либо методы базового класса
-C:\Users\bkras\source\repos\ood\lab3\Coffee\Coffee\Condiments.h(229,14): error C3668: CChocolate::GetCondimentDescription: метод со спецификатором переопределения "override" не переопределяет какие-либо методы базового класса
+  Coffee.vcxproj -> C:\Users\bkras\source\repos\ood\lab3\Coffee\x64\Debug\Coffee.exe
