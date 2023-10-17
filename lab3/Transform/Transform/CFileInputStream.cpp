@@ -14,6 +14,10 @@ CFileInputStream::CFileInputStream(std::string const& filename)
 
 bool CFileInputStream::IsEOF() const
 {
+    if (!m_stream.good())
+    {
+        throw std::ios_base::failure("Error has occurred");
+    }
     return m_length == m_pos;
 }
 
@@ -31,13 +35,23 @@ std::streamsize CFileInputStream::ReadBlock(void* dstBuffer, const std::streamsi
 {
     const auto start = m_pos;
     char* bytes = new char[size];
-    while (!IsEOF() && m_pos - start < size)
+    try
     {
-        char* dst = bytes + m_pos - start;
-        memset(dst, ReadByte(), 1);
+        while (!IsEOF() && m_pos - start < size)
+        {
+            char* dst = bytes + m_pos - start;
+            memset(dst, ReadByte(), 1);
+        }
+        memcpy_s(dstBuffer, m_pos - start, bytes, m_pos - start);
+        return m_pos - start;
     }
-    memcpy_s(dstBuffer, m_pos - start, bytes, m_pos - start);
-    return m_pos - start;
+    catch (std::exception& e)
+    {
+        delete[] bytes;
+        throw e;
+    }
+
+    delete[] bytes;
 }
 
 CFileInputStream::~CFileInputStream()

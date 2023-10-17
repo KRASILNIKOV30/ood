@@ -19,20 +19,22 @@ void CMemoryOutputStream::WriteByte(uint8_t const data)
 
 void CMemoryOutputStream::WriteBlock(const void* srcData, std::streamsize const size)
 {
-	char* buffer;
+	//Убрать утечки памяти (исправлено)
+	char* buffer = new char[size];
 	try
 	{
-		buffer = new char[size];
+		memcpy_s(buffer, size, srcData, size);
+
+		for (int pos = 0; pos < size; pos++)
+		{
+			WriteByte(*buffer);
+			buffer += 1;
+		}
 	}
 	catch (std::exception&)
 	{
+		delete[] buffer;
 		throw std::ios_base::failure("Fail to write block");
 	}
-	memcpy_s(buffer, size, srcData, size);
-
-	for (int pos = 0; pos < size; pos++)
-	{
-		WriteByte(*buffer);
-		buffer += 1;
-	}
+	delete[] buffer;
 }

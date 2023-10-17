@@ -57,6 +57,8 @@ SCENARIO("CFileInputStream test")
 			CHECK_FALSE(strm.IsEOF());
 		}
 
+		//Проверить многострочный файл
+
 		WHEN("Read block less than current file data")
 		{
 			char* buffer = new char[7];

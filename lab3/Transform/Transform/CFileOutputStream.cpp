@@ -36,3 +36,11 @@ void CFileOutputStream::Close()
 {
     m_stream.close();
 }
+
+CFileOutputStream::~CFileOutputStream()
+{
+    if (m_stream.is_open())
+    {
+        m_stream.close();
+    }
+}

@@ -20,6 +20,7 @@ SCENARIO("File output stream test")
 			}
 		}
 
+		//Протестировать на больших данных (exe)
 		AND_WHEN("Write full data block to file")
 		{
 			char* const src = new char[14]{"Hello, world!"};

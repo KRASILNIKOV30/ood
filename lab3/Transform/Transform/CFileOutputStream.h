@@ -10,6 +10,7 @@ public:
 	void WriteByte(uint8_t data) override;
 	void WriteBlock(const void* srcData, std::streamsize const size) override;
 	void Close();
+	~CFileOutputStream() override;
 
 private:
 	std::ofstream m_stream;
