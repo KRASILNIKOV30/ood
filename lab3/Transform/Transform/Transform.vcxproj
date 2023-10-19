@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClCompile Include="CDecompressiveInputStream.cpp" />
     <ClCompile Include="CCompressiveOutputStream.cpp" />
+    <ClCompile Include="CEncryptOutputStream.cpp" />
     <ClCompile Include="CFileInputStream.cpp" />
     <ClCompile Include="CFileOutputStream.cpp" />
     <ClCompile Include="CMemoryInputStream.cpp" />
@@ -140,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="CDecompressiveInputStream.h" />
     <ClInclude Include="CCompressiveOutputStream.h" />
+    <ClInclude Include="CEncryptOutputStream.h" />
     <ClInclude Include="CFileInputStream.h" />
     <ClInclude Include="CFileOutputStream.h" />
     <ClInclude Include="CMemoryInputStream.h" />
