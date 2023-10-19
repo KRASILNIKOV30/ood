@@ -23,8 +23,7 @@ SCENARIO("File output stream test")
 		//Протестировать на больших данных (exe)
 		AND_WHEN("Write full data block to file")
 		{
-			char* const src = new char[14]{"Hello, world!"};
-			strm.WriteBlock(src, 14);
+			strm.WriteBlock("Hello, world!", 14);
 			strm.Close();
 
 			THEN("Block has been fully written")
@@ -39,8 +38,7 @@ SCENARIO("File output stream test")
 
 		AND_WHEN("Write not full data block to file")
 		{
-			char* const src = new char[14]{"Hello, world!"};
-			strm.WriteBlock(src, 5);
+			strm.WriteBlock("Hello, world!", 5);
 			strm.Close();
 
 			THEN("Block has been fully written")

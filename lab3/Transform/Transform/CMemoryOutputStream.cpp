@@ -27,8 +27,7 @@ void CMemoryOutputStream::WriteBlock(const void* srcData, std::streamsize const 
 
 		for (int pos = 0; pos < size; pos++)
 		{
-			WriteByte(*buffer);
-			buffer += 1;
+			WriteByte(*(buffer + pos));
 		}
 	}
 	catch (std::exception&)

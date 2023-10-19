@@ -22,13 +22,12 @@ SCENARIO("Memory output stream test")
 
 		AND_WHEN("Write full data block to file")
 		{
-			const char* const src = new char[14]{"Hello, world!"};
-			strm.WriteBlock(src, 14);
+			strm.WriteBlock("Hello, world!", 14);
 
 			THEN("Block has been fully written")
 			{
 				const std::vector<uint8_t> expected = { 'H', 'e', 'l', 'l', 'o', ',', ' ', 'w', 'o', 'r', 'l', 'd', '!', '\0' };
-				CHECK(memory.size() == expected.size());
+				REQUIRE(memory.size() == expected.size());
 				for (int i = 0; i < memory.size(); i++)
 				{
 					CHECK(memory[i] == expected[i]);
@@ -38,8 +37,7 @@ SCENARIO("Memory output stream test")
 
 		AND_WHEN("Write not full data block to file")
 		{
-			char* const src = new char[14]{"Hello, world!"};
-			strm.WriteBlock(src, 5);
+			strm.WriteBlock("Hello, world!", 5);
 
 			THEN("Block has been fully written")
 			{

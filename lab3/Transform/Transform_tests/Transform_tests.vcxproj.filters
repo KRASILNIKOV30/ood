@@ -48,6 +48,18 @@
     <ClCompile Include="CMemoryOutputStream_tests.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="CDecompressiveInputStream_tests.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Transform\CDecompressiveInputStream.cpp">
+      <Filter>Исходные файлы\Streams</Filter>
+    </ClCompile>
+    <ClCompile Include="CCompressiveOutputStream_tests.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Transform\CCompressiveOutputStream.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Transform\CFileInputStream.h">
@@ -65,9 +77,15 @@
     <ClInclude Include="..\Transform\CMemoryOutputStream.h">
       <Filter>Файлы заголовков\Streams</Filter>
     </ClInclude>
+    <ClInclude Include="..\Transform\CDecompressiveInputStream.h">
+      <Filter>Файлы заголовков\Streams</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Transform\CCcompressiveOutputStream.h">
+      <Filter>Файлы заголовков\Streams</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="test.txt">
+    <Text Include="test.dat">
       <Filter>Исходные файлы</Filter>
     </Text>
   </ItemGroup>

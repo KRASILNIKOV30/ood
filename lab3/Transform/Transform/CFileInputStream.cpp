@@ -7,9 +7,9 @@ CFileInputStream::CFileInputStream(std::string const& filename)
     {
         throw std::ios_base::failure("Failed to open file for reading");
     }
-    m_stream.seekg(0, m_stream.end);
+    m_stream.seekg(0, std::ifstream::end);
     m_length = m_stream.tellg();
-    m_stream.seekg(0, m_stream.beg);
+    m_stream.seekg(0, std::ifstream::beg);
 }
 
 bool CFileInputStream::IsEOF() const

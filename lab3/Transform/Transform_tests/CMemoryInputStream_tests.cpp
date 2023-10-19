@@ -54,6 +54,7 @@ SCENARIO("CMemoryInputStream test")
 			{
 				CHECK(readSize == 7);
 				CHECK(strncmp(buffer, "Hello, ", 7) == 0);
+				delete[] buffer;
 			}
 		}
 
@@ -66,6 +67,7 @@ SCENARIO("CMemoryInputStream test")
 			{
 				CHECK(readSize == 13);
 				CHECK(strncmp(buffer, "Hello, world!", 13) == 0);
+				delete[] buffer;
 			}
 		}
 	}

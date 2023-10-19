@@ -127,10 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Transform\CCompressiveOutputStream.cpp" />
+    <ClCompile Include="..\Transform\CDecompressiveInputStream.cpp" />
     <ClCompile Include="..\Transform\CFileInputStream.cpp" />
     <ClCompile Include="..\Transform\CFileOutputStream.cpp" />
     <ClCompile Include="..\Transform\CMemoryInputStream.cpp" />
     <ClCompile Include="..\Transform\CMemoryOutputStream.cpp" />
+    <ClCompile Include="CCompressiveOutputStream_tests.cpp" />
+    <ClCompile Include="CDecompressiveInputStream_tests.cpp" />
     <ClCompile Include="CFileOutputStream_tests.cpp" />
     <ClCompile Include="CMemoryInputStream_tests.cpp" />
     <ClCompile Include="CMemoryOutputStream_tests.cpp" />
@@ -138,6 +142,8 @@
     <ClCompile Include="CFileInputStream_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Transform\CCcompressiveOutputStream.h" />
+    <ClInclude Include="..\Transform\CDecompressiveInputStream.h" />
     <ClInclude Include="..\Transform\CFileInputStream.h" />
     <ClInclude Include="..\Transform\CFileOutputStream.h" />
     <ClInclude Include="..\Transform\CMemoryInputStream.h" />
@@ -145,7 +151,7 @@
     <ClInclude Include="..\Transform\IDataStreams.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="test.txt" />
+    <Text Include="test.dat" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

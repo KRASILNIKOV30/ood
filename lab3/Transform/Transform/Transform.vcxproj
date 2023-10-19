@@ -129,6 +129,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CDecompressiveInputStream.cpp" />
+    <ClCompile Include="CCompressiveOutputStream.cpp" />
     <ClCompile Include="CFileInputStream.cpp" />
     <ClCompile Include="CFileOutputStream.cpp" />
     <ClCompile Include="CMemoryInputStream.cpp" />
@@ -136,10 +138,13 @@
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CDecompressiveInputStream.h" />
+    <ClInclude Include="CCompressiveOutputStream.h" />
     <ClInclude Include="CFileInputStream.h" />
     <ClInclude Include="CFileOutputStream.h" />
     <ClInclude Include="CMemoryInputStream.h" />
     <ClInclude Include="CMemoryOutputStream.h" />
+    <ClInclude Include="CStreamDecorator.h" />
     <ClInclude Include="IDataStreams.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -5,14 +5,14 @@ SCENARIO("CFileInputStream test")
 {
 	THEN("An exception is thrown when creating a stream from a non-existent file")
 	{
-		CHECK_THROWS_AS(CFileInputStream("non-existent-file.txt"), std::ios_base::failure);
+		CHECK_THROWS_AS(CFileInputStream("non-existent-file.dat"), std::ios_base::failure);
 	}
 
 	GIVEN("File input stream from empty file")
 	{
-		std::ofstream file("test.txt", std::ofstream::out);
+		std::ofstream file("test.dat", std::ofstream::out | std::ofstream::binary);
 		file.close();
-		CFileInputStream strm("test.txt");
+		CFileInputStream strm("test.dat");
 
 		THEN("Eof has been reached")
 		{
@@ -24,10 +24,10 @@ SCENARIO("CFileInputStream test")
 
 	GIVEN("File input stream from file with one char")
 	{
-		std::ofstream file("test.txt", std::ofstream::out);
+		std::ofstream file("test.dat", std::ofstream::out | std::ofstream::binary);
 		file << 'A';
 		file.close();
-		CFileInputStream strm("test.txt");
+		CFileInputStream strm("test.dat");
 
 		THEN("Eof has not been reached")
 		{
@@ -47,10 +47,10 @@ SCENARIO("CFileInputStream test")
 
 	GIVEN("File input stream from file with manny chars")
 	{
-		std::ofstream file("test.txt", std::ofstream::out);
+		std::ofstream file("test.dat", std::ofstream::out | std::ofstream::binary);
 		file << "Hello, world!";
 		file.close();
-		CFileInputStream strm("test.txt");
+		CFileInputStream strm("test.dat");
 
 		THEN("Eof has not been reached")
 		{
@@ -68,6 +68,7 @@ SCENARIO("CFileInputStream test")
 			{
 				CHECK(readSize == 7);
 				CHECK(strncmp(buffer, "Hello, ", 7) == 0);
+				delete[] buffer;
 			}
 		}
 
@@ -80,6 +81,7 @@ SCENARIO("CFileInputStream test")
 			{
 				CHECK(readSize == 13);
 				CHECK(strncmp(buffer, "Hello, world!", 13) == 0);
+				delete[] buffer;
 			}
 		}
 	}

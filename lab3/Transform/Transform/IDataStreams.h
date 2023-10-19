@@ -16,6 +16,8 @@ public:
 	virtual ~IOutputDataStream() = default;
 };
 
+using IOutputPtr = std::unique_ptr<IOutputDataStream>;
+
 class IInputDataStream
 {
 public:
@@ -34,3 +36,5 @@ public:
 
 	virtual ~IInputDataStream() = default;
 };
+
+using IInputPtr = std::unique_ptr<IInputDataStream>;
