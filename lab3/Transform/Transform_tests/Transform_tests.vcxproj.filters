@@ -60,6 +60,15 @@
     <ClCompile Include="..\Transform\CCompressiveOutputStream.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="EncryptionStreams_tests.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Transform\CDecryptInputStream.cpp">
+      <Filter>Исходные файлы\Streams</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Transform\CEncryptOutputStream.cpp">
+      <Filter>Исходные файлы\Streams</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Transform\CFileInputStream.h">
@@ -81,6 +90,12 @@
       <Filter>Файлы заголовков\Streams</Filter>
     </ClInclude>
     <ClInclude Include="..\Transform\CCcompressiveOutputStream.h">
+      <Filter>Файлы заголовков\Streams</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Transform\CDecryptInputStream.h">
+      <Filter>Файлы заголовков\Streams</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Transform\CEncryptOutputStream.h">
       <Filter>Файлы заголовков\Streams</Filter>
     </ClInclude>
   </ItemGroup>

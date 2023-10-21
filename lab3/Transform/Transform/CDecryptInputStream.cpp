@@ -25,10 +25,13 @@ std::streamsize CDecryptInputStream::ReadBlock(void* dstBuffer, const std::strea
 	try
 	{
 		std::streamsize const readSize = CInputStreamDecorator::ReadBlock(bytes, size);
+		char* decryptedBytes = new char[readSize];
 		for (int i = 0; i < readSize; i++)
 		{
-			memset(dstBuffer, m_map[*(bytes + i)], 1);
+			memset(decryptedBytes + i, m_map[*(bytes + i)], 1);
 		}
+		memcpy_s(dstBuffer, readSize, decryptedBytes, readSize);
+		delete[] decryptedBytes;
 		delete[] bytes;
 
 		return readSize;

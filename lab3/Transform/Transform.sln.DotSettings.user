@@ -8,6 +8,7 @@
     &lt;ProjectFile&gt;731111AA-03CD-408B-9B3B-FC3548322F24/f:CDecompressiveInputStream_tests.cpp&lt;/ProjectFile&gt;&#xD;
     &lt;TestAncestor&gt;&#xD;
       &lt;TestId&gt;Catch::731111AA-03CD-408B-9B3B-FC3548322F24::Windows,Version=v10.0.22000::Scenario: Compressive output stream tests&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;Catch::731111AA-03CD-408B-9B3B-FC3548322F24::Windows,Version=v10.0.22000::Scenario: Encrytion streams tests&lt;/TestId&gt;&#xD;
     &lt;/TestAncestor&gt;&#xD;
   &lt;/Or&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

@@ -1,4 +1,2 @@
-﻿  CCompressiveOutputStream.cpp
-  CFileInputStream.cpp
-  Создание кода...
+﻿  EncryptionStreams_tests.cpp
   Transform_tests.vcxproj -> C:\Users\bkras\source\repos\ood\lab3\Transform\x64\Debug\Transform_tests.exe
