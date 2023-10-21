@@ -8,15 +8,32 @@ CEncryptOutputStream::CEncryptOutputStream(IOutputPtr&& stream, int const key)
 	: COutputStreamDecorator(std::move(stream))
 	, m_key(key)
 {
+	GenerateMap();
 }
 
 void CEncryptOutputStream::WriteByte(const uint8_t data)
 {
-
+	COutputStreamDecorator::WriteByte(m_map[data]);
 }
 
 void CEncryptOutputStream::WriteBlock(const void* srcData, const std::streamsize size)
 {
+	char* buffer = new char[size];
+	try
+	{
+		memcpy_s(buffer, size, srcData, size);
+
+		for (int i = 0; i < size; i++)
+		{
+			WriteByte(*(buffer + i));
+		}
+	}
+	catch (std::exception&)
+	{
+		delete[] buffer;
+		throw std::ios_base::failure("Fail to write block");
+	}
+	delete[] buffer;
 }
 
 void CEncryptOutputStream::GenerateMap()

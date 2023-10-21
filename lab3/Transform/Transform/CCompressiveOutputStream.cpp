@@ -21,21 +21,22 @@ void CCompressiveOutputStream::WriteByte(const uint8_t data)
 
 void CCompressiveOutputStream::WriteBlock(const void* srcData, const std::streamsize size)
 {
-	char* buffer;
+	char* buffer = new char[size];
 	try
 	{
-		buffer = new char[size];
+		memcpy_s(buffer, size, srcData, size);
+
+		for (int i = 0; i < size; i++)
+		{
+			WriteByte(*(buffer + i));
+		}
 	}
 	catch (std::exception&)
 	{
+		delete[] buffer;
 		throw std::ios_base::failure("Fail to write block");
 	}
-	memcpy_s(buffer, size, srcData, size);
-
-	for (int i = 0; i < size; i++)
-	{
-		WriteByte(*(buffer + i));
-	}
+	delete[] buffer;
 }
 
 void CCompressiveOutputStream::Flush()

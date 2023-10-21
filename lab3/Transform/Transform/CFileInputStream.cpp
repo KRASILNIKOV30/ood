@@ -43,6 +43,7 @@ std::streamsize CFileInputStream::ReadBlock(void* dstBuffer, const std::streamsi
             memset(dst, ReadByte(), 1);
         }
         memcpy_s(dstBuffer, m_pos - start, bytes, m_pos - start);
+        delete[] bytes;
         return m_pos - start;
     }
     catch (std::exception& e)
@@ -50,8 +51,6 @@ std::streamsize CFileInputStream::ReadBlock(void* dstBuffer, const std::streamsi
         delete[] bytes;
         throw e;
     }
-
-    delete[] bytes;
 }
 
 CFileInputStream::~CFileInputStream()
