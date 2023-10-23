@@ -11,6 +11,7 @@ public:
 	void WriteBlock(const void* srcData, std::streamsize const size) override;
 	void Close();
 	~CFileOutputStream() override;
+	bool Flush() override;
 
 private:
 	std::ofstream m_stream;

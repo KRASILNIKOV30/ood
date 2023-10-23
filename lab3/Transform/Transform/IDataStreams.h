@@ -12,6 +12,7 @@ public:
 	// располагающийся по адресу srcData,
 	// В случае ошибки выбрасывает исключение std::ios_base::failure
 	virtual void WriteBlock(const void* srcData, std::streamsize size) = 0;
+	virtual bool Flush() = 0;
 
 	virtual ~IOutputDataStream() = default;
 };

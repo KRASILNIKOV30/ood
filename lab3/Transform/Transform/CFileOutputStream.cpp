@@ -44,3 +44,8 @@ CFileOutputStream::~CFileOutputStream()
         m_stream.close();
     }
 }
+
+bool CFileOutputStream::Flush()
+{
+    return static_cast<bool>(m_stream.flush());
+}

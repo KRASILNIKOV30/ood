@@ -39,7 +39,7 @@ void CCompressiveOutputStream::WriteBlock(const void* srcData, const std::stream
 	delete[] buffer;
 }
 
-void CCompressiveOutputStream::Flush()
+bool CCompressiveOutputStream::Flush()
 {
 	if (m_count)
 	{
@@ -48,6 +48,8 @@ void CCompressiveOutputStream::Flush()
 		m_count = 0;
 		m_currByte = NULL;
 	}
+
+	return COutputStreamDecorator::Flush();
 }
 
 CCompressiveOutputStream::~CCompressiveOutputStream()

@@ -7,7 +7,7 @@ public:
 	explicit CCompressiveOutputStream(IOutputPtr&& stream);
 	void WriteByte(const uint8_t data) override;
 	void WriteBlock(const void* srcData, const std::streamsize size) override;
-	void Flush();
+	bool Flush() override;
 	~CCompressiveOutputStream() override;
 
 private:

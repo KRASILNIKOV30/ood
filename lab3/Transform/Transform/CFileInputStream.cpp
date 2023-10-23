@@ -14,7 +14,7 @@ CFileInputStream::CFileInputStream(std::string const& filename)
 
 bool CFileInputStream::IsEOF() const
 {
-    if (!m_stream.good())
+	if (!m_stream.good())
     {
         throw std::ios_base::failure("Error has occurred");
     }

@@ -75,4 +75,18 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="input.dat">
+      <Filter>Исходные файлы</Filter>
+    </None>
+    <None Include="output.dat">
+      <Filter>Исходные файлы</Filter>
+    </None>
+    <None Include="test.bat">
+      <Filter>Исходные файлы</Filter>
+    </None>
+    <None Include="empty.dat">
+      <Filter>Исходные файлы</Filter>
+    </None>
+  </ItemGroup>
 </Project>

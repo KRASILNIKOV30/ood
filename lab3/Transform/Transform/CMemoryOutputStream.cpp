@@ -37,3 +37,8 @@ void CMemoryOutputStream::WriteBlock(const void* srcData, std::streamsize const 
 	}
 	delete[] buffer;
 }
+
+bool CMemoryOutputStream::Flush()
+{
+	return true;
+}

@@ -9,6 +9,7 @@ public:
 	explicit CEncryptOutputStream(IOutputPtr&& stream, int const key);
 	void WriteByte(const uint8_t data) override;
 	void WriteBlock(const void* srcData, const std::streamsize size) override;
+	bool Flush() override;
 
 private:
 	void GenerateMap();

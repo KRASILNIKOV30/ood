@@ -42,6 +42,11 @@ public:
 		m_stream->WriteBlock(srcData, size);
 	}
 
+	bool Flush() override
+	{
+		return m_stream->Flush();
+	}
+
 protected:
 	explicit COutputStreamDecorator(IOutputPtr&& stream)
 		: m_stream(std::move(stream))
