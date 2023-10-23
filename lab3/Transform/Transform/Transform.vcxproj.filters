@@ -13,34 +13,37 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Исходные файлы\Streams">
+      <UniqueIdentifier>{e038740b-aff2-49fe-94e1-8065a1ca373c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Transform.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="CFileInputStream.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="CMemoryInputStream.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="CFileOutputStream.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="CMemoryOutputStream.cpp">
-      <Filter>Исходные файлы</Filter>
+    <ClCompile Include="CCompressiveOutputStream.cpp">
+      <Filter>Исходные файлы\Streams</Filter>
     </ClCompile>
     <ClCompile Include="CDecompressiveInputStream.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="CCompressiveOutputStream.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="CEncryptOutputStream.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\Streams</Filter>
     </ClCompile>
     <ClCompile Include="CDecryptInputStream.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\Streams</Filter>
+    </ClCompile>
+    <ClCompile Include="CEncryptOutputStream.cpp">
+      <Filter>Исходные файлы\Streams</Filter>
+    </ClCompile>
+    <ClCompile Include="CFileInputStream.cpp">
+      <Filter>Исходные файлы\Streams</Filter>
+    </ClCompile>
+    <ClCompile Include="CFileOutputStream.cpp">
+      <Filter>Исходные файлы\Streams</Filter>
+    </ClCompile>
+    <ClCompile Include="CMemoryInputStream.cpp">
+      <Filter>Исходные файлы\Streams</Filter>
+    </ClCompile>
+    <ClCompile Include="CMemoryOutputStream.cpp">
+      <Filter>Исходные файлы\Streams</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
