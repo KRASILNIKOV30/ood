@@ -36,9 +36,9 @@ void CEncryptOutputStream::WriteBlock(const void* srcData, const std::streamsize
 	delete[] buffer;
 }
 
-bool CEncryptOutputStream::Flush()
+void CEncryptOutputStream::Flush()
 {
-	return COutputStreamDecorator::Flush();
+	COutputStreamDecorator::Flush();
 }
 
 void CEncryptOutputStream::GenerateMap()

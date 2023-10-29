@@ -21,6 +21,7 @@ uint8_t CDecryptInputStream::ReadByte()
 
 std::streamsize CDecryptInputStream::ReadBlock(void* dstBuffer, const std::streamsize size)
 {
+	//Использовать каст
 	char* bytes = new char[size];
 	try
 	{

@@ -42,9 +42,9 @@ public:
 		m_stream->WriteBlock(srcData, size);
 	}
 
-	bool Flush() override
+	void Flush() override
 	{
-		return m_stream->Flush();
+		m_stream->Flush();
 	}
 
 protected:

@@ -18,20 +18,20 @@ uint8_t CDecompressiveInputStream::ReadByte()
 
 std::streamsize CDecompressiveInputStream::ReadBlock(void* dstBuffer, const std::streamsize size)
 {
-	char* bytes = new char[size];
+	//Использовать приведение (Исправлено)
 	int bytesWereRead = 0;
+	uint8_t* dst = static_cast<uint8_t*>(dstBuffer);
 	while (bytesWereRead < size)
 	{
 		if (!m_count && !NextBlock())
 		{
 			break;
 		}
-		memset(bytes + bytesWereRead, m_currByte, 1);
+		*(dst++) = m_currByte;
+		//memset(static_cast<char*>(dstBuffer) + bytesWereRead, m_currByte, 1);
 		bytesWereRead++;
 		m_count--;
 	}
-	memcpy_s(dstBuffer, bytesWereRead, bytes, bytesWereRead);
-	delete[] bytes;
 	return bytesWereRead;
 }
 
@@ -41,7 +41,8 @@ bool CDecompressiveInputStream::NextBlock()
 	{
 		return false;
 	}
-	m_count = CInputStreamDecorator::ReadByte() - '0';
+	//Не прибавлять символ ноль (Исправлено)
+	m_count = CInputStreamDecorator::ReadByte();
 	m_currByte = CInputStreamDecorator::ReadByte();
 	return true;
 }

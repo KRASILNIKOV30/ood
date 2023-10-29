@@ -1,18 +1,2 @@
-﻿  CCompressiveOutputStream.cpp
-  CDecompressiveInputStream.cpp
-  CDecryptInputStream.cpp
-  CEncryptOutputStream.cpp
-  CFileInputStream.cpp
-  CFileOutputStream.cpp
-  CMemoryInputStream.cpp
-C:\Users\bkras\source\repos\ood\lab3\Transform\Transform\CMemoryInputStream.cpp(32,38): warning C4018: <: несоответствие типов со знаком и без знака
-  CMemoryOutputStream.cpp
-  CCompressiveOutputStream_tests.cpp
-  CDecompressiveInputStream_tests.cpp
-  CFileInputStream_tests.cpp
-  CFileOutputStream_tests.cpp
-  CMemoryInputStream_tests.cpp
-  CMemoryOutputStream_tests.cpp
-  EncryptionStreams_tests.cpp
-  Создание кода...
+﻿  CDecompressiveInputStream.cpp
   Transform_tests.vcxproj -> C:\Users\bkras\source\repos\ood\lab3\Transform\x64\Debug\Transform_tests.exe

@@ -48,16 +48,10 @@
     <ClCompile Include="CMemoryOutputStream_tests.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="CDecompressiveInputStream_tests.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="..\Transform\CDecompressiveInputStream.cpp">
       <Filter>Исходные файлы\Streams</Filter>
     </ClCompile>
-    <ClCompile Include="CCompressiveOutputStream_tests.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Transform\CCompressiveOutputStream.cpp">
+    <ClCompile Include="CCompressiveStreams_tests.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="EncryptionStreams_tests.cpp">
@@ -67,6 +61,9 @@
       <Filter>Исходные файлы\Streams</Filter>
     </ClCompile>
     <ClCompile Include="..\Transform\CEncryptOutputStream.cpp">
+      <Filter>Исходные файлы\Streams</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Transform\CCompressiveOutputStream.cpp">
       <Filter>Исходные файлы\Streams</Filter>
     </ClCompile>
   </ItemGroup>

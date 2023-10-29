@@ -137,8 +137,7 @@
     <ClCompile Include="..\Transform\CFileOutputStream.cpp" />
     <ClCompile Include="..\Transform\CMemoryInputStream.cpp" />
     <ClCompile Include="..\Transform\CMemoryOutputStream.cpp" />
-    <ClCompile Include="CCompressiveOutputStream_tests.cpp" />
-    <ClCompile Include="CDecompressiveInputStream_tests.cpp" />
+    <ClCompile Include="CCompressiveStreams_tests.cpp" />
     <ClCompile Include="CFileOutputStream_tests.cpp" />
     <ClCompile Include="CMemoryInputStream_tests.cpp" />
     <ClCompile Include="CMemoryOutputStream_tests.cpp" />

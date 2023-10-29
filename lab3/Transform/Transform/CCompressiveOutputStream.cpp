@@ -21,35 +21,25 @@ void CCompressiveOutputStream::WriteByte(const uint8_t data)
 
 void CCompressiveOutputStream::WriteBlock(const void* srcData, const std::streamsize size)
 {
-	char* buffer = new char[size];
-	try
+	//Скастить к *char (Исправлено)
+	for (int i = 0; i < size; i++)
 	{
-		memcpy_s(buffer, size, srcData, size);
-
-		for (int i = 0; i < size; i++)
-		{
-			WriteByte(*(buffer + i));
-		}
+		WriteByte(*(static_cast<const char*>(srcData) + i));
 	}
-	catch (std::exception&)
-	{
-		delete[] buffer;
-		throw std::ios_base::failure("Fail to write block");
-	}
-	delete[] buffer;
 }
 
-bool CCompressiveOutputStream::Flush()
+void CCompressiveOutputStream::Flush()
 {
 	if (m_count)
 	{
-		COutputStreamDecorator::WriteByte(m_count + '0');
+		COutputStreamDecorator::WriteByte(m_count);
 		COutputStreamDecorator::WriteByte(m_currByte);
 		m_count = 0;
 		m_currByte = NULL;
+		COutputStreamDecorator::Flush();
 	}
 
-	return COutputStreamDecorator::Flush();
+	//Должен быть в условии (Исправлено)
 }
 
 CCompressiveOutputStream::~CCompressiveOutputStream()

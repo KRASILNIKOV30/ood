@@ -19,6 +19,8 @@ struct Args
 	std::vector<std::string> options;
 };
 
+//Добавить диаграмму классов
+
 std::optional<Args> ParseArgs(const int argc, char* argv[])
 {
 	if (argc < 3)

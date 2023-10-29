@@ -14,6 +14,7 @@ public:
 private:
 	void GenerateMap();
 
+	//Использовать вектор
 private:
 	using Map = std::map<uint8_t, uint8_t>;
 	const int MAP_SIZE = 256;

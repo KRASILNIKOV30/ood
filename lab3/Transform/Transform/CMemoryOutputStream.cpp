@@ -19,7 +19,6 @@ void CMemoryOutputStream::WriteByte(uint8_t const data)
 
 void CMemoryOutputStream::WriteBlock(const void* srcData, std::streamsize const size)
 {
-	//Убрать утечки памяти (исправлено)
 	char* buffer = new char[size];
 	try
 	{
@@ -38,7 +37,6 @@ void CMemoryOutputStream::WriteBlock(const void* srcData, std::streamsize const 
 	delete[] buffer;
 }
 
-bool CMemoryOutputStream::Flush()
+void CMemoryOutputStream::Flush()
 {
-	return true;
 }

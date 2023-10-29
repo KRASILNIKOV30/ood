@@ -19,17 +19,9 @@ void CFileOutputStream::WriteByte(uint8_t const data)
 
 void CFileOutputStream::WriteBlock(const void* srcData, std::streamsize const size)
 {
-    char* buffer;
-    try
-    {
-        buffer = new char[size];
-    }
-    catch (std::exception&)
-    {
-        throw std::ios_base::failure("Fail to write block");
-    }
-    memcpy_s(buffer, size, srcData, size);
-    m_stream.write(buffer, size);
+    std::string str;
+    memcpy_s(str.data(), size, srcData, size);
+    m_stream.write(str.c_str(), size);
 }
 
 void CFileOutputStream::Close()
@@ -45,7 +37,7 @@ CFileOutputStream::~CFileOutputStream()
     }
 }
 
-bool CFileOutputStream::Flush()
+void CFileOutputStream::Flush()
 {
-    return static_cast<bool>(m_stream.flush());
+	m_stream.flush();
 }
