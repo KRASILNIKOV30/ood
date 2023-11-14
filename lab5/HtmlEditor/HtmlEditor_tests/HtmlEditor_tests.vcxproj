@@ -129,16 +129,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\HtmlEditor\CDocument.cpp" />
+    <ClCompile Include="..\HtmlEditor\History.cpp" />
+    <ClCompile Include="Commands_tests.cpp" />
+    <ClCompile Include="Document_tests.cpp" />
+    <ClCompile Include="History_tests.cpp" />
     <ClCompile Include="Image_tests.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Paragraph_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\HtmlEditor\CCommands.h" />
+    <ClInclude Include="..\HtmlEditor\CDocument.h" />
+    <ClInclude Include="..\HtmlEditor\CDocumentItem.h" />
+    <ClInclude Include="..\HtmlEditor\History.h" />
     <ClInclude Include="..\HtmlEditor\ICommand.h" />
+    <ClInclude Include="..\HtmlEditor\IDocument.h" />
     <ClInclude Include="..\HtmlEditor\IImage.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="cactus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

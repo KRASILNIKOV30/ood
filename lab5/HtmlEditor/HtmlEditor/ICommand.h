@@ -1,4 +1,5 @@
-﻿﻿#pragma once
+﻿#pragma once
+#include <memory>
 
 class ICommand
 {
@@ -7,3 +8,5 @@ public:
 	virtual void Unexecute() = 0;
 	virtual ~ICommand() = default;
 };
+
+typedef std::unique_ptr<ICommand> ICommandPtr;

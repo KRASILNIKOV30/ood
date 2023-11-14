@@ -6,8 +6,9 @@ class CImage final : public IImage
 {
 public:
 	CImage(const int m_width, const int m_height, std::filesystem::path const& path)
-		: m_width(m_width),
-		  m_height(m_height)
+		: m_width(m_width)
+		, m_height(m_height)
+		, m_originPath(path)
 	{
 		Copy(path);
 	}
@@ -33,6 +34,32 @@ public:
 		m_height = height;
 	}
 
+	void Remove() override
+	{
+		if (m_removed)
+		{
+			return;
+		}
+
+		m_removed = true;
+		std::filesystem::remove(m_path);
+	}
+
+	std::string ToString() const override
+	{
+		std::stringstream strm;
+		strm << "Image: " << m_width << " " << m_height << " " << m_originPath;
+		return strm.str();
+	}
+
+	~CImage() override
+	{
+		if (!m_removed)
+		{
+			std::filesystem::remove(m_path);
+		}
+	}
+
 private:
 	void Copy(std::filesystem::path const& path)
 	{
@@ -48,5 +75,7 @@ private:
 private:
 	int m_width;
 	int m_height;
+	bool m_removed = false;
 	std::filesystem::path m_path;
+	std::filesystem::path m_originPath;
 };

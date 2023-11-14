@@ -1,0 +1,8 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=78b5af8f_002D4d62_002D4aa5_002Db499_002D8792ec981e91/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Scenario: Resize image command test" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;Catch::8EAECD9F-DF6A-4BF1-AC08-85690C485DCE::Windows,Version=v10.0.22000::Scenario: Resize image command test&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;Catch::8EAECD9F-DF6A-4BF1-AC08-85690C485DCE::Windows,Version=v10.0.22000::Scenario: History tests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;Catch::8EAECD9F-DF6A-4BF1-AC08-85690C485DCE::Windows,Version=v10.0.22000::Scenario: Document tests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

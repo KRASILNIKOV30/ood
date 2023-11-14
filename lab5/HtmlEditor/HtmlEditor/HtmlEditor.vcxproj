@@ -129,13 +129,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="HtmlEditor.cpp" />
+    <ClCompile Include="CDocument.cpp" />
+    <ClCompile Include="CMenu.cpp" />
+    <ClCompile Include="History.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCommands.h" />
+    <ClInclude Include="CDocument.h" />
+    <ClInclude Include="CDocumentItem.h" />
     <ClInclude Include="CImage.h" />
+    <ClInclude Include="CMenu.h" />
+    <ClInclude Include="CParagraph.h" />
+    <ClInclude Include="History.h" />
     <ClInclude Include="ICommand.h" />
+    <ClInclude Include="IDocument.h" />
     <ClInclude Include="IImage.h" />
+    <ClInclude Include="IParagraph.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

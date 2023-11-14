@@ -19,6 +19,9 @@
     <Filter Include="Исходные файлы\images">
       <UniqueIdentifier>{69241b3c-305f-4dc1-895b-98c3c495ef04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\components">
+      <UniqueIdentifier>{49245b92-372e-4021-87cb-b63d1efcb600}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -26,6 +29,24 @@
     </ClCompile>
     <ClCompile Include="Image_tests.cpp">
       <Filter>Исходные файлы\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands_tests.cpp">
+      <Filter>Исходные файлы\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Paragraph_tests.cpp">
+      <Filter>Исходные файлы\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="History_tests.cpp">
+      <Filter>Исходные файлы\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\HtmlEditor\History.cpp">
+      <Filter>Исходные файлы\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Document_tests.cpp">
+      <Filter>Исходные файлы\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\HtmlEditor\CDocument.cpp">
+      <Filter>Исходные файлы\components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -38,10 +59,25 @@
     <ClInclude Include="..\HtmlEditor\IImage.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="..\HtmlEditor\History.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\HtmlEditor\CDocument.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\HtmlEditor\IDocument.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\HtmlEditor\CDocumentItem.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="cactus.png">
       <Filter>Исходные файлы\images</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

@@ -1,2 +1,5 @@
-﻿  Image_tests.cpp
+﻿  CDocument.cpp
+  Commands_tests.cpp
+  History_tests.cpp
+  Создание кода...
   HtmlEditor_tests.vcxproj -> C:\Users\bkras\source\repos\ood\lab5\HtmlEditor\x64\Debug\HtmlEditor_tests.exe
