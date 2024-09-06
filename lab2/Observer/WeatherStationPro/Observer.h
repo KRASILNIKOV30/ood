@@ -1,5 +1,27 @@
 #pragma once
 #include <map>
+#include <vector>
+#include <algorithm>
+#include <set>
+#include <unordered_map>
+
+enum class Measurement
+{
+	Temperature,
+	Humidity,
+	Pressure,
+	WindSpeed,
+	WindDirection,
+};
+
+const std::set<Measurement> defaultMeasurements =
+{
+	Measurement::Temperature,
+	Measurement::Humidity,
+	Measurement::Pressure,
+	Measurement::WindSpeed,
+	Measurement::WindDirection,
+};
 
 /*
 Шаблонный интерфейс IObserver. Его должен реализовывать класс,
@@ -24,9 +46,9 @@ class IObservable
 {
 public:
 	virtual ~IObservable() = default;
-	virtual void RegisterObserver(IObserver<T>& observer, int priority = -std::numeric_limits<int>::infinity()) = 0;
-	virtual void NotifyObservers() = 0;
-	virtual void RemoveObserver(IObserver<T>& observer) = 0;
+	virtual void RegisterObserver(IObserver<T>& observer, std::set<Measurement> measurements, int priority) = 0;
+	virtual void NotifyObservers(Measurement measurement) = 0;
+	virtual void RemoveObserver(IObserver<T>& observer, std::set<Measurement> measurements) = 0;
 };
 
 // Реализация интерфейса IObservable
@@ -36,34 +58,59 @@ class CObservable : public IObservable<T>
 public:
 	typedef IObserver<T> ObserverType;
 
-	void RegisterObserver(ObserverType& observer, int priority = 0) override
+	void RegisterObserver
+	(
+		ObserverType& observer,
+		std::set<Measurement> measurements,
+		int priority = 0
+	) override
 	{
-		m_observers.push_back(std::make_pair(priority, &observer));
-	}
-
-	void NotifyObservers() override
-	{
-		T data = GetChangedData();
-		Observers observersCopy = m_observers;
-		std::sort(observersCopy.begin(), observersCopy.end(), [](auto& left, auto& right)
-			{
-				return left.first > right.first;
-			});
-
-		for (auto& [priority, observer] : observersCopy)
+		for (auto& measurement : measurements)
 		{
-			observer->Update(data);
+			auto measurementObservers = m_observers.find(measurement);
+			if (measurementObservers == m_observers.end())
+			{
+				measurementObservers = m_observers.emplace(measurement, ObserversWithPrioriting{}).first;
+			}
+			measurementObservers->second.emplace(priority, &observer);
 		}
 	}
 
-	void RemoveObserver(ObserverType& observer) override
+	void NotifyObservers(Measurement measurement) override
 	{
-		for (auto it = m_observers.begin(); it != m_observers.end(); it++)
+		T data = GetChangedData();
+		Observers observersCopy = m_observers;
+
+		auto measurementObservers = m_observers.find(measurement);
+		if (measurementObservers != m_observers.end())
 		{
-			if (it->second == std::addressof(observer))
+			for (auto& observer : measurementObservers->second)
 			{
-				m_observers.erase(it);
-				return;
+				observer.second->Update(data);
+			}
+		}
+	}
+
+	void RemoveObserver
+	(
+		ObserverType& observer,
+		std::set<Measurement> measurements = defaultMeasurements
+	) override
+	{
+		for (auto& measurement : measurements)
+		{
+			auto measurementObservers = m_observers.find(measurement);
+			if (measurementObservers != m_observers.end())
+			{
+				auto& observers = measurementObservers->second;
+				for (auto it = observers.begin(); it != observers.end(); it++)
+				{
+					if (it->second == std::addressof(observer))
+					{
+						observers.erase(it);
+						break;
+					}
+				}
 			}
 		}
 	}
@@ -74,7 +121,7 @@ protected:
 	virtual T GetChangedData()const = 0;
 
 private:
-	using ObserverWithPrioriting = std::pair<int, ObserverType*>;
-	using Observers = std::vector<ObserverWithPrioriting>;
+	using ObserversWithPrioriting = std::multimap<int, ObserverType*, std::greater<int>>;
+	using Observers = std::unordered_map<Measurement, ObserversWithPrioriting>;
 	Observers m_observers;
 };

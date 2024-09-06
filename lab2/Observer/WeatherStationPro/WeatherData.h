@@ -1,6 +1,7 @@
 #pragma once
 #include "Observer.h"
 #include "SWeatherInfo.h"
+#include "../../../external/core/Assert.h"
 
 class CWeatherData final : public CObservable<SWeatherInfo>
 {
@@ -33,9 +34,9 @@ public:
 		return m_windDirection;
 	}
 
-	void MeasurementsChanged()
+	void MeasurementChanged(Measurement measurement)
 	{
-		NotifyObservers();
+		NotifyObservers(measurement);
 	}
 
 	void SetMeasurements
@@ -47,13 +48,31 @@ public:
 		const double windDirection
 	)
 	{
-		m_humidity = humidity;
-		m_temperature = temp;
-		m_pressure = pressure;
-		m_windSpeed = windSpeed;
-		m_windDirection = windDirection;
-
-		MeasurementsChanged();
+		if (!isEqual(m_temperature, temp))
+		{
+			m_temperature = temp;
+			MeasurementChanged(Measurement::Temperature);
+		}
+		if (!isEqual(m_humidity, humidity))
+		{
+			m_humidity = humidity;
+			MeasurementChanged(Measurement::Humidity);
+		}
+		if (!isEqual(m_pressure, pressure))
+		{
+			m_pressure = pressure;
+			MeasurementChanged(Measurement::Pressure);
+		}
+		if (!isEqual(m_windSpeed, windSpeed))
+		{
+			m_windSpeed = windSpeed;
+			MeasurementChanged(Measurement::WindSpeed);
+		}
+		if (!isEqual(m_windDirection, windDirection))
+		{
+			m_windDirection = windDirection;
+			MeasurementChanged(Measurement::WindDirection);
+		}
 	}
 
 protected:
