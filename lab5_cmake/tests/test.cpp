@@ -1,12 +1,11 @@
-#define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 #include "../headers/Menu.h"
 
-SCENARIO("some scenario")
+SCENARIO("some scenario2")
 {
-    GIVEN("Menu")
+    GIVEN("Menu2")
     {
-        THEN("test")
+        THEN("test2")
         {
             Menu menu;
             CHECK(menu.Test() == 25);

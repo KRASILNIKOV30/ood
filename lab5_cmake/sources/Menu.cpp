@@ -1,5 +1,7 @@
-//
-// Created by bogdan.krasilnikov on 18.10.24.
-//
+#include "../headers/Menu.h"
 
-#include "Menu.h"
+
+int Menu::Test()
+{
+    return 25;
+}

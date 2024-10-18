@@ -1,16 +1,6 @@
-//
-// Created by bogdan.krasilnikov on 18.10.24.
-//
-
-#ifndef MENU_H
-#define MENU_H
-
-
+#pragma once
 
 class Menu {
-
+public:
+    static int Test();
 };
-
-
-
-#endif //MENU_H
