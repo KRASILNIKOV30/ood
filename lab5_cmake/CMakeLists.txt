@@ -1,6 +1,5 @@
 add_executable(HtmlEditor_tests
         tests/menu_tests.cpp
-        tests/test.cpp
         sources/Menu.cpp
         headers/Menu.h
 )
