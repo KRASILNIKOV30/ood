@@ -1,6 +1,10 @@
-add_test(HtmlEditor
+add_executable(HtmlEditor_tests
+        tests/menu_tests.cpp
+        tests/test.cpp
         sources/Menu.cpp
         headers/Menu.h
-        tests/menu_tests.cpp
 )
+
+target_link_libraries(HtmlEditor_tests PUBLIC catch2)
+add_test(NAME HtmlEditor_tests COMMAND HtmlEditor_tests)
 
