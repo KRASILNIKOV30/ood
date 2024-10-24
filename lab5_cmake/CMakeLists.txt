@@ -12,6 +12,7 @@ add_executable(HtmlEditor_tests
         sources/CompoundEdit.cpp
         headers/UndoManager.h
         sources/UndoManager.cpp
+        tests/UndoManager_tests.cpp
 )
 
 target_link_libraries(HtmlEditor_tests PUBLIC catch2)

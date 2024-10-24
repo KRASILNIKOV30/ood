@@ -30,6 +30,7 @@ private:
 
 private:
 	size_t m_indexOfNextAdd = 0;
+	static constexpr int HISTORY_LIMIT = 5;
 };
 
 } // namespace undo

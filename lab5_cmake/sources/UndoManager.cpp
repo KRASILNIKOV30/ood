@@ -11,10 +11,8 @@ bool UndoManager::CanUndo() const
 		const auto& edit = GetEditToBeUndone();
 		return edit && edit->CanUndo();
 	}
-	else
-	{
-		return CompoundEdit::CanUndo();
-	}
+
+	return CompoundEdit::CanUndo();
 }
 
 bool UndoManager::CanRedo() const
@@ -24,10 +22,8 @@ bool UndoManager::CanRedo() const
 		const auto& edit = GetEditToBeRedone();
 		return edit && edit->CanRedo();
 	}
-	else
-	{
-		return CompoundEdit::CanRedo();
-	}
+
+	return CompoundEdit::CanRedo();
 }
 
 size_t UndoManager::GetCurrentEditIndex() const
@@ -123,7 +119,10 @@ bool UndoManager::AddEditImpl(const IUndoableEditPtr& edit)
 
 	m_indexOfNextAdd = m_edits.size();
 
-	// TODO: trim for limit
+	if (m_edits.size() > HISTORY_LIMIT)
+	{
+		TrimEdits(0, 1);
+	}
 
 	return addResult;
 }
