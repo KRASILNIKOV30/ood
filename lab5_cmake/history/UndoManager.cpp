@@ -1,4 +1,4 @@
-#include "../headers/UndoManager.h"
+#include "./UndoManager.h"
 #include <cassert>
 
 namespace undo

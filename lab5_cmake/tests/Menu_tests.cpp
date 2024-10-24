@@ -1,6 +1,6 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
-#include "../headers/Menu.h"
+#include "../menu/Menu.h"
 
 SCENARIO("add items to menu and run it")
 {

@@ -1,4 +1,4 @@
-#include "../headers/CompoundEdit.h"
+#include "./CompoundEdit.h"
 #include <optional>
 #include <ranges>
 

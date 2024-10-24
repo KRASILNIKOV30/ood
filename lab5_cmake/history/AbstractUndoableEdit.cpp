@@ -1,4 +1,4 @@
-#include "../headers/AbstractUndoableEdit.h"
+#include "./AbstractUndoableEdit.h"
 
 namespace undo
 {

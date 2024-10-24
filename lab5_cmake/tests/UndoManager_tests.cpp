@@ -1,4 +1,4 @@
-#include "../headers/UndoManager.h"
+#include "../history/UndoManager.h"
 
 #include <catch.hpp>
 
