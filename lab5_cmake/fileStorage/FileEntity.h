@@ -1,5 +1,5 @@
 #pragma once
-#include "path.h"
+#include "Path.h"
 
 class FileEntity
 {
