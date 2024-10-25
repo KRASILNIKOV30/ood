@@ -12,6 +12,9 @@ add_executable(HtmlEditor_tests
         history/UndoManager.cpp
         tests/UndoManager_tests.cpp
         tests/Menu_tests.cpp
+        fileStorage/FileEntity.h
+        fileStorage/path.h
+        tests/FileStorage_tests.cpp
 )
 
 target_link_libraries(HtmlEditor_tests PUBLIC catch2)
