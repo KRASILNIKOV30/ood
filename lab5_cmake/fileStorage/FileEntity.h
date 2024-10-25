@@ -9,7 +9,7 @@ public:
 	{
 	}
 
-	[[nodiscard]] Path GetPath() const noexcept
+	[[nodiscard]] Path const& GetPath() const noexcept
 	{
 		return m_path;
 	}
@@ -23,7 +23,8 @@ public:
 	{
 		if (!m_keepAlive)
 		{
-			fs::remove(m_path);
+			std::error_code ec;
+			fs::remove(m_path, ec);
 		}
 	}
 
@@ -31,3 +32,5 @@ private:
 	const Path m_path;
 	bool m_keepAlive = false;
 };
+
+using FileEntityPtr = std::shared_ptr<FileEntity>;

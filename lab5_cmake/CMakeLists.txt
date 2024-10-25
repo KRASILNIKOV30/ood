@@ -16,6 +16,8 @@ add_executable(HtmlEditor_tests
         fileStorage/Path.h
         tests/FileStorage_tests.cpp
         fileStorage/FolderEntity.h
+        fileStorage/FileRef.h
+        fileStorage/FileStorage.h
 )
 
 target_link_libraries(HtmlEditor_tests PUBLIC catch2)

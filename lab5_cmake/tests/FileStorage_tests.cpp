@@ -1,4 +1,5 @@
 #include "../fileStorage/FileEntity.h"
+#include "../fileStorage/FileStorage.h"
 #include "../fileStorage/FolderEntity.h"
 
 #include <fstream>
@@ -68,5 +69,67 @@ SCENARIO("folder entity tests")
 			fs::remove(p / "test.txt");
 			fs::remove(p);
 		}
+	}
+}
+
+SCENARIO("file storage tests")
+{
+	WHEN("create directory for storage")
+	{
+		const Path storageDirPath = "./storage";
+		create_directory(storageDirPath);
+
+		THEN("storage directory exist")
+		{
+			FileStorage storage(storageDirPath);
+			CHECK(fs::exists(storageDirPath));
+		}
+
+		CHECK_FALSE(fs::exists(storageDirPath));
+	}
+
+	GIVEN("file storage")
+	{
+		create_directory(STORAGE_PATH);
+
+		WHEN("create storage")
+		{
+			FileStorage storage(STORAGE_PATH);
+
+			AND_WHEN("add files")
+			{
+				auto file = storage.AddFile("cactus.png");
+
+				THEN("added file exist")
+				{
+					CHECK(fs::exists(file->GetPath()));
+				}
+			}
+		}
+		CHECK_FALSE(fs::exists(STORAGE_PATH));
+	}
+
+	GIVEN("file storage")
+	{
+		create_directory(STORAGE_PATH);
+		FileRefPtr file;
+
+		WHEN("create storage")
+		{
+			FileStorage storage(STORAGE_PATH);
+
+			AND_WHEN("add files")
+			{
+				file = storage.AddFile("cactus.png");
+
+				THEN("added file exist")
+				{
+					CHECK(fs::exists(file->GetPath()));
+				}
+			}
+		}
+
+		CHECK(fs::exists(STORAGE_PATH));
+		CHECK(fs::exists(file->GetPath()));
 	}
 }

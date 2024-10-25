@@ -25,3 +25,5 @@ public:
 private:
 	Path m_path;
 };
+
+using FolderEntityPtr = std::shared_ptr<FolderEntity>;
