@@ -46,7 +46,7 @@ public:
 	[[nodiscard]] std::string ToString() const override
 	{
 		std::stringstream strm;
-		strm << "Image: " << m_width << " " << m_height << " " << m_file->GetPath();
+		strm << "Image: " << m_width << " " << m_height << " " << m_file->GetOriginalPath();
 		return strm.str();
 	}
 

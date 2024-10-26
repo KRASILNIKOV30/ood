@@ -25,7 +25,7 @@ public:
 	void Undo() override;
 	bool CanRedo() const override;
 	void Redo() override;
-	void Save(const std::filesystem::path& path) const override;
+	void Save(const Path& path) const override;
 	void List() const override;
 	void ChangeTitle(std::string const& title);
 

@@ -1,5 +1,4 @@
 #pragma once
-#include
 #include "CompoundEdit.h"
 
 namespace undo

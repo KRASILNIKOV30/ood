@@ -14,12 +14,12 @@ public:
 
 	void UndoImpl() override
 	{
-		m_items.insert(m_iter, m_item);
+		m_iter = m_items.insert(m_iter, m_item);
 	}
 
 	void RedoImpl() override
 	{
-		m_items.erase(m_iter);
+		m_iter = m_items.erase(m_iter);
 	}
 
 private:

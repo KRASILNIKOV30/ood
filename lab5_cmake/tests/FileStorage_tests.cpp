@@ -14,7 +14,7 @@ SCENARIO("file entity tests")
 		const Path p = "test.txt";
 		std::ofstream file{ p };
 		{
-			FileEntity fileEntity(p);
+			FileEntity fileEntity(p, p);
 			CHECK(fileEntity.GetPath() == p);
 			CHECK(fs::exists(p));
 		}
@@ -26,7 +26,7 @@ SCENARIO("file entity tests")
 		const Path p = "test.txt";
 		std::ofstream{ p };
 		{
-			FileEntity fileEntity(p);
+			FileEntity fileEntity(p, p);
 			CHECK(fs::exists(p));
 			fileEntity.KeepAlive();
 		}

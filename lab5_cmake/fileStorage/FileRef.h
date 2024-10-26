@@ -17,6 +17,11 @@ public:
 		return m_file->GetPath();
 	}
 
+	[[nodiscard]] Path const& GetOriginalPath() const
+	{
+		return m_file->GetOriginalPath();
+	}
+
 	void KeepAlive() noexcept
 	{
 		m_file->KeepAlive();

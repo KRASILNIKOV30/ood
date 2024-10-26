@@ -5,12 +5,12 @@
 class ConstDocumentItem
 {
 public:
-	explicit ConstDocumentItem(std::shared_ptr<const IImage>&& image)
+	explicit ConstDocumentItem(std::shared_ptr<const IImage> image)
 		: m_image(std::move(image))
 	{
 	}
 
-	explicit ConstDocumentItem(std::shared_ptr<const IParagraph>&& paragraph = nullptr)
+	explicit ConstDocumentItem(std::shared_ptr<const IParagraph> paragraph = nullptr)
 		: m_paragraph(std::move(paragraph))
 	{
 	}
@@ -25,7 +25,7 @@ public:
 		return m_paragraph;
 	}
 
-	[[nodiscard]] std::string ToString() const
+	[[nodiscard]] virtual std::string ToString() const
 	{
 		if (m_image != nullptr)
 		{
@@ -87,6 +87,15 @@ public:
 	std::shared_ptr<IParagraph> GetParagraph()
 	{
 		return m_paragraph;
+	}
+
+	[[nodiscard]] std::string ToString() const override
+	{
+		if (m_image != nullptr)
+		{
+			return m_image->ToString();
+		}
+		return m_paragraph->ToString();
 	}
 
 private:

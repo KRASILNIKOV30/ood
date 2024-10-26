@@ -88,8 +88,9 @@ void Document::DeleteItem(size_t index)
     {
         throw std::out_of_range("Can not delete non exesting item");
     }
+	auto item = *it;
 	auto iter = m_items.erase(it);
-    m_history.AddEdit(std::make_shared<DeleteItemEdit>(*iter, iter, m_items));
+    m_history.AddEdit(std::make_shared<DeleteItemEdit>(item, iter, m_items));
 }
 
 std::string Document::GetTitle() const
@@ -136,20 +137,29 @@ void Document::WriteHtmlHead(std::ostream& strm) const
     strm << "</head>" << std::endl;
 }
 
-void Document::Save(const std::filesystem::path& path) const
+void Document::Save(const Path& path) const
 {
-    std::filesystem::path imgPath = path;
-    imgPath.concat("/images");
-    create_directory(path);
-    create_directory(imgPath);
-    std::filesystem::path htmlPath = path;
-    htmlPath.concat("/index.html");
-    std::ofstream strm = std::ofstream(htmlPath.c_str());
+	std::vector<Path> files;
+	files.reserve(GetItemsCount());
+	for (auto& item : m_items)
+	{
+		if (auto img = static_cast<ConstDocumentItem>(item).GetImage())
+		{
+			files.push_back(img->GetPath());
+		}
+	}
+	auto imgDir = path / "images";
+	create_directory(path);
+	create_directory(imgDir);
+	FileStorage::Save(imgDir, files);
+
+    Path htmlPath = path / "index.html";
+	auto strm = std::ofstream(htmlPath.c_str());
     WriteHtmlHead(strm);
     strm << "<body>" << std::endl;
     for (auto const& item : m_items)
     {
-    	item.ToHtml(strm, imgPath);
+    	item.ToHtml(strm, imgDir);
     }
     strm << "</body>" << std::endl;
     strm << "</html>" << std::endl;
@@ -158,7 +168,7 @@ void Document::Save(const std::filesystem::path& path) const
 void Document::List() const
 {
     size_t i = 1;
-    for (auto const& item : m_items)
+    for (auto& item : m_items)
     {
     	std::cout << i++ << ". " << item.ToString() << std::endl;
     }
