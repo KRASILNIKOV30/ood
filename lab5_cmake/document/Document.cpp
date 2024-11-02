@@ -66,7 +66,7 @@ ConstDocumentItem Document::GetItem(const size_t index) const
 	const auto it = GetIteratorByIndex(index);
     if (it == m_items.end())
     {
-        throw std::out_of_range("Can not delete non exesting item");
+        throw std::out_of_range("Can not get non existing item");
     }
     return static_cast<ConstDocumentItem>(*it);
 }
@@ -76,7 +76,7 @@ DocumentItem Document::GetItem(size_t const index)
     auto const it = GetIteratorByIndex(index);
     if (it == m_items.end())
     {
-        throw std::out_of_range("Can not delete non exesting item");
+        throw std::out_of_range("Can not get non existing item");
     }
     return *it;
 }

@@ -2,9 +2,11 @@
 #include "../fileStorage/Path.h"
 #include "../document/Document.h"
 #include <catch.hpp>
+#include <fstream>
 class IDocument;
 
 const Path STORAGE_DIR = "storage";
+const Path EXPORT_DIR = "testSaveDocument";
 
 SCENARIO_METHOD(CoutBufferFixture, "Document tests")
 {
@@ -27,6 +29,8 @@ SCENARIO_METHOD(CoutBufferFixture, "Document tests")
 
 			THEN("There is an image at the first position")
 			{
+				CHECK_NOTHROW(document->GetItem(1));
+				CHECK_THROWS(document->GetItem(2));
 				CHECK(document->GetItemsCount() == 1);
 				document->List();
 				CHECK(GetOutput() == "Title: \n1. Image: 200 300 \"cactus.png\"\n");
@@ -142,6 +146,33 @@ SCENARIO_METHOD(CoutBufferFixture, "Delete documents items test")
 										"1. Paragraph: Hello World\n"
 										"2. Image: 200 300 \"cactus.png\"\n"
 									);
+								}
+
+								WHEN("save document")
+								{
+									document->DeleteItem(2);
+									document->Save(EXPORT_DIR);
+
+									THEN("Document was saved")
+									{
+										CHECK(fs::exists(EXPORT_DIR));
+										CHECK(fs::exists(EXPORT_DIR/"images"));
+										CHECK(fs::exists(EXPORT_DIR/"index.html"));
+
+										std::ifstream file(EXPORT_DIR/"index.html");
+										std::stringstream fileContent;
+										fileContent << file.rdbuf();
+										CHECK(fileContent.str() ==
+											"<html>\n"
+											"<head>\n"
+											"  <title></title>\n"
+											"</head>\n"
+											"<body>\n"
+											"<p>Hello World</p>\n"
+											"</body>\n"
+											"</html>\n"
+										);
+									}
 								}
 							}
 						}
