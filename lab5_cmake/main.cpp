@@ -112,9 +112,9 @@ void AddCommands(Menu& menu, IDocumentPtr const& document)
 	});
 }
 
-// Исключения
-// Нумерация
-// Улучшить склеивания
+// Исключения (Исправлено)
+// Нумерация (Исправлено)
+// Улучшить склеивания (Улучшил)
 int main()
 {
 	create_directory(STORAGE_DIR);
@@ -122,14 +122,7 @@ int main()
 	Menu menu(std::cin, std::cout);
 	AddCommands(menu, document);
 
-	try
-	{
-		menu.Run();
-	}
-	catch (std::exception& e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
+	menu.Run();
 
 	return 0;
 }

@@ -15,6 +15,11 @@ bool AbstractUndoableEdit::CanRedo() const
 	return !IsExecuted() && m_isAlive;
 }
 
+bool AbstractUndoableEdit::CanBeReplaced() const
+{
+	return m_canBeReplaced;
+}
+
 void AbstractUndoableEdit::Undo()
 {
 	if (!CanUndo())
@@ -32,6 +37,7 @@ void AbstractUndoableEdit::Redo()
 		throw logic_error("Can't redo");
 	}
 	SetExecuted(true);
+	SetReplaceable(false);
 	RedoImpl();
 }
 
@@ -59,7 +65,7 @@ bool AbstractUndoableEdit::ReplaceEdit(const IUndoableEditPtr& edit)
 	{
 		throw logic_error("UndoableEdit has been destroyed");
 	}
-	if (m_canBeReplaced)
+	if (m_canBeReplaced && edit->CanBeReplaced())
 	{
 		return ReplaceEditImpl(edit);
 	}

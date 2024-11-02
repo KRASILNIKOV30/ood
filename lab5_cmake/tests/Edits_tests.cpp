@@ -45,38 +45,38 @@ SCENARIO("resize image")
 						CHECK(image->GetWidth() == 200);
 						CHECK(image->GetHeight() == 200);
 					}
+				}
+			}
 
-					WHEN("resize image again")
+			WHEN("resize image again")
+			{
+				image->Resize(300, 300);
+
+				THEN("edits has pasted together")
+				{
+					CHECK(history.GetEditCount() == 1);
+					CHECK(image->GetWidth() == 300);
+					CHECK(image->GetHeight() == 300);
+				}
+
+				WHEN("undo resize")
+				{
+					history.Undo();
+
+					THEN("both resizes was undone")
 					{
-						image->Resize(300, 300);
+						CHECK(image->GetWidth() == 100);
+						CHECK(image->GetHeight() == 100);
+					}
 
-						THEN("edits has pasted together")
+					WHEN("redo image resize")
+					{
+						history.Redo();
+
+						THEN("image has resized")
 						{
-							CHECK(history.GetEditCount() == 1);
 							CHECK(image->GetWidth() == 300);
 							CHECK(image->GetHeight() == 300);
-						}
-
-						WHEN("undo resize")
-						{
-							history.Undo();
-
-							THEN("both resizes was undone")
-							{
-								CHECK(image->GetWidth() == 100);
-								CHECK(image->GetHeight() == 100);
-							}
-
-							WHEN("redo image resize")
-							{
-								history.Redo();
-
-								THEN("image has resized")
-								{
-									CHECK(image->GetWidth() == 300);
-									CHECK(image->GetHeight() == 300);
-								}
-							}
 						}
 					}
 				}
@@ -87,7 +87,7 @@ SCENARIO("resize image")
 
 SCENARIO("replace text")
 {
-	GIVEN("An text")
+	GIVEN("undo manager")
 	{
 		UndoManager history;
 		auto paragraph = std::make_shared<Paragraph>("hello", [&](auto const& edit) {
@@ -120,36 +120,69 @@ SCENARIO("replace text")
 					{
 						CHECK(paragraph->GetText() == "hello world");
 					}
+				}
+			}
 
-					WHEN("replace text again")
+			WHEN("replace text again")
+			{
+				paragraph->SetText("hello new world");
+
+				THEN("edits has pasted together")
+				{
+					CHECK(history.GetEditCount() == 1);
+					CHECK(paragraph->GetText() == "hello new world");
+				}
+
+				WHEN("undo resize")
+				{
+					history.Undo();
+
+					THEN("both replaces was undone")
 					{
-						paragraph->SetText("hello new world");
+						CHECK(paragraph->GetText() == "hello");
+					}
 
-						THEN("edits has pasted together")
+					WHEN("redo text resize")
+					{
+						history.Redo();
+
+						THEN("text has resized")
 						{
-							CHECK(history.GetEditCount() == 1);
 							CHECK(paragraph->GetText() == "hello new world");
 						}
+					}
+				}
+			}
+		}
+	}
+}
 
-						WHEN("undo resize")
-						{
-							history.Undo();
+SCENARIO("redone edits should not be pasted together")
+{
+	GIVEN("undo manager")
+	{
+		UndoManager history;
+		auto paragraph = std::make_shared<Paragraph>("hello", [&](auto const& edit) {
+			history.AddEdit(edit);
+		});
 
-							THEN("both replaces was undone")
-							{
-								CHECK(paragraph->GetText() == "hello");
-							}
+		WHEN("add text")
+		{
+			paragraph->SetText("hello world");
 
-							WHEN("redo text resize")
-							{
-								history.Redo();
+			AND_WHEN("undo and redo edit")
+			{
+				history.Undo();
+				history.Redo();
 
-								THEN("text has resized")
-								{
-									// CHECK(paragraph->GetText() == "hello new world");
-								}
-							}
-						}
+				AND_WHEN("add text again")
+				{
+					paragraph->SetText("hello world!");
+
+					THEN("edits have not been pasted together")
+					{
+						history.Undo();
+						CHECK(paragraph->GetText() == "hello world");
 					}
 				}
 			}

@@ -167,6 +167,7 @@ void Document::Save(const Path& path) const
 
 void Document::List() const
 {
+	std::cout << "Title: " << GetTitle() << std::endl;
     size_t i = 1;
     for (auto& item : m_items)
     {

@@ -29,7 +29,7 @@ SCENARIO_METHOD(CoutBufferFixture, "Document tests")
 			{
 				CHECK(document->GetItemsCount() == 1);
 				document->List();
-				CHECK(GetOutput() == "1. Image: 200 300 \"cactus.png\"\n");
+				CHECK(GetOutput() == "Title: \n1. Image: 200 300 \"cactus.png\"\n");
 			}
 		}
 
@@ -41,7 +41,7 @@ SCENARIO_METHOD(CoutBufferFixture, "Document tests")
 			{
 				CHECK(document->GetItemsCount() == 1);
 				document->List();
-				CHECK(GetOutput() == "1. Paragraph: Hello World\n");
+				CHECK(GetOutput() == "Title: \n1. Paragraph: Hello World\n");
 			}
 		}
 	}
@@ -64,7 +64,7 @@ SCENARIO_METHOD(CoutBufferFixture, "Delete documents items test")
 			{
 				CHECK(document->GetItemsCount() == 2);
 				document->List();
-				CHECK(GetOutput() ==
+				CHECK(GetOutput() == "Title: \n"
 					"1. Paragraph: Hello World\n"
 					"2. Image: 200 300 \"cactus.png\"\n"
 				);
@@ -90,7 +90,7 @@ SCENARIO_METHOD(CoutBufferFixture, "Delete documents items test")
 				{
 					CHECK(document->GetItemsCount() == 1);
 					document->List();
-					CHECK(GetOutput() ==
+					CHECK(GetOutput() == "Title: \n"
 						"1. Paragraph: Hello World\n"
 					);
 				}
@@ -113,7 +113,7 @@ SCENARIO_METHOD(CoutBufferFixture, "Delete documents items test")
 						{
 							CHECK(document->GetItemsCount() == 1);
 							document->List();
-							CHECK(GetOutput() ==
+							CHECK(GetOutput() == "Title: \n"
 								"1. Paragraph: Hello World\n"
 							);
 						}
@@ -138,7 +138,7 @@ SCENARIO_METHOD(CoutBufferFixture, "Delete documents items test")
 								{
 									CHECK(document->GetItemsCount() == 2);
 									document->List();
-									CHECK(GetOutput() ==
+									CHECK(GetOutput() == "Title: \n"
 										"1. Paragraph: Hello World\n"
 										"2. Image: 200 300 \"cactus.png\"\n"
 									);
