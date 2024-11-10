@@ -30,6 +30,7 @@ void PaintPictureOnModernGraphicsRenderer()
 	renderer.EndDraw();
 }
 }
+
 int main()
 {
 	std::cout << "Should we use new API (y)?" << std::endl << "> ";

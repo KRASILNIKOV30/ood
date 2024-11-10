@@ -35,3 +35,5 @@
 *packages/*
 /lab2/Observer/packages/boost.1.86.0
 /lab2/Observer/WeatherStationSignals/x64/Debug
+
+out

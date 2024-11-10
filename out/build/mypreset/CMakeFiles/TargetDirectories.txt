@@ -1,7 +1,0 @@
-/home/bogdan.krasilnikov/projects/ood/out/build/mypreset/CMakeFiles/test.dir
-/home/bogdan.krasilnikov/projects/ood/out/build/mypreset/CMakeFiles/edit_cache.dir
-/home/bogdan.krasilnikov/projects/ood/out/build/mypreset/CMakeFiles/rebuild_cache.dir
-/home/bogdan.krasilnikov/projects/ood/out/build/mypreset/lab5_cmake/CMakeFiles/HtmlEditor_tests.dir
-/home/bogdan.krasilnikov/projects/ood/out/build/mypreset/lab5_cmake/CMakeFiles/test.dir
-/home/bogdan.krasilnikov/projects/ood/out/build/mypreset/lab5_cmake/CMakeFiles/edit_cache.dir
-/home/bogdan.krasilnikov/projects/ood/out/build/mypreset/lab5_cmake/CMakeFiles/rebuild_cache.dir
