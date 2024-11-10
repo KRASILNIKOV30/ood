@@ -2,7 +2,7 @@
 #include <string>
 #include "Point.h"
 #include "ICanvas.h"
-#include "../../../../vcpkg/packages/fakeit_x86-windows/include/standalone/fakeit.hpp"
+#include "../../external/fakeit/fakeit.hpp"
 
 const int COLOR_LEN = 6;
 const int COLOR_RADIX = 16;

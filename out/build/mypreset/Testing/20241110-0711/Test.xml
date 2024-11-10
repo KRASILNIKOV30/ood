@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20241110-0711-Experimental"
+	Name="(empty)"
+	Generator="ctest-3.22.1"
+	CompilerName=""
+	CompilerVersion=""
+	OSName="Linux"
+	Hostname="b-krasilnikov"
+	OSRelease="6.8.0-48-generic"
+	OSVersion="#48~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Mon Oct  7 11:24:13 UTC 2"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="GenuineIntel"
+	VendorID="Intel Corporation"
+	FamilyID="6"
+	ModelID="60"
+	ProcessorCacheSize="8192"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="4"
+	TotalVirtualMemory="16383"
+	TotalPhysicalMemory="31972"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="3500.91"
+	>
+	<Testing>
+		<StartDateTime>Nov 10 10:12 MSK</StartDateTime>
+		<StartTestTime>1731222748</StartTestTime>
+		<TestList>
+			<Test>./lab5_cmake/HtmlEditor_tests</Test>
+		</TestList>
+		<Test Status="passed">
+			<Name>HtmlEditor_tests</Name>
+			<Path>./lab5_cmake</Path>
+			<FullName>./lab5_cmake/HtmlEditor_tests</FullName>
+			<FullCommandLine>/home/bogdan.krasilnikov/projects/ood/out/build/mypreset/lab5_cmake/HtmlEditor_tests</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.00603301</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/home/bogdan.krasilnikov/projects/ood/out/build/mypreset/lab5_cmake/HtmlEditor_tests</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyztaUq4HLMyVEoSS0uKVYoSCwuTk1R0DA2UQCxikoy8/OKFTLzFMzAChSSE4tTizW5uABv7SOd====</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Nov 10 10:12 MSK</EndDateTime>
+		<EndTestTime>1731222748</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

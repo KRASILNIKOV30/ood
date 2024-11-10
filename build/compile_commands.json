@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/bogdan.krasilnikov/projects/ood/build/lab5_cmake",
+  "command": "/usr/bin/c++  -I/home/bogdan.krasilnikov/projects/ood/external/catch2 -g -std=gnu++20 -o CMakeFiles/HtmlEditor_tests.dir/history/AbstractUndoableEdit.cpp.o -c /home/bogdan.krasilnikov/projects/ood/lab5_cmake/history/AbstractUndoableEdit.cpp",
+  "file": "/home/bogdan.krasilnikov/projects/ood/lab5_cmake/history/AbstractUndoableEdit.cpp"
+},
+{
+  "directory": "/home/bogdan.krasilnikov/projects/ood/build/lab5_cmake",
+  "command": "/usr/bin/c++  -I/home/bogdan.krasilnikov/projects/ood/external/catch2 -g -std=gnu++20 -o CMakeFiles/HtmlEditor_tests.dir/history/CompoundEdit.cpp.o -c /home/bogdan.krasilnikov/projects/ood/lab5_cmake/history/CompoundEdit.cpp",
+  "file": "/home/bogdan.krasilnikov/projects/ood/lab5_cmake/history/CompoundEdit.cpp"
+},
+{
+  "directory": "/home/bogdan.krasilnikov/projects/ood/build/lab5_cmake",
+  "command": "/usr/bin/c++  -I/home/bogdan.krasilnikov/projects/ood/external/catch2 -g -std=gnu++20 -o CMakeFiles/HtmlEditor_tests.dir/history/UndoManager.cpp.o -c /home/bogdan.krasilnikov/projects/ood/lab5_cmake/history/UndoManager.cpp",
+  "file": "/home/bogdan.krasilnikov/projects/ood/lab5_cmake/history/UndoManager.cpp"
+},
+{
+  "directory": "/home/bogdan.krasilnikov/projects/ood/build/lab5_cmake",
+  "command": "/usr/bin/c++  -I/home/bogdan.krasilnikov/projects/ood/external/catch2 -g -std=gnu++20 -o CMakeFiles/HtmlEditor_tests.dir/tests/UndoManager_tests.cpp.o -c /home/bogdan.krasilnikov/projects/ood/lab5_cmake/tests/UndoManager_tests.cpp",
+  "file": "/home/bogdan.krasilnikov/projects/ood/lab5_cmake/tests/UndoManager_tests.cpp"
+},
+{
+  "directory": "/home/bogdan.krasilnikov/projects/ood/build/lab5_cmake",
+  "command": "/usr/bin/c++  -I/home/bogdan.krasilnikov/projects/ood/external/catch2 -g -std=gnu++20 -o CMakeFiles/HtmlEditor_tests.dir/tests/Menu_tests.cpp.o -c /home/bogdan.krasilnikov/projects/ood/lab5_cmake/tests/Menu_tests.cpp",
+  "file": "/home/bogdan.krasilnikov/projects/ood/lab5_cmake/tests/Menu_tests.cpp"
+},
+{
+  "directory": "/home/bogdan.krasilnikov/projects/ood/build/lab5_cmake",
+  "command": "/usr/bin/c++  -I/home/bogdan.krasilnikov/projects/ood/external/catch2 -g -std=gnu++20 -o CMakeFiles/HtmlEditor_tests.dir/tests/FileStorage_tests.cpp.o -c /home/bogdan.krasilnikov/projects/ood/lab5_cmake/tests/FileStorage_tests.cpp",
+  "file": "/home/bogdan.krasilnikov/projects/ood/lab5_cmake/tests/FileStorage_tests.cpp"
+}
+]

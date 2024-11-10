@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20241110-0626-Experimental"
+	Name="(empty)"
+	Generator="ctest-3.22.1"
+	CompilerName=""
+	CompilerVersion=""
+	OSName="Linux"
+	Hostname="b-krasilnikov"
+	OSRelease="6.8.0-48-generic"
+	OSVersion="#48~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Mon Oct  7 11:24:13 UTC 2"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="GenuineIntel"
+	VendorID="Intel Corporation"
+	FamilyID="6"
+	ModelID="60"
+	ProcessorCacheSize="8192"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="4"
+	TotalVirtualMemory="16383"
+	TotalPhysicalMemory="31972"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="3530.21"
+	>
+	<Testing>
+		<StartDateTime>Nov 10 09:26 MSK</StartDateTime>
+		<StartTestTime>1731219980</StartTestTime>
+		<TestList/>
+		<EndDateTime>Nov 10 09:26 MSK</EndDateTime>
+		<EndTestTime>1731219980</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

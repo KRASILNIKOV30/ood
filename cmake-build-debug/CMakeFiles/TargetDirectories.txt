@@ -1,0 +1,7 @@
+/home/bogdan.krasilnikov/projects/ood/cmake-build-debug/CMakeFiles/test.dir
+/home/bogdan.krasilnikov/projects/ood/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/bogdan.krasilnikov/projects/ood/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/bogdan.krasilnikov/projects/ood/cmake-build-debug/lab5_cmake/CMakeFiles/HtmlEditor_tests.dir
+/home/bogdan.krasilnikov/projects/ood/cmake-build-debug/lab5_cmake/CMakeFiles/test.dir
+/home/bogdan.krasilnikov/projects/ood/cmake-build-debug/lab5_cmake/CMakeFiles/edit_cache.dir
+/home/bogdan.krasilnikov/projects/ood/cmake-build-debug/lab5_cmake/CMakeFiles/rebuild_cache.dir
