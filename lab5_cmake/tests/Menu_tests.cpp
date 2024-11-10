@@ -46,7 +46,7 @@ SCENARIO("add items to menu and run it")
 				expected << "  increment: increment counter" << std::endl;
 				expected << "  add: add some parameters to counter" << std::endl;
 				expected << "  exit: exit menu" << std::endl;
-				expected << ">>>";
+				expected << "> > > ";
 
 				CHECK(expected.str() == output.str());
 				CHECK(counter == 5);

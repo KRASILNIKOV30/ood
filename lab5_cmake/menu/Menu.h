@@ -28,10 +28,19 @@ public:
 		ShowInstructions();
 
 		std::string command;
-		while (m_output << ">"
-			&& std::getline(m_input, command)
-			&& ExecuteCommand(command))
+		while (m_output << "> " && std::getline(m_input, command))
 		{
+			try
+			{
+				if (!ExecuteCommand(command))
+				{
+					break;
+				}
+			}
+			catch (std::exception& e)
+			{
+				std::cout << e.what() << std::endl;
+			}
 		}
 	}
 

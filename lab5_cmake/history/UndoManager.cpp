@@ -114,9 +114,6 @@ bool UndoManager::AddEditImpl(const IUndoableEditPtr& edit)
 
 	const auto addResult = CompoundEdit::AddEditImpl(edit);
 
-	// TODO: check m_inProgress status
-	assert((m_inProgress && addResult) || !"TODO: handle situation if compound was failed to add an edit");
-
 	m_indexOfNextAdd = m_edits.size();
 
 	if (m_edits.size() > HISTORY_LIMIT)

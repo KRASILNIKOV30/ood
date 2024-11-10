@@ -9,6 +9,7 @@ class AbstractUndoableEdit : public IUndoableEdit
 public:
 	[[nodiscard]] bool CanUndo() const override;
 	[[nodiscard]] bool CanRedo() const override;
+	[[nodiscard]] bool CanBeReplaced() const override;
 	void Undo() final;
 	void Redo() final;
 	void Destroy() noexcept final;
