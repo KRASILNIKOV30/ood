@@ -21,9 +21,6 @@ add_executable(Adapter_tests
         lib/ModernGraphicsLib.h
 )
 
-set_target_properties(object-adapter PROPERTIES LINKER_LANGUAGE C20)
-set_target_properties(class-adapter PROPERTIES LINKER_LANGUAGE C20)
-
 target_link_libraries(Adapter_tests PUBLIC catch2)
 add_test(NAME Adapter_tests COMMAND Adapter_tests)
 

@@ -24,7 +24,7 @@ void AbstractUndoableEdit::Undo()
 {
 	if (!CanUndo())
 	{
-		throw logic_error("Can't undo");
+		throw std::logic_error("Can't undo");
 	}
 	SetExecuted(false);
 	UndoImpl();
@@ -34,7 +34,7 @@ void AbstractUndoableEdit::Redo()
 {
 	if (!CanRedo())
 	{
-		throw logic_error("Can't redo");
+		throw std::logic_error("Can't redo");
 	}
 	SetExecuted(true);
 	SetReplaceable(false);
@@ -54,7 +54,7 @@ bool AbstractUndoableEdit::AddEdit(const IUndoableEditPtr& edit)
 {
 	if (!m_isAlive)
 	{
-		throw logic_error("UndoableEdit has been destroyed");
+		throw std::logic_error("UndoableEdit has been destroyed");
 	}
 	return AddEditImpl(edit);
 }
@@ -63,7 +63,7 @@ bool AbstractUndoableEdit::ReplaceEdit(const IUndoableEditPtr& edit)
 {
 	if (!m_isAlive)
 	{
-		throw logic_error("UndoableEdit has been destroyed");
+		throw std::logic_error("UndoableEdit has been destroyed");
 	}
 	if (m_canBeReplaced && edit->CanBeReplaced())
 	{
