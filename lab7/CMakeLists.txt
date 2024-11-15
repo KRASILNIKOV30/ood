@@ -14,4 +14,6 @@ add_executable(slides_tests
         slides/shapes/Rectangle.h
         slides/shapes/Triangle.h
         slides/shapes/Ellipse.h
+        slides/styles/StyleEnumerators.h
+        slides/styles/lineStyle/CompositeLineStyle.h
 )

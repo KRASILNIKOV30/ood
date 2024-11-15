@@ -10,7 +10,7 @@ public:
 	{
 	}
 
-	[[nodiscard]] bool isEnabled() const override
+	[[nodiscard]] std::optional<bool> isEnabled() const override
 	{
 		return m_enabled;
 	}
@@ -20,7 +20,7 @@ public:
 		m_enabled = enabled;
 	}
 
-	[[nodiscard]] Color GetColor() const override
+	[[nodiscard]] std::optional<Color> GetColor() const override
 	{
 		return m_color;
 	}
@@ -35,7 +35,7 @@ public:
 		m_lineWidth = width;
 	}
 
-	[[nodiscard]] double GetLineWidth() const override
+	[[nodiscard]] std::optional<double> GetLineWidth() const override
 	{
 		return m_lineWidth;
 	}
