@@ -4,6 +4,8 @@
 #include "../Color.h"
 #include "../Frame.h"
 
+#include <memory>
+
 class ICanvas
 {
 public:
@@ -16,3 +18,5 @@ public:
 	virtual void DrawEllipse(Frame frame) = 0;
 	virtual void DrawPolygon(std::vector<Point> points) = 0;
 };
+
+using ICanvasPtr = std::shared_ptr<ICanvas>;

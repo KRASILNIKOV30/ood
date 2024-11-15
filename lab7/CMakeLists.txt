@@ -2,5 +2,16 @@ add_executable(slides_tests
         slides/canvas/ICanvas.h
         slides/canvas/SvgCanvas.h
         slides/canvas/SvgCanvas.cpp
-        
+        slides/styles/lineStyle/ILineStyle.h
+        slides/Color.h
+        slides/Frame.h
+        slides/styles/fillStyle/IFillStyle.h
+        slides/styles/fillStyle/FillStyle.h
+        slides/styles/lineStyle/LineStyle.h
+        slides/shapes/IShape.h
+        slides/groupShape/IGroupShape.h
+        slides/shapes/Shape.h
+        slides/shapes/Rectangle.h
+        slides/shapes/Triangle.h
+        slides/shapes/Ellipse.h
 )
