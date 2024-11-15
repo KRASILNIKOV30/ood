@@ -1,8 +1,6 @@
 #pragma once
 #include <utility>
-
 #include "ILineStyle.h"
-#include "LineStyle.h"
 #include "../StyleEnumerators.h"
 
 class CompositeLineStyle final : public ILineStyle
@@ -31,11 +29,67 @@ public:
 		return enabled;
 	}
 
-	void setEnabled(bool enabled) override;
-	[[nodiscard]] Color GetColor() const override;
-	void SetColor(Color color) override;
-	[[nodiscard]] double GetLineWidth() const override;
-	void SetLineWidth(int width) override;
+	void SetEnabled(bool const enabled) override
+	{
+		m_enumerator([&](ILineStyle* lineStyle) {
+			lineStyle->SetEnabled(enabled);
+			return true;
+		});
+	}
+
+	[[nodiscard]] std::optional<Color> GetColor() const override
+	{
+		std::optional<Color> color = std::nullopt;
+		m_enumerator([&](const ILineStyle* lineStyle) {
+			if (!color)
+			{
+				color = lineStyle->GetColor();
+			}
+			if (color != lineStyle->GetColor())
+			{
+				color = std::nullopt;
+				return false;
+			}
+			return true;
+		});
+
+		return color;
+	}
+
+	void SetColor(Color const color) override
+	{
+		m_enumerator([&](ILineStyle* lineStyle) {
+			lineStyle->SetColor(color);
+			return true;
+		});
+	}
+
+	[[nodiscard]] std::optional<double> GetLineWidth() const override
+	{
+		std::optional<double> lineWidth = std::nullopt;
+		m_enumerator([&](const ILineStyle* lineStyle) {
+			if (!lineWidth)
+			{
+				lineWidth = lineStyle->GetLineWidth();
+			}
+			if (lineWidth != lineStyle->GetLineWidth())
+			{
+				lineWidth = std::nullopt;
+				return false;
+			}
+			return true;
+		});
+
+		return lineWidth;
+	}
+
+	void SetLineWidth(double const width) override
+	{
+		m_enumerator([&](ILineStyle* lineStyle) {
+			lineStyle->SetLineWidth(width);
+			return true;
+		});
+	}
 
 private:
 	LineStyleEnumerator m_enumerator;

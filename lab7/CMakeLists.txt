@@ -16,4 +16,5 @@ add_executable(slides_tests
         slides/shapes/Ellipse.h
         slides/styles/StyleEnumerators.h
         slides/styles/lineStyle/CompositeLineStyle.h
+        slides/styles/fillStyle/CompositeFillStyle.h
 )

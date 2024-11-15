@@ -15,7 +15,7 @@ public:
 		return m_enabled;
 	}
 
-	void setEnabled(bool const enabled) override
+	void SetEnabled(bool const enabled) override
 	{
 		m_enabled = enabled;
 	}
@@ -30,7 +30,7 @@ public:
 		m_color = color;
 	}
 
-	void SetLineWidth(int const width) override
+	void SetLineWidth(double const width) override
 	{
 		m_lineWidth = width;
 	}

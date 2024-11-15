@@ -6,10 +6,10 @@ class ILineStyle
 {
 public:
 	[[nodiscard]] virtual std::optional<bool> isEnabled() const = 0;
-	virtual void setEnabled(bool enabled) = 0;
+	virtual void SetEnabled(bool enabled) = 0;
 	[[nodiscard]] virtual std::optional<Color> GetColor() const = 0;
 	virtual void SetColor(Color color) = 0;
 	[[nodiscard]] virtual std::optional<double> GetLineWidth() const = 0;
-	virtual void SetLineWidth(int width) = 0;
+	virtual void SetLineWidth(double const width) = 0;
 	virtual ~ILineStyle() = 0;
 };

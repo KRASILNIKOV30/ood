@@ -9,12 +9,12 @@ public:
 	{
 	}
 
-	[[nodiscard]] std::optional<bool> isEnabled() const override
+	[[nodiscard]] std::optional<bool> IsEnabled() const override
 	{
 		return m_enabled;
 	}
 
-	void setEnabled(bool const enabled) override
+	void SetEnabled(bool const enabled) override
 	{
 		m_enabled = enabled;
 	}
