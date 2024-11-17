@@ -17,4 +17,5 @@ add_executable(slides_tests
         slides/styles/StyleEnumerators.h
         slides/styles/lineStyle/CompositeLineStyle.h
         slides/styles/fillStyle/CompositeFillStyle.h
+        slides/groupShape/GroupShape.h
 )

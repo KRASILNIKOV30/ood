@@ -19,3 +19,5 @@ public:
 
 	virtual ~IShape() = 0;
 };
+
+using IShapePtr = std::shared_ptr<IShape>;
