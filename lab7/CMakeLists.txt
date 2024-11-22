@@ -18,4 +18,31 @@ add_executable(slides_tests
         slides/styles/lineStyle/CompositeLineStyle.h
         slides/styles/fillStyle/CompositeFillStyle.h
         slides/groupShape/GroupShape.h
+        tests/GroupShape_tests.cpp
 )
+
+add_executable(slides
+        slides/canvas/ICanvas.h
+        slides/canvas/SvgCanvas.h
+        slides/canvas/SvgCanvas.cpp
+        slides/styles/lineStyle/ILineStyle.h
+        slides/Color.h
+        slides/Frame.h
+        slides/styles/fillStyle/IFillStyle.h
+        slides/styles/fillStyle/FillStyle.h
+        slides/styles/lineStyle/LineStyle.h
+        slides/shapes/IShape.h
+        slides/groupShape/IGroupShape.h
+        slides/shapes/Shape.h
+        slides/shapes/Rectangle.h
+        slides/shapes/Triangle.h
+        slides/shapes/Ellipse.h
+        slides/styles/StyleEnumerators.h
+        slides/styles/lineStyle/CompositeLineStyle.h
+        slides/styles/fillStyle/CompositeFillStyle.h
+        slides/groupShape/GroupShape.h
+        slides/main.cpp
+)
+
+target_link_libraries(slides_tests PUBLIC catch2)
+add_test(NAME slides_tests COMMAND slides_tests)

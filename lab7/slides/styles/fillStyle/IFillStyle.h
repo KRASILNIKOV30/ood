@@ -11,3 +11,5 @@ public:
 	virtual void SetColor(Color color) = 0;
 	virtual ~IFillStyle() = 0;
 };
+
+using IFillStylePtr = std::shared_ptr<IFillStyle>;

@@ -13,3 +13,5 @@ public:
 	virtual void SetLineWidth(double const width) = 0;
 	virtual ~ILineStyle() = 0;
 };
+
+using ILineStylePtr = std::shared_ptr<ILineStyle>;

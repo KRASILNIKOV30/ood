@@ -8,8 +8,8 @@ class Shape : public IShape
 public:
 	explicit Shape(Frame const& frame, Color const fillColor, Color const lineColor)
 		: m_frame(frame)
-		, m_lineStyle(lineColor)
-		, m_fillStyle(fillColor)
+		, m_lineStyle(std::make_shared<LineStyle>(lineColor))
+		, m_fillStyle(std::make_shared<FillStyle>(fillColor))
 	{
 	}
 
@@ -23,12 +23,12 @@ public:
 		return m_frame;
 	}
 
-	ILineStyle& GetLineStyle() override
+	ILineStylePtr GetLineStyle() override
 	{
 		return m_lineStyle;
 	}
 
-	IFillStyle& GetFillStyle() override
+	IFillStylePtr GetFillStyle() override
 	{
 		return m_fillStyle;
 	}
@@ -40,9 +40,9 @@ public:
 
 	void Draw(const ICanvasPtr canvas) const override
 	{
-		canvas->SetFillColor(m_fillStyle.GetColor());
-		canvas->SetLineColor(m_lineStyle.GetColor());
-		canvas->SetLineWidth(m_lineStyle.GetLineWidth());
+		canvas->SetFillColor(m_fillStyle->GetColor().value());
+		canvas->SetLineColor(m_lineStyle->GetColor().value());
+		canvas->SetLineWidth(m_lineStyle->GetLineWidth().value());
 		DrawShape(canvas);
 	}
 
@@ -50,6 +50,6 @@ public:
 
 private:
 	Frame m_frame;
-	LineStyle m_lineStyle;
-	FillStyle m_fillStyle;
+	std::shared_ptr<LineStyle> m_lineStyle;
+	std::shared_ptr<FillStyle> m_fillStyle;
 };
