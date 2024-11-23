@@ -23,14 +23,14 @@ public:
 		return m_frame;
 	}
 
-	ILineStylePtr GetLineStyle() override
+	ILineStyle& GetLineStyle() override
 	{
-		return m_lineStyle;
+		return *m_lineStyle;
 	}
 
-	IFillStylePtr GetFillStyle() override
+	IFillStyle& GetFillStyle() override
 	{
-		return m_fillStyle;
+		return *m_fillStyle;
 	}
 
 	IGroupShapePtr GetGroup() override

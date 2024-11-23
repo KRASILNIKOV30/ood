@@ -4,5 +4,5 @@
 
 #include <functional>
 
-using LineStyleEnumerator = std::function<void(std::function<bool(ILineStylePtr)>)>;
-using FillStyleEnumerator = std::function<void(std::function<bool(IFillStylePtr)>)>;
+using LineStyleEnumerator = std::function<void(std::function<bool(ILineStyle&)>)>;
+using FillStyleEnumerator = std::function<void(std::function<bool(IFillStyle&)>)>;

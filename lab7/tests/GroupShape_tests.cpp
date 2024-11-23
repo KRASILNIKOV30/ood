@@ -118,7 +118,7 @@ SCENARIO("GroupShape fill style functionality with color changes")
         WHEN("Checking the fill color of the group")
     	{
             THEN("The fill color should be the same as the individual shapes") {
-                std::optional<Color> groupColor = group.GetFillStyle()->GetColor();
+                std::optional<Color> groupColor = group.GetFillStyle().GetColor();
                 REQUIRE(groupColor.has_value());
                 REQUIRE(groupColor.value() == commonFillColor);
             }
@@ -126,20 +126,19 @@ SCENARIO("GroupShape fill style functionality with color changes")
 
         WHEN("Changing the fill color of the group via CompositeFillStyle")
     	{
-            auto compositeFillStyle = group.GetFillStyle();
             Color newColor = 0x00FF00;
-            compositeFillStyle->SetColor(newColor);
+        	group.GetFillStyle().SetColor(newColor);
 
             THEN("The fill color of the group should be updated") {
-                std::optional<Color> updatedGroupColor = group.GetFillStyle()->GetColor();
+                std::optional<Color> updatedGroupColor = group.GetFillStyle().GetColor();
                 REQUIRE(updatedGroupColor.has_value());
                 REQUIRE(updatedGroupColor.value() == newColor);
             }
 
             THEN("All shapes in the group should have the updated fill color") {
-                REQUIRE(ellipse->GetFillStyle()->GetColor().value() == newColor);
-                REQUIRE(rectangle->GetFillStyle()->GetColor().value() == newColor);
-                REQUIRE(triangle->GetFillStyle()->GetColor().value() == newColor);
+                REQUIRE(ellipse->GetFillStyle().GetColor().value() == newColor);
+                REQUIRE(rectangle->GetFillStyle().GetColor().value() == newColor);
+                REQUIRE(triangle->GetFillStyle().GetColor().value() == newColor);
             }
         }
     }
@@ -158,13 +157,12 @@ SCENARIO("GroupShape line style updates automatically when new shape with differ
 
         GroupShape group({ ellipse, rectangle, triangle });
 
-        auto compositeLineStyle = group.GetLineStyle();
-        auto initialGroupLineColor = compositeLineStyle->GetColor();
+        auto initialGroupLineColor = group.GetLineStyle().GetColor();
 
         REQUIRE(initialGroupLineColor.has_value());
         REQUIRE(initialGroupLineColor.value() == commonLineColor);
-    	REQUIRE(compositeLineStyle->isEnabled());
-    	REQUIRE(compositeLineStyle->GetLineWidth().value() == 1);
+    	REQUIRE(group.GetLineStyle().isEnabled());
+    	REQUIRE(group.GetLineStyle().GetLineWidth().value() == 1);
 
         WHEN("A new shape with a different line style is added to the group")
     	{
@@ -174,27 +172,26 @@ SCENARIO("GroupShape line style updates automatically when new shape with differ
 
             THEN("The group's line style should now reflect the new shape's line style")
         	{
-                std::optional<Color> updatedGroupLineColor = compositeLineStyle->GetColor();
+                std::optional<Color> updatedGroupLineColor = group.GetLineStyle().GetColor();
                 REQUIRE_FALSE(updatedGroupLineColor.has_value());
             }
         }
 
     	WHEN("Get composite line style")
         {
-	        auto lineStyle = group.GetLineStyle();
-        	REQUIRE(lineStyle->GetColor().value() == commonLineColor);
+        	REQUIRE(group.GetLineStyle().GetColor().value() == commonLineColor);
 
         	AND_WHEN("Add new shape to group")
         	{
         		Color newLineColor = 0x00FF00;
         		auto newRectangle = std::make_shared<Rectangle>(Frame{{300, 300}, 100, 50}, commonFillColor, newLineColor);
-        		newRectangle->GetLineStyle()->SetEnabled(false);
+        		newRectangle->GetLineStyle().SetEnabled(false);
         		group.AddShape(newRectangle);
 
         		THEN("line style updated")
         		{
-        			REQUIRE_FALSE(lineStyle->GetColor().has_value());
-        			REQUIRE_FALSE(lineStyle->isEnabled().has_value());
+        			REQUIRE_FALSE(group.GetLineStyle().GetColor().has_value());
+        			REQUIRE_FALSE(group.GetLineStyle().isEnabled().has_value());
         		}
         	}
         }
@@ -242,3 +239,21 @@ SCENARIO("GroupShape correctly resizes and repositions its shapes when SetFrame 
     }
 }
 
+SCENARIO("get group by pointer")
+{
+	GIVEN("A GroupShape with several shapes")
+	{
+		std::shared_ptr<IShape> ellipse = std::make_shared<Ellipse>(Frame{{0, 0}, 100, 50}, 0xFF0000, 0x000000);
+		std::shared_ptr<IShape> rectangle = std::make_shared<Rectangle>(Frame{{100, 100}, 200, 150}, 0x00FF00, 0x000000);
+		std::shared_ptr<IShape> triangle = std::make_shared<Triangle>(Frame{{200, 200}, 120, 100}, 0x0000FF, 0x000000);
+
+		std::shared_ptr<IShape> shape = std::make_shared<GroupShape>(std::initializer_list{ellipse, rectangle, triangle});
+
+		WHEN("get shape")
+		{
+			auto const group = shape->GetGroup();
+
+			CHECK(group == shape);
+		}
+	}
+}

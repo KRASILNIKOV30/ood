@@ -26,6 +26,9 @@ int main()
 
 	GroupShape treeGroup({ treeTrunk, treeLeaves });
 
+	treeGroup.SetFrame(Frame{{600, 300}, 300, 50});
+	houseGroup.SetFrame(Frame{{100, 300}, 400, 200});
+
 	std::ofstream svgFile("slides.svg");
 	const auto canvas = std::make_shared<SvgCanvas>(svgFile);
 

@@ -2,18 +2,21 @@
 #include "IGroupShape.h"
 #include "../styles/lineStyle/CompositeLineStyle.h"
 #include "../styles/fillStyle/CompositeFillStyle.h"
-
 #include <cassert>
-#include <list>
+#include <vector>
 
 class GroupShape final
 	: public IGroupShape
 	, public std::enable_shared_from_this<GroupShape>
 {
 public:
-	GroupShape(const std::initializer_list<IShapePtr> shapes)
-		: m_shapes(shapes)
+	//передавать вектор или 2 итератора (исправлено)
+	// Добавить удаление
+	// ReSharper disable once CppNonExplicitConvertingConstructor
+	GroupShape(std::vector<IShapePtr> shapes)
+		: m_shapes(std::move(shapes))
 	{
+		// Лучше хранить в векторе
 		if (m_shapes.empty())
 		{
 			throw std::logic_error("GroupShape cannot be empty");
@@ -61,30 +64,41 @@ public:
 		return Frame{ minX, minY, maxX, maxY };
 	}
 
-	ILineStylePtr GetLineStyle() override
+	// Можно не создавать каждый раз (исправлено)
+	ILineStyle& GetLineStyle() override
 	{
-		return std::make_shared<CompositeLineStyle>([this](const auto& cb) {
-			for (auto const& shape : m_shapes)
-			{
-				if (!cb(shape->GetLineStyle()))
+		if (!m_lineStyle.has_value())
+		{
+			m_lineStyle = CompositeLineStyle([this](const auto& cb) {
+				for (auto const& shape : m_shapes)
 				{
-					break;
+					if (!cb(shape->GetLineStyle()))
+					{
+						break;
+					}
 				}
-			}
-		});
+			});
+		}
+
+		return m_lineStyle.value();
 	}
 
-	IFillStylePtr GetFillStyle() override
+	IFillStyle& GetFillStyle() override
 	{
-		return std::make_shared<CompositeFillStyle>([this](const auto& cb) {
-			for (auto const& shape : m_shapes)
-			{
-				if (!cb(shape->GetFillStyle()))
+		if (!m_fillStyle.has_value())
+		{
+			m_fillStyle = CompositeFillStyle([this](const auto& cb) {
+				for (auto const& shape : m_shapes)
 				{
-					break;
+					if (!cb(shape->GetFillStyle()))
+					{
+						break;
+					}
 				}
-			}
-		});
+			});
+		}
+
+		return m_fillStyle.value();
 	}
 
 	void Draw(const ICanvasPtr canvas) const override
@@ -112,7 +126,7 @@ public:
 			throw std::out_of_range("GroupShape::GetShape index out of range");
 		}
 
-		return *std::next(m_shapes.begin(), index);
+		return m_shapes[index];
 	}
 
 	void AddShape(const IShapePtr& shape) override
@@ -121,5 +135,7 @@ public:
 	}
 
 private:
-	std::list<IShapePtr> m_shapes;
+	std::vector<IShapePtr> m_shapes;
+	std::optional<CompositeFillStyle> m_fillStyle;
+	std::optional<CompositeLineStyle> m_lineStyle;
 };

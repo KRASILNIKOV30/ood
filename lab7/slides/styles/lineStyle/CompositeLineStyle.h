@@ -16,9 +16,9 @@ public:
 		m_enumerator([&](const auto& lineStyle) {
 			if (!enabled)
 			{
-				enabled = lineStyle->isEnabled();
+				enabled = lineStyle.isEnabled();
 			}
-			if (enabled != lineStyle->isEnabled())
+			if (enabled != lineStyle.isEnabled())
 			{
 				enabled = std::nullopt;
 				return false;
@@ -31,8 +31,8 @@ public:
 
 	void SetEnabled(bool const enabled) override
 	{
-		m_enumerator([&](const auto& lineStyle) {
-			lineStyle->SetEnabled(enabled);
+		m_enumerator([&](auto& lineStyle) {
+			lineStyle.SetEnabled(enabled);
 			return true;
 		});
 	}
@@ -43,9 +43,9 @@ public:
 		m_enumerator([&](const auto& lineStyle) {
 			if (!color)
 			{
-				color = lineStyle->GetColor();
+				color = lineStyle.GetColor();
 			}
-			if (color != lineStyle->GetColor())
+			if (color != lineStyle.GetColor())
 			{
 				color = std::nullopt;
 				return false;
@@ -58,8 +58,8 @@ public:
 
 	void SetColor(Color const color) override
 	{
-		m_enumerator([&](const auto& lineStyle) {
-			lineStyle->SetColor(color);
+		m_enumerator([&](auto& lineStyle) {
+			lineStyle.SetColor(color);
 			return true;
 		});
 	}
@@ -70,9 +70,9 @@ public:
 		m_enumerator([&](const auto& lineStyle) {
 			if (!lineWidth)
 			{
-				lineWidth = lineStyle->GetLineWidth();
+				lineWidth = lineStyle.GetLineWidth();
 			}
-			if (lineWidth != lineStyle->GetLineWidth())
+			if (lineWidth != lineStyle.GetLineWidth())
 			{
 				lineWidth = std::nullopt;
 				return false;
@@ -85,8 +85,8 @@ public:
 
 	void SetLineWidth(double const width) override
 	{
-		m_enumerator([&](const auto& lineStyle) {
-			lineStyle->SetLineWidth(width);
+		m_enumerator([&](auto& lineStyle) {
+			lineStyle.SetLineWidth(width);
 			return true;
 		});
 	}

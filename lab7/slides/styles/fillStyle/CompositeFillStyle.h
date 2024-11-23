@@ -12,58 +12,59 @@ public:
 
 	[[nodiscard]] std::optional<bool> IsEnabled() const override
 	{
-		std::optional<bool> enabled = std::nullopt;
-		m_enumerator([&](const auto& FillStyle) {
-			if (!enabled)
-			{
-				enabled = FillStyle->IsEnabled();
-			}
-			if (enabled != FillStyle->IsEnabled())
-			{
-				enabled = std::nullopt;
-				return false;
-			}
-			return true;
-		});
-
-		return enabled;
+		return GetCompositeStyleValue(std::function([](IFillStyle const& fillStyle) {
+			return fillStyle.IsEnabled();
+		}));
 	}
 
 	void SetEnabled(bool const enabled) override
 	{
-		m_enumerator([&](const auto& FillStyle) {
-			FillStyle->SetEnabled(enabled);
+		m_enumerator([&](auto& fillStyle) {
+			fillStyle.SetEnabled(enabled);
 			return true;
 		});
 	}
 
+	// Устранить дублирование с помощью шаблонов (Исправлено)
 	[[nodiscard]] std::optional<Color> GetColor() const override
 	{
-		std::optional<Color> color = std::nullopt;
-		m_enumerator([&](const auto& FillStyle) {
-			if (!color)
-			{
-				color = FillStyle->GetColor();
-			}
-			if (color != FillStyle->GetColor())
-			{
-				color = std::nullopt;
-				return false;
-			}
-			return true;
-		});
-
-		return color;
+		return GetCompositeStyleValue(std::function([](IFillStyle const& fillStyle) {
+			return fillStyle.GetColor();
+		}));
 	}
 
 	void SetColor(Color const color) override
 	{
-		m_enumerator([&](const auto& FillStyle) {
-			FillStyle->SetColor(color);
+		m_enumerator([&](auto& fillStyle) {
+			fillStyle.SetColor(color);
 			return true;
 		});
 	}
 
 private:
+	template <typename T>
+	std::optional<T> GetCompositeStyleValue(std::function<std::optional<T>(IFillStyle const&)> const& GetStyle) const;
+
+private:
 	FillStyleEnumerator m_enumerator;
 };
+
+template <typename T>
+std::optional<T> CompositeFillStyle::GetCompositeStyleValue(std::function<std::optional<T>(IFillStyle const&)> const& GetStyle) const
+{
+	std::optional<T> result = std::nullopt;
+	m_enumerator([&](auto const& fillStyle) {
+		if (!result.has_value())
+		{
+			result = GetStyle(fillStyle);
+		}
+		if (result != GetStyle(fillStyle))
+		{
+			result = std::nullopt;
+			return false;
+		}
+		return true;
+	});
+
+	return result;
+}
