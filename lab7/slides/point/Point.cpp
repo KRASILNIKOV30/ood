@@ -1,13 +1,11 @@
 #include "Point.h"
 
-inline bool IsEquals(const double leftValue, const double rightValue)
-{
-	return std::abs(leftValue - rightValue) <= 1e-7;
-}
+#include "AreEqual.h"
+
 
 bool Point::operator==(Point const& right) const
 {
-	return IsEquals(x, right.x) && IsEquals(y, right.y);
+	return AreEqual(x, right.x) && AreEqual(y, right.y);
 }
 
 Point& Point::operator+=(Point const& right)

@@ -6,6 +6,7 @@
 #include "../slides/shapes/Rectangle.h"
 #include "../slides/shapes/Triangle.h"
 #include "../slides/groupShape/GroupShape.h"
+#include "../slides/point/AreEqual.h"
 
 using Color = uint32_t;
 
@@ -203,15 +204,15 @@ SCENARIO("GroupShape correctly resizes and repositions its shapes when SetFrame 
     GIVEN("A GroupShape with several shapes")
 	{
         Frame initialFrame = {{0, 0}, 100, 100};
-        std::shared_ptr<IShape> ellipse = std::make_shared<Ellipse>(initialFrame, 0xFF0000, 0x000000);
-        std::shared_ptr<IShape> rectangle = std::make_shared<Rectangle>(initialFrame, 0x00FF00, 0x000000);
-        std::shared_ptr<IShape> triangle = std::make_shared<Triangle>(initialFrame, 0x0000FF, 0x000000);
+        std::shared_ptr<IShape> ellipse = std::make_shared<Ellipse>(Frame{{0, 0}, 100, 100}, 0xFF0000, 0x000000);
+        std::shared_ptr<IShape> rectangle = std::make_shared<Rectangle>(Frame{{50, 100}, 200, 100}, 0x00FF00, 0x000000);
+        std::shared_ptr<IShape> triangle = std::make_shared<Triangle>(Frame{{50, 50}, 100, 200}, 0x0000FF, 0x000000);
 
         GroupShape group({ ellipse, rectangle, triangle });
 
         WHEN("SetFrame is called to resize and reposition the group")
     	{
-            Frame newFrame = {{50, 50}, 200, 200};
+            Frame newFrame = {{100, 50}, 200, 400};
             group.SetFrame(newFrame);
 
             THEN("The shapes within the group should resize and reposition proportionally")
@@ -220,20 +221,18 @@ SCENARIO("GroupShape correctly resizes and repositions its shapes when SetFrame 
                 Frame rectangleFrame = rectangle->GetFrame();
                 Frame triangleFrame = triangle->GetFrame();
 
-                REQUIRE(ellipseFrame.leftTop.x == Approx(50 + 0).epsilon(0.01));
-                REQUIRE(ellipseFrame.leftTop.y == Approx(50 + 0).epsilon(0.01));
-                REQUIRE(ellipseFrame.width == Approx(200).epsilon(0.01));
-                REQUIRE(ellipseFrame.height == Approx(200).epsilon(0.01));
-
-                REQUIRE(rectangleFrame.leftTop.x == Approx(50 + 0).epsilon(0.01));
-                REQUIRE(rectangleFrame.leftTop.y == Approx(50 + 0).epsilon(0.01));
-                REQUIRE(rectangleFrame.width == Approx(200).epsilon(0.01));
-                REQUIRE(rectangleFrame.height == Approx(200).epsilon(0.01));
-
-                REQUIRE(triangleFrame.leftTop.x == Approx(50 + 0).epsilon(0.01));
-                REQUIRE(triangleFrame.leftTop.y == Approx(50 + 0).epsilon(0.01));
-                REQUIRE(triangleFrame.width == Approx(200).epsilon(0.01));
-                REQUIRE(triangleFrame.height == Approx(200).epsilon(0.01));
+                CHECK(AreEqual(ellipseFrame.leftTop.x, 100));
+                CHECK(AreEqual(ellipseFrame.leftTop.y, 50));
+                CHECK(AreEqual(ellipseFrame.width, 80));
+                CHECK(AreEqual(ellipseFrame.height, 160));
+                CHECK(AreEqual(rectangleFrame.leftTop.x, 140));
+                CHECK(AreEqual(rectangleFrame.leftTop.y, 210));
+                CHECK(AreEqual(rectangleFrame.width, 160));
+                CHECK(AreEqual(rectangleFrame.height, 160));
+                CHECK(AreEqual(triangleFrame.leftTop.x, 140));
+                CHECK(AreEqual(triangleFrame.leftTop.y, 130));
+                CHECK(AreEqual(triangleFrame.width, 80));
+                CHECK(AreEqual(triangleFrame.height, 320));
             }
         }
     }

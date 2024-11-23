@@ -21,6 +21,7 @@ add_executable(slides_tests
         slides/styles/fillStyle/CompositeFillStyle.h
         slides/groupShape/GroupShape.h
         tests/GroupShape_tests.cpp
+        slides/point/AreEqual.h
 )
 
 add_executable(slides
@@ -46,6 +47,7 @@ add_executable(slides
         slides/styles/fillStyle/CompositeFillStyle.h
         slides/groupShape/GroupShape.h
         slides/main.cpp
+        slides/point/AreEqual.h
 )
 
 target_link_libraries(slides_tests PUBLIC catch2)
