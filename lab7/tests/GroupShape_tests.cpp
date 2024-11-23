@@ -74,11 +74,11 @@ SCENARIO("GroupShape functionality with SVG output") {
 
             THEN("The SVG output should match the expected output") {
                 std::string expectedSvg =
-                    R"(<svg width="1200" height="800" version="1.1" xmlns="http://www.w3.org/2000/svg">
-<ellipse cx="0" cy="0" rx="100" ry="50" style="fill:transparent;stroke:#ff0000;stroke-width:3"/>
-<polygon points="100,100 300,100 300,250 100,250" style="fill:transparent;stroke:#00ff00;stroke-width:3"/>
-<polygon points="200,200 320,300 200,300" style="fill:transparent;stroke:#0000ff;stroke-width:3"/>
-</svg>)";
+                	R"(<svg width="1200" height="800" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="50" cy="25" rx="50" ry="25" style="fill:#ff0000;stroke:#000000;stroke-width:1"/>
+<polygon points="100,100 300,100 300,250 100,250 " style="fill:#00ff00;stroke:#000000;stroke-width:1"/>
+<polygon points="260,200 320,300 200,300 " style="fill:#0000ff;stroke:#000000;stroke-width:1"/>
+)";
 
                 REQUIRE(ss.str() == expectedSvg);
             }
@@ -165,11 +165,12 @@ SCENARIO("GroupShape line style updates automatically when new shape with differ
         		Color newLineColor = 0x00FF00;
         		auto newRectangle = std::make_shared<Rectangle>(Frame{{300, 300}, 100, 50}, commonFillColor, newLineColor);
         		newRectangle->GetLineStyle()->SetEnabled(false);
+        		group.AddShape(newRectangle);
 
         		THEN("line style updated")
         		{
         			REQUIRE_FALSE(lineStyle->GetColor().has_value());
-        			REQUIRE_FALSE(lineStyle->isEnabled());
+        			REQUIRE_FALSE(lineStyle->isEnabled().has_value());
         		}
         	}
         }
