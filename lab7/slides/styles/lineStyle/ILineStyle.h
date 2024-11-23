@@ -11,7 +11,7 @@ public:
 	virtual void SetColor(Color color) = 0;
 	[[nodiscard]] virtual std::optional<double> GetLineWidth() const = 0;
 	virtual void SetLineWidth(double const width) = 0;
-	virtual ~ILineStyle() = 0;
+	virtual ~ILineStyle() = default;
 };
 
 using ILineStylePtr = std::shared_ptr<ILineStyle>;

@@ -29,7 +29,7 @@ inline uint32_t StringToUint32(std::string const& str)
 	return i;
 }
 
-std::string GetHexStrFromUint32(uint32_t const& uint32, int len)
+inline std::string GetHexStrFromUint32(uint32_t const& uint32, int len)
 {
 	std::stringstream stream;
 	stream << std::setfill('0') << std::setw(len) << std::hex << uint32;

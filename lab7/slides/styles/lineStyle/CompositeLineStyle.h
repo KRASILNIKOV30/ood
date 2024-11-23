@@ -13,7 +13,7 @@ public:
 	[[nodiscard]] std::optional<bool> isEnabled() const override
 	{
 		std::optional<bool> enabled = std::nullopt;
-		m_enumerator([&](const ILineStyle* lineStyle) {
+		m_enumerator([&](const auto& lineStyle) {
 			if (!enabled)
 			{
 				enabled = lineStyle->isEnabled();
@@ -31,7 +31,7 @@ public:
 
 	void SetEnabled(bool const enabled) override
 	{
-		m_enumerator([&](ILineStyle* lineStyle) {
+		m_enumerator([&](const auto& lineStyle) {
 			lineStyle->SetEnabled(enabled);
 			return true;
 		});
@@ -40,7 +40,7 @@ public:
 	[[nodiscard]] std::optional<Color> GetColor() const override
 	{
 		std::optional<Color> color = std::nullopt;
-		m_enumerator([&](const ILineStyle* lineStyle) {
+		m_enumerator([&](const auto& lineStyle) {
 			if (!color)
 			{
 				color = lineStyle->GetColor();
@@ -58,7 +58,7 @@ public:
 
 	void SetColor(Color const color) override
 	{
-		m_enumerator([&](ILineStyle* lineStyle) {
+		m_enumerator([&](const auto& lineStyle) {
 			lineStyle->SetColor(color);
 			return true;
 		});
@@ -67,7 +67,7 @@ public:
 	[[nodiscard]] std::optional<double> GetLineWidth() const override
 	{
 		std::optional<double> lineWidth = std::nullopt;
-		m_enumerator([&](const ILineStyle* lineStyle) {
+		m_enumerator([&](const auto& lineStyle) {
 			if (!lineWidth)
 			{
 				lineWidth = lineStyle->GetLineWidth();
@@ -85,7 +85,7 @@ public:
 
 	void SetLineWidth(double const width) override
 	{
-		m_enumerator([&](ILineStyle* lineStyle) {
+		m_enumerator([&](const auto& lineStyle) {
 			lineStyle->SetLineWidth(width);
 			return true;
 		});

@@ -1,6 +1,9 @@
-#pragma once
 #include "Point.h"
-#include "Common.h"
+
+inline bool IsEquals(const double leftValue, const double rightValue)
+{
+	return std::abs(leftValue - rightValue) <= 1e-7;
+}
 
 bool Point::operator==(Point const& right) const
 {

@@ -16,7 +16,8 @@ public:
 
 private:
 	std::ostream& m_svgFile;
-	Color m_color = 0;
+	Color m_fillColor = 0;
+	Color m_lineColor = 0;
 	Point m_point = { 0, 0 };
 	double m_lineWidth = 1;
 };

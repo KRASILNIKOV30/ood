@@ -10,4 +10,3 @@ add_subdirectory(lab7)
 
 add_library(catch2 INTERFACE)
 target_include_directories(catch2 INTERFACE external/catch2/)
-add_executable(slides lab7/slides/main.cpp lab7/slides/main.h)

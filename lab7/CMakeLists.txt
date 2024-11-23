@@ -5,6 +5,8 @@ add_executable(slides_tests
         slides/styles/lineStyle/ILineStyle.h
         slides/Color.h
         slides/Frame.h
+        slides/point/Point.h
+        slides/point/Point.cpp
         slides/styles/fillStyle/IFillStyle.h
         slides/styles/fillStyle/FillStyle.h
         slides/styles/lineStyle/LineStyle.h
@@ -28,6 +30,8 @@ add_executable(slides
         slides/styles/lineStyle/ILineStyle.h
         slides/Color.h
         slides/Frame.h
+        slides/point/Point.h
+        slides/point/Point.cpp
         slides/styles/fillStyle/IFillStyle.h
         slides/styles/fillStyle/FillStyle.h
         slides/styles/lineStyle/LineStyle.h

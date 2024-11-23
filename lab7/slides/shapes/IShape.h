@@ -17,7 +17,7 @@ public:
 	virtual void Draw(ICanvasPtr canvas) const = 0;
 	virtual IGroupShapePtr GetGroup() = 0;
 
-	virtual ~IShape() = 0;
+	virtual ~IShape() = default;
 };
 
 using IShapePtr = std::shared_ptr<IShape>;

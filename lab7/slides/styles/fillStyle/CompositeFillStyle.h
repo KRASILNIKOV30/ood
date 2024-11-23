@@ -13,7 +13,7 @@ public:
 	[[nodiscard]] std::optional<bool> IsEnabled() const override
 	{
 		std::optional<bool> enabled = std::nullopt;
-		m_enumerator([&](const IFillStyle* FillStyle) {
+		m_enumerator([&](const auto& FillStyle) {
 			if (!enabled)
 			{
 				enabled = FillStyle->IsEnabled();
@@ -31,7 +31,7 @@ public:
 
 	void SetEnabled(bool const enabled) override
 	{
-		m_enumerator([&](IFillStyle* FillStyle) {
+		m_enumerator([&](const auto& FillStyle) {
 			FillStyle->SetEnabled(enabled);
 			return true;
 		});
@@ -40,7 +40,7 @@ public:
 	[[nodiscard]] std::optional<Color> GetColor() const override
 	{
 		std::optional<Color> color = std::nullopt;
-		m_enumerator([&](const IFillStyle* FillStyle) {
+		m_enumerator([&](const auto& FillStyle) {
 			if (!color)
 			{
 				color = FillStyle->GetColor();
@@ -58,7 +58,7 @@ public:
 
 	void SetColor(Color const color) override
 	{
-		m_enumerator([&](IFillStyle* FillStyle) {
+		m_enumerator([&](const auto& FillStyle) {
 			FillStyle->SetColor(color);
 			return true;
 		});

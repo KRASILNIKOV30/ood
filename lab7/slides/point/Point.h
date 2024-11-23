@@ -12,6 +12,6 @@ public:
 	Point operator -() const;
 };
 
-Point operator +(Point const left, Point const right);
-Point operator -(Point const left, Point const right);
-std::ostream& operator <<(std::ostream& stream, Point const point);
+Point operator +(Point left, Point right);
+Point operator -(Point left, Point right);
+std::ostream& operator <<(std::ostream& stream, Point point);
