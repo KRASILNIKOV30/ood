@@ -9,8 +9,10 @@
 
 using Color = uint32_t;
 
-SCENARIO("GroupShape functionality with SVG output") {
-    GIVEN("A GroupShape with several shapes") {
+SCENARIO("GroupShape functionality with SVG output")
+{
+    GIVEN("A GroupShape with several shapes")
+	{
         std::shared_ptr<IShape> ellipse = std::make_shared<Ellipse>(Frame{{0, 0}, 100, 50}, 0xFF0000, 0x000000);
         std::shared_ptr<IShape> rectangle = std::make_shared<Rectangle>(Frame{{100, 100}, 200, 150}, 0x00FF00, 0x000000);
         std::shared_ptr<IShape> triangle = std::make_shared<Triangle>(Frame{{200, 200}, 120, 100}, 0x0000FF, 0x000000);
@@ -19,10 +21,12 @@ SCENARIO("GroupShape functionality with SVG output") {
 
     	REQUIRE(group.GetShapesCount() == 3);
 
-        WHEN("Getting the frame of the group") {
+        WHEN("Getting the frame of the group")
+    	{
         	auto [leftTop, width, height] = group.GetFrame();
 
-            THEN("The frame should be calculated based on the minimum and maximum coordinates") {
+            THEN("The frame should be calculated based on the minimum and maximum coordinates")
+        	{
                 REQUIRE(leftTop.x == 0);
                 REQUIRE(leftTop.y == 0);
                 REQUIRE(width == 320);
@@ -30,15 +34,18 @@ SCENARIO("GroupShape functionality with SVG output") {
             }
         }
 
-        WHEN("Adding another shape to the group") {
+        WHEN("Adding another shape to the group")
+    	{
             std::shared_ptr<IShape> newEllipse = std::make_shared<Ellipse>(Frame{{150, 350}, 50, 50}, 0xFFFF00, 0x000000);
             group.AddShape(newEllipse);
 
-            THEN("The number of shapes in the group should now be 4") {
+            THEN("The number of shapes in the group should now be 4")
+        	{
                 REQUIRE(group.GetShapesCount() == 4);
             }
 
-            THEN("The frame of the group should be updated to include the new shape") {
+            THEN("The frame of the group should be updated to include the new shape")
+        	{
                 auto [leftTop, width, height] = group.GetFrame();
                 REQUIRE(leftTop.x == 0);
                 REQUIRE(leftTop.y == 0);
@@ -48,31 +55,37 @@ SCENARIO("GroupShape functionality with SVG output") {
         }
 
         WHEN("Getting a shape by index") {
-            THEN("Getting the first shape should return the ellipse") {
+            THEN("Getting the first shape should return the ellipse")
+        	{
                 REQUIRE(group.GetShape(0) == ellipse);
             }
 
-            THEN("Getting the second shape should return the rectangle") {
+            THEN("Getting the second shape should return the rectangle")
+        	{
                 REQUIRE(group.GetShape(1) == rectangle);
             }
 
-            THEN("Getting the third shape should return the triangle") {
+            THEN("Getting the third shape should return the triangle")
+        	{
                 REQUIRE(group.GetShape(2) == triangle);
             }
         }
 
-        WHEN("Trying to get a shape by an invalid index") {
+        WHEN("Trying to get a shape by an invalid index")
+    	{
             THEN("An exception should be thrown when the index is out of bounds") {
                 REQUIRE_THROWS_AS(group.GetShape(3), std::out_of_range);
             }
         }
 
-        WHEN("Drawing the group to a stringstream") {
+        WHEN("Drawing the group to a stringstream")
+    	{
             std::stringstream ss;
             std::shared_ptr<ICanvas> canvas = std::make_shared<SvgCanvas>(ss);
             group.Draw(canvas);
 
-            THEN("The SVG output should match the expected output") {
+            THEN("The SVG output should match the expected output")
+        	{
                 std::string expectedSvg =
                 	R"(<svg width="1200" height="800" version="1.1" xmlns="http://www.w3.org/2000/svg">
 <ellipse cx="50" cy="25" rx="50" ry="25" style="fill:#ff0000;stroke:#000000;stroke-width:1"/>
@@ -86,8 +99,10 @@ SCENARIO("GroupShape functionality with SVG output") {
     }
 }
 
-SCENARIO("GroupShape fill style functionality with color changes") {
-    GIVEN("A GroupShape with several shapes having the same fill color") {
+SCENARIO("GroupShape fill style functionality with color changes")
+{
+    GIVEN("A GroupShape with several shapes having the same fill color")
+	{
         Color commonFillColor = 0xFF0000;
         Color commonLineColor = 0x000000;
 
@@ -97,7 +112,8 @@ SCENARIO("GroupShape fill style functionality with color changes") {
 
         GroupShape group({ ellipse, rectangle, triangle });
 
-        WHEN("Checking the fill color of the group") {
+        WHEN("Checking the fill color of the group")
+    	{
             THEN("The fill color should be the same as the individual shapes") {
                 std::optional<Color> groupColor = group.GetFillStyle()->GetColor();
                 REQUIRE(groupColor.has_value());
@@ -105,7 +121,8 @@ SCENARIO("GroupShape fill style functionality with color changes") {
             }
         }
 
-        WHEN("Changing the fill color of the group via CompositeFillStyle") {
+        WHEN("Changing the fill color of the group via CompositeFillStyle")
+    	{
             auto compositeFillStyle = group.GetFillStyle();
             Color newColor = 0x00FF00;
             compositeFillStyle->SetColor(newColor);
@@ -125,8 +142,10 @@ SCENARIO("GroupShape fill style functionality with color changes") {
     }
 }
 
-SCENARIO("GroupShape line style updates automatically when new shape with different line style is added", "[GroupShape]") {
-    GIVEN("A GroupShape with several shapes having the same line style") {
+SCENARIO("GroupShape line style updates automatically when new shape with different line style is added", "[GroupShape]")
+{
+    GIVEN("A GroupShape with several shapes having the same line style")
+	{
         Color commonLineColor = 0x000000;
         Color commonFillColor = 0xFF0000;
 
@@ -144,12 +163,14 @@ SCENARIO("GroupShape line style updates automatically when new shape with differ
     	REQUIRE(compositeLineStyle->isEnabled());
     	REQUIRE(compositeLineStyle->GetLineWidth().value() == 1);
 
-        WHEN("A new shape with a different line style is added to the group") {
+        WHEN("A new shape with a different line style is added to the group")
+    	{
             Color newLineColor = 0x00FF00;
             auto newRectangle = std::make_shared<Rectangle>(Frame{{300, 300}, 100, 50}, commonFillColor, newLineColor);
             group.AddShape(newRectangle);
 
-            THEN("The group's line style should now reflect the new shape's line style") {
+            THEN("The group's line style should now reflect the new shape's line style")
+        	{
                 std::optional<Color> updatedGroupLineColor = compositeLineStyle->GetColor();
                 REQUIRE_FALSE(updatedGroupLineColor.has_value());
             }
@@ -177,8 +198,10 @@ SCENARIO("GroupShape line style updates automatically when new shape with differ
     }
 }
 
-SCENARIO("GroupShape correctly resizes and repositions its shapes when SetFrame is called") {
-    GIVEN("A GroupShape with several shapes") {
+SCENARIO("GroupShape correctly resizes and repositions its shapes when SetFrame is called")
+{
+    GIVEN("A GroupShape with several shapes")
+	{
         Frame initialFrame = {{0, 0}, 100, 100};
         std::shared_ptr<IShape> ellipse = std::make_shared<Ellipse>(initialFrame, 0xFF0000, 0x000000);
         std::shared_ptr<IShape> rectangle = std::make_shared<Rectangle>(initialFrame, 0x00FF00, 0x000000);
@@ -186,11 +209,13 @@ SCENARIO("GroupShape correctly resizes and repositions its shapes when SetFrame 
 
         GroupShape group({ ellipse, rectangle, triangle });
 
-        WHEN("SetFrame is called to resize and reposition the group") {
+        WHEN("SetFrame is called to resize and reposition the group")
+    	{
             Frame newFrame = {{50, 50}, 200, 200};
             group.SetFrame(newFrame);
 
-            THEN("The shapes within the group should resize and reposition proportionally") {
+            THEN("The shapes within the group should resize and reposition proportionally")
+        	{
                 Frame ellipseFrame = ellipse->GetFrame();
                 Frame rectangleFrame = rectangle->GetFrame();
                 Frame triangleFrame = triangle->GetFrame();

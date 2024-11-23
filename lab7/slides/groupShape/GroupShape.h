@@ -16,29 +16,20 @@ public:
 	{}
 	void SetFrame(const Frame& frame) override
 	{
-		// Получаем текущий фрейм группы
-		const Frame currentFrame = GetFrame();
+		const auto [leftTop, width, height] = GetFrame();
 
-		// Вычисляем коэффициенты масштаба для X и Y
-		double scaleX = frame.width / currentFrame.width;
-		double scaleY = frame.height / currentFrame.height;
+		const double scaleX = frame.width / width;
+		const double scaleY = frame.height / height;
 
-		// Сдвигаем группу, чтобы её левый верхний угол совпал с новым фреймом
-		double deltaX = frame.leftTop.x - currentFrame.leftTop.x;
-		double deltaY = frame.leftTop.y - currentFrame.leftTop.y;
-
-		// Применяем изменения к каждой фигуре в группе
-		for (auto& shape : m_shapes) {
-			// Получаем текущий фрейм фигуры
+		for (const auto& shape : m_shapes)
+		{
 			Frame shapeFrame = shape->GetFrame();
 
-			// Вычисляем новые координаты и размеры фигуры с учетом масштаба и сдвига
-			double newLeftTopX = frame.leftTop.x + (shapeFrame.leftTop.x - currentFrame.leftTop.x) * scaleX;
-			double newLeftTopY = frame.leftTop.y + (shapeFrame.leftTop.y - currentFrame.leftTop.y) * scaleY;
-			double newWidth = shapeFrame.width * scaleX;
-			double newHeight = shapeFrame.height * scaleY;
+			const double newLeftTopX = frame.leftTop.x + (shapeFrame.leftTop.x - leftTop.x) * scaleX;
+			const double newLeftTopY = frame.leftTop.y + (shapeFrame.leftTop.y - leftTop.y) * scaleY;
+			const double newWidth = shapeFrame.width * scaleX;
+			const double newHeight = shapeFrame.height * scaleY;
 
-			// Устанавливаем новый фрейм для фигуры
 			shape->SetFrame({{newLeftTopX, newLeftTopY}, newWidth, newHeight});
 		}
 	}

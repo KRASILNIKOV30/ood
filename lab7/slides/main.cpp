@@ -9,7 +9,8 @@
 
 using Color = uint32_t;
 
-int main() {
+int main()
+{
 	const auto houseBase = std::make_shared<Rectangle>(Frame{{100, 300}, 400, 300}, 0x8B4513, 0x000000);
 	const auto houseRoof = std::make_shared<Triangle>(Frame{{100, 200}, 400, 100}, 0xA52A2A, 0x000000);
 
