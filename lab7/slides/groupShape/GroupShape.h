@@ -13,7 +13,12 @@ class GroupShape final
 public:
 	GroupShape(const std::initializer_list<IShapePtr> shapes)
 		: m_shapes(shapes)
-	{}
+	{
+		if (m_shapes.empty())
+		{
+			throw std::logic_error("GroupShape cannot be empty");
+		}
+	}
 	void SetFrame(const Frame& frame) override
 	{
 		const auto [leftTop, width, height] = GetFrame();

@@ -14,6 +14,8 @@ SCENARIO("GroupShape functionality with SVG output")
 {
     GIVEN("A GroupShape with several shapes")
 	{
+		REQUIRE_THROWS_AS(GroupShape({}), std::logic_error);
+
         std::shared_ptr<IShape> ellipse = std::make_shared<Ellipse>(Frame{{0, 0}, 100, 50}, 0xFF0000, 0x000000);
         std::shared_ptr<IShape> rectangle = std::make_shared<Rectangle>(Frame{{100, 100}, 200, 150}, 0x00FF00, 0x000000);
         std::shared_ptr<IShape> triangle = std::make_shared<Triangle>(Frame{{200, 200}, 120, 100}, 0x0000FF, 0x000000);
@@ -205,7 +207,7 @@ SCENARIO("GroupShape correctly resizes and repositions its shapes when SetFrame 
 	{
         Frame initialFrame = {{0, 0}, 100, 100};
         std::shared_ptr<IShape> ellipse = std::make_shared<Ellipse>(Frame{{0, 0}, 100, 100}, 0xFF0000, 0x000000);
-        std::shared_ptr<IShape> rectangle = std::make_shared<Rectangle>(Frame{{50, 100}, 200, 100}, 0x00FF00, 0x000000);
+        std::shared_ptr<IShape> rectangle = std::make_shared<Rectangle>(Frame{{50, 100}, 150, 100}, 0x00FF00, 0x000000);
         std::shared_ptr<IShape> triangle = std::make_shared<Triangle>(Frame{{50, 50}, 100, 200}, 0x0000FF, 0x000000);
 
         GroupShape group({ ellipse, rectangle, triangle });
@@ -223,17 +225,20 @@ SCENARIO("GroupShape correctly resizes and repositions its shapes when SetFrame 
 
                 CHECK(AreEqual(ellipseFrame.leftTop.x, 100));
                 CHECK(AreEqual(ellipseFrame.leftTop.y, 50));
-                CHECK(AreEqual(ellipseFrame.width, 80));
+                CHECK(AreEqual(ellipseFrame.width, 100));
                 CHECK(AreEqual(ellipseFrame.height, 160));
-                CHECK(AreEqual(rectangleFrame.leftTop.x, 140));
+
+                CHECK(AreEqual(rectangleFrame.leftTop.x, 150));
                 CHECK(AreEqual(rectangleFrame.leftTop.y, 210));
-                CHECK(AreEqual(rectangleFrame.width, 160));
+                CHECK(AreEqual(rectangleFrame.width, 150));
                 CHECK(AreEqual(rectangleFrame.height, 160));
-                CHECK(AreEqual(triangleFrame.leftTop.x, 140));
+
+                CHECK(AreEqual(triangleFrame.leftTop.x, 150));
                 CHECK(AreEqual(triangleFrame.leftTop.y, 130));
-                CHECK(AreEqual(triangleFrame.width, 80));
+                CHECK(AreEqual(triangleFrame.width, 100));
                 CHECK(AreEqual(triangleFrame.height, 320));
             }
         }
     }
 }
+

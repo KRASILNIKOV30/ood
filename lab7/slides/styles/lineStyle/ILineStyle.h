@@ -10,7 +10,7 @@ public:
 	[[nodiscard]] virtual std::optional<Color> GetColor() const = 0;
 	virtual void SetColor(Color color) = 0;
 	[[nodiscard]] virtual std::optional<double> GetLineWidth() const = 0;
-	virtual void SetLineWidth(double const width) = 0;
+	virtual void SetLineWidth(double width) = 0;
 	virtual ~ILineStyle() = default;
 };
 
