@@ -19,6 +19,8 @@ struct IGumballMachine
 {
 	virtual void ReleaseBall() = 0;
 	[[nodiscard]] virtual unsigned GetBallCount() const = 0;
+	virtual void SetCoins(unsigned count) = 0;
+	[[nodiscard]] virtual unsigned GetCoinCount() const = 0;
 
 	virtual void SetSoldOutState() = 0;
 	virtual void SetNoQuarterState() = 0;
@@ -50,6 +52,7 @@ public:
 	void Dispense() override
 	{
 		m_gumballMachine.ReleaseBall();
+		m_gumballMachine.SetCoins(m_gumballMachine.GetCoinCount() - 1);
 		if (m_gumballMachine.GetBallCount() == 0)
 		{
 			std::cout << "Oops, out of gumballs\n";
@@ -57,6 +60,11 @@ public:
 		}
 		else
 		{
+			if (m_gumballMachine.GetCoinCount() > 0)
+			{
+				m_gumballMachine.SetHasQuarterState();
+				return;
+			}
 			m_gumballMachine.SetNoQuarterState();
 		}
 	}
@@ -83,7 +91,13 @@ public:
 	}
 	void EjectQuarter() override
 	{
-		std::cout << "You can't eject, you haven't inserted a quarter yet\n";
+		if (m_gumballMachine.GetCoinCount() == 0)
+		{
+			std::cout << "You can't eject, you haven't inserted a quarter yet\n";
+			return;
+		}
+		std::cout << "Quarter returned" << std::endl;
+		m_gumballMachine.SetCoins(0);
 	}
 	void TurnCrank() override
 	{
@@ -112,11 +126,19 @@ public:
 
 	void InsertQuarter() override
 	{
-		std::cout << "You can't insert another quarter\n";
+		if (m_gumballMachine.GetCoinCount() >= 5)
+		{
+			std::cout << "You can't insert another quarter\n";
+			return;
+		}
+
+		m_gumballMachine.SetCoins(m_gumballMachine.GetCoinCount() + 1);
+		std::cout << "You inserted a quarter" << std::endl;
 	}
 	void EjectQuarter() override
 	{
 		std::cout << "Quarter returned\n";
+		m_gumballMachine.SetCoins(0);
 		m_gumballMachine.SetNoQuarterState();
 	}
 	void TurnCrank() override
@@ -148,6 +170,7 @@ public:
 	void InsertQuarter() override
 	{
 		std::cout << "You inserted a quarter\n";
+		m_gumballMachine.SetCoins(m_gumballMachine.GetCoinCount() + 1);
 		m_gumballMachine.SetHasQuarterState();
 	}
 	void EjectQuarter() override
@@ -212,7 +235,7 @@ Machine is {}
 	}
 
 private:
-	unsigned GetBallCount() const override
+	[[nodiscard]] unsigned GetBallCount() const override
 	{
 		return m_count;
 	}
@@ -223,6 +246,14 @@ private:
 			std::cout << "A gumball comes rolling out the slot...\n";
 			--m_count;
 		}
+	}
+	void SetCoins(unsigned const count) override
+	{
+		m_coins = count;
+	}
+	[[nodiscard]] unsigned GetCoinCount() const override
+	{
+		return m_coins;
 	}
 	void SetSoldOutState() override
 	{
@@ -243,6 +274,7 @@ private:
 
 private:
 	unsigned m_count = 0;
+	unsigned m_coins = 0;
 	SoldState m_soldState;
 	SoldOutState m_soldOutState;
 	NoQuarterState m_noQuarterState;

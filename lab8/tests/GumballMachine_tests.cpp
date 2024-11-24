@@ -18,6 +18,8 @@ public:
 	void SetNoQuarterState() override {}
 	void SetSoldState() override {}
 	void SetHasQuarterState() override {}
+	void SetCoins(unsigned count) override {}
+	[[nodiscard]] unsigned GetCoinCount() const override { return 0; }
 
 private:
 	unsigned m_ballCount;
@@ -157,16 +159,6 @@ SCENARIO_METHOD(CoutBufferFixture, "Testing the behavior of each state of the Gu
 		GIVEN("The machine is in HasQuarterState")
 		{
 			HasQuarterState hasQuarterState(machine);
-
-			WHEN("A quarter is inserted again")
-			{
-				THEN("The state should reject the second quarter")
-				{
-					hasQuarterState.InsertQuarter();
-					REQUIRE(GetOutput() == "You can't insert another quarter\n");
-					ClearOutput();
-				}
-			}
 
 			WHEN("The crank is turned")
 			{
