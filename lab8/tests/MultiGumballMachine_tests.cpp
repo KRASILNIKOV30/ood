@@ -203,3 +203,49 @@ SCENARIO_METHOD(CoutBufferFixture, "multi gumball machine tests")
 		}
 	}
 }
+
+SCENARIO_METHOD(CoutBufferFixture, "refilling test")
+{
+	GIVEN("an empty gumball machine")
+	{
+		auto machine = GumballMachine(1);
+
+		WHEN("refill in no quarter state")
+		{
+			machine.Refill(2);
+
+			THEN("can buy this balls")
+			{
+				machine.InsertQuarter();
+				machine.InsertQuarter();
+				ClearOutput();
+				machine.TurnCrank();
+				machine.TurnCrank();
+
+				CHECK(GetOutput() == "You turned...\n"
+									 "A gumball comes rolling out the slot...\n"
+									 "You turned...\n"
+									 "A gumball comes rolling out the slot...\n"
+									 "Oops, out of gumballs\n");
+			}
+		}
+
+		WHEN("refill in has quarter state")
+		{
+			machine.InsertQuarter();
+			machine.Refill(2);
+
+
+			// протестировать остальные случаи в этом состоянии
+
+			THEN("can buy one ball and balls not sold out")
+			{
+				ClearOutput();
+				machine.TurnCrank();
+
+				CHECK(GetOutput() == "You turned...\n"
+									 "A gumball comes rolling out the slot...\n");
+			}
+		}
+	}
+}

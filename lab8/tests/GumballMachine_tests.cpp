@@ -20,6 +20,7 @@ public:
 	void SetHasQuarterState() override {}
 	void SetCoins(unsigned count) override {}
 	[[nodiscard]] unsigned GetCoinCount() const override { return 0; }
+	void SetBalls(unsigned ballsNum) override {}
 
 private:
 	unsigned m_ballCount;

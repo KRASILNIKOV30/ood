@@ -11,6 +11,7 @@ struct IState
 	virtual void EjectQuarter() = 0;
 	virtual void TurnCrank() = 0;
 	virtual void Dispense() = 0;
+	virtual void Refill(unsigned ballsNum) = 0;
 	[[nodiscard]] virtual std::string ToString() const = 0;
 	virtual ~IState() = default;
 };
@@ -21,6 +22,7 @@ struct IGumballMachine
 	[[nodiscard]] virtual unsigned GetBallCount() const = 0;
 	virtual void SetCoins(unsigned count) = 0;
 	[[nodiscard]] virtual unsigned GetCoinCount() const = 0;
+	virtual void SetBalls(unsigned ballsNum) = 0;
 
 	virtual void SetSoldOutState() = 0;
 	virtual void SetNoQuarterState() = 0;
@@ -30,7 +32,7 @@ struct IGumballMachine
 	virtual ~IGumballMachine() = default;
 };
 
-class SoldState : public IState
+class SoldState final : public IState
 {
 public:
 	SoldState(IGumballMachine& gumballMachine)
@@ -39,15 +41,15 @@ public:
 	}
 	void InsertQuarter() override
 	{
-		std::cout << "Please wait, we're already giving you a gumball\n";
+		std::cout << "Please wait, we're already giving you a gumball" << std::endl;
 	}
 	void EjectQuarter() override
 	{
-		std::cout << "Sorry you already turned the crank\n";
+		std::cout << "Sorry you already turned the crank" << std::endl;
 	}
 	void TurnCrank() override
 	{
-		std::cout << "Turning twice doesn't get you another gumball\n";
+		std::cout << "Turning twice doesn't get you another gumball" << std::endl;
 	}
 	void Dispense() override
 	{
@@ -55,7 +57,7 @@ public:
 		m_gumballMachine.SetCoins(m_gumballMachine.GetCoinCount() - 1);
 		if (m_gumballMachine.GetBallCount() == 0)
 		{
-			std::cout << "Oops, out of gumballs\n";
+			std::cout << "Oops, out of gumballs" << std::endl;
 			m_gumballMachine.SetSoldOutState();
 		}
 		else
@@ -72,12 +74,16 @@ public:
 	{
 		return "delivering a gumball";
 	}
+	void Refill(unsigned const ballsNum) override
+	{
+		std::cout << "Can not refill during giving a gumball" << std::endl;
+	}
 
 private:
 	IGumballMachine& m_gumballMachine;
 };
 
-class SoldOutState : public IState
+class SoldOutState final : public IState
 {
 public:
 	SoldOutState(IGumballMachine& gumballMachine)
@@ -87,13 +93,13 @@ public:
 
 	void InsertQuarter() override
 	{
-		std::cout << "You can't insert a quarter, the machine is sold out\n";
+		std::cout << "You can't insert a quarter, the machine is sold out" << std::endl;
 	}
 	void EjectQuarter() override
 	{
 		if (m_gumballMachine.GetCoinCount() == 0)
 		{
-			std::cout << "You can't eject, you haven't inserted a quarter yet\n";
+			std::cout << "You can't eject, you haven't inserted a quarter yet" << std::endl;
 			return;
 		}
 		std::cout << "Quarter returned" << std::endl;
@@ -101,22 +107,25 @@ public:
 	}
 	void TurnCrank() override
 	{
-		std::cout << "You turned but there's no gumballs\n";
+		std::cout << "You turned but there's no gumballs" << std::endl;
 	}
 	void Dispense() override
 	{
-		std::cout << "No gumball dispensed\n";
+		std::cout << "No gumball dispensed" << std::endl;
 	}
 	std::string ToString() const override
 	{
 		return "sold out";
+	}
+	void Refill(unsigned const ballsNum) override
+	{
 	}
 
 private:
 	IGumballMachine& m_gumballMachine;
 };
 
-class HasQuarterState : public IState
+class HasQuarterState final : public IState
 {
 public:
 	HasQuarterState(IGumballMachine& gumballMachine)
@@ -128,7 +137,7 @@ public:
 	{
 		if (m_gumballMachine.GetCoinCount() >= 5)
 		{
-			std::cout << "You can't insert another quarter\n";
+			std::cout << "You can't insert another quarter" << std::endl;
 			return;
 		}
 
@@ -137,29 +146,32 @@ public:
 	}
 	void EjectQuarter() override
 	{
-		std::cout << "Quarter returned\n";
+		std::cout << "Quarter returned" << std::endl;
 		m_gumballMachine.SetCoins(0);
 		m_gumballMachine.SetNoQuarterState();
 	}
 	void TurnCrank() override
 	{
-		std::cout << "You turned...\n";
+		std::cout << "You turned..." << std::endl;
 		m_gumballMachine.SetSoldState();
 	}
 	void Dispense() override
 	{
-		std::cout << "No gumball dispensed\n";
+		std::cout << "No gumball dispensed" << std::endl;
 	}
 	std::string ToString() const override
 	{
 		return "waiting for turn of crank";
+	}
+	void Refill(unsigned const ballsNum) override
+	{
 	}
 
 private:
 	IGumballMachine& m_gumballMachine;
 };
 
-class NoQuarterState : public IState
+class NoQuarterState final : public IState
 {
 public:
 	NoQuarterState(IGumballMachine& gumballMachine)
@@ -169,25 +181,29 @@ public:
 
 	void InsertQuarter() override
 	{
-		std::cout << "You inserted a quarter\n";
+		std::cout << "You inserted a quarter" << std::endl;
 		m_gumballMachine.SetCoins(m_gumballMachine.GetCoinCount() + 1);
 		m_gumballMachine.SetHasQuarterState();
 	}
 	void EjectQuarter() override
 	{
-		std::cout << "You haven't inserted a quarter\n";
+		std::cout << "You haven't inserted a quarter" << std::endl;
 	}
 	void TurnCrank() override
 	{
-		std::cout << "You turned but there's no quarter\n";
+		std::cout << "You turned but there's no quarter" << std::endl;
 	}
 	void Dispense() override
 	{
-		std::cout << "You need to pay first\n";
+		std::cout << "You need to pay first" << std::endl;
 	}
 	std::string ToString() const override
 	{
 		return "waiting for quarter";
+	}
+	void Refill(unsigned const ballsNum) override
+	{
+		m_gumballMachine.SetBalls(ballsNum);
 	}
 
 private:
@@ -223,7 +239,11 @@ public:
 		m_state->TurnCrank();
 		m_state->Dispense();
 	}
-	std::string ToString() const
+	void Refill(const unsigned ballsNum)
+	{
+		m_state->Refill(ballsNum);
+	}
+	[[nodiscard]] std::string ToString() const
 	{
 		return std::format(R"(
 Mighty Gumball, Inc.
@@ -243,7 +263,7 @@ private:
 	{
 		if (m_count != 0)
 		{
-			std::cout << "A gumball comes rolling out the slot...\n";
+			std::cout << "A gumball comes rolling out the slot..." << std::endl;
 			--m_count;
 		}
 	}
@@ -254,6 +274,10 @@ private:
 	[[nodiscard]] unsigned GetCoinCount() const override
 	{
 		return m_coins;
+	}
+	void SetBalls(unsigned const ballsNum) override
+	{
+		m_count = ballsNum;
 	}
 	void SetSoldOutState() override
 	{

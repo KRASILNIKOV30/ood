@@ -3,6 +3,8 @@
 #include <format>
 #include <iostream>
 
+using namespace std;
+
 namespace naive
 {
 class GumballMachine
@@ -99,7 +101,7 @@ public:
 		}
 	}
 
-	void Refill(unsigned numBalls)
+	void Refill(const unsigned numBalls)
 	{
 		m_count = numBalls;
 		m_state = numBalls > 0 ? State::NoQuarter : State::SoldOut;
