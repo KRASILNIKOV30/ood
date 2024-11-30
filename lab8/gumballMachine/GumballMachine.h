@@ -128,7 +128,7 @@ public:
 			}
 			else
 			{
-				m_gumballMachine.SetNoQuarterState();
+				//m_gumballMachine.SetNoQuarterState();
 			}
 		}
 	}

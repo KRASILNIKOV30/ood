@@ -4,10 +4,11 @@
 #include "../styles/fillStyle/CompositeFillStyle.h"
 #include <cassert>
 #include <vector>
+#include "../Clonable.h"
 
 class GroupShape final
-	: public IGroupShape
-	, public std::enable_shared_from_this<GroupShape>
+	: public Clonable<IGroupShape, IShape, GroupShape>
+	, public std::enable_shared_from_this<IGroupShape>
 {
 public:
 	//передавать вектор или 2 итератора (исправлено)
@@ -16,12 +17,22 @@ public:
 	GroupShape(std::vector<IShapePtr> shapes)
 		: m_shapes(std::move(shapes))
 	{
-		// Лучше хранить в векторе
+		// Лучше хранить в векторе (Исправлено)
 		if (m_shapes.empty())
 		{
 			throw std::logic_error("GroupShape cannot be empty");
 		}
 	}
+
+	GroupShape(const GroupShape& group)
+		: enable_shared_from_this(group)
+	{
+		for (auto & shape : group.m_shapes)
+		{
+			m_shapes.push_back(shape->Clone());
+		}
+	}
+
 	void SetFrame(const Frame& frame) override
 	{
 		const auto [leftTop, width, height] = GetFrame();
@@ -136,6 +147,6 @@ public:
 
 private:
 	std::vector<IShapePtr> m_shapes;
-	std::optional<CompositeFillStyle> m_fillStyle;
-	std::optional<CompositeLineStyle> m_lineStyle;
+	std::optional<CompositeFillStyle> m_fillStyle = std::nullopt;
+	std::optional<CompositeLineStyle> m_lineStyle = std::nullopt;
 };

@@ -22,6 +22,7 @@ add_executable(slides_tests
         slides/groupShape/GroupShape.h
         tests/GroupShape_tests.cpp
         slides/point/AreEqual.h
+        slides/Clonable.h
 )
 
 add_executable(slides
@@ -48,6 +49,7 @@ add_executable(slides
         slides/groupShape/GroupShape.h
         slides/main.cpp
         slides/point/AreEqual.h
+        slides/Clonable.h
 )
 
 target_link_libraries(slides_tests PUBLIC catch2)

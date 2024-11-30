@@ -1,4 +1,5 @@
 #pragma once
+
 #include "IShape.h"
 #include "../styles/fillStyle/FillStyle.h"
 #include "../styles/lineStyle/LineStyle.h"
@@ -12,6 +13,12 @@ public:
 		, m_fillStyle(std::make_shared<FillStyle>(fillColor))
 	{
 	}
+
+	Shape(Shape const& shape)
+		: m_frame(shape.m_frame)
+		, m_lineStyle(std::make_shared<LineStyle>(*shape.m_lineStyle))
+		, m_fillStyle(std::make_shared<FillStyle>(*shape.m_fillStyle))
+	{}
 
 	void SetFrame(const Frame& frame) override
 	{
@@ -33,7 +40,7 @@ public:
 		return *m_fillStyle;
 	}
 
-	IGroupShapePtr GetGroup() override
+	IGroupShapePtr  GetGroup() override
 	{
 		return nullptr;
 	}

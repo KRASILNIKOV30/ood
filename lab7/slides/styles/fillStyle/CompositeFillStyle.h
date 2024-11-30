@@ -58,7 +58,7 @@ std::optional<T> CompositeFillStyle::GetCompositeStyleValue(std::function<std::o
 		{
 			result = GetStyle(fillStyle);
 		}
-		if (result != GetStyle(fillStyle))
+		else if (result != GetStyle(fillStyle))
 		{
 			result = std::nullopt;
 			return false;

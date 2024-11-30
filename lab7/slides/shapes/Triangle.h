@@ -1,11 +1,12 @@
 #pragma once
 #include "Shape.h"
+#include "../Clonable.h"
 
-class Triangle final : public Shape
+class Triangle final : public Clonable<Shape, IShape, Triangle, Frame const&, Color const, Color const>
 {
 public:
 	Triangle(Frame const& frame, Color const fillColor, Color const lineColor)
-		: Shape(frame, fillColor, lineColor)
+		: Clonable(frame, std::move(fillColor), std::move(lineColor))
 	{}
 
 	void DrawShape(const ICanvasPtr canvas) const override
