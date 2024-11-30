@@ -212,39 +212,107 @@ SCENARIO_METHOD(CoutBufferFixture, "refilling test")
 
 		WHEN("refill in no quarter state")
 		{
-			machine.Refill(2);
-
-			THEN("can buy this balls")
+			WHEN("refill with 2 balls")
 			{
-				machine.InsertQuarter();
-				machine.InsertQuarter();
-				ClearOutput();
-				machine.TurnCrank();
-				machine.TurnCrank();
+				machine.Refill(2);
 
-				CHECK(GetOutput() == "You turned...\n"
-									 "A gumball comes rolling out the slot...\n"
-									 "You turned...\n"
-									 "A gumball comes rolling out the slot...\n"
-									 "Oops, out of gumballs\n");
+				THEN("can buy this balls")
+				{
+					machine.InsertQuarter();
+					machine.InsertQuarter();
+					ClearOutput();
+					machine.TurnCrank();
+					machine.TurnCrank();
+
+					CHECK(GetOutput() == "You turned...\n"
+										 "A gumball comes rolling out the slot...\n"
+										 "You turned...\n"
+										 "A gumball comes rolling out the slot...\n"
+										 "Oops, out of gumballs\n");
+				}
 			}
+
+			WHEN("refill with 0 balls")
+			{
+				machine.Refill(0);
+
+				THEN("no balls in machine")
+				{
+					ClearOutput();
+					machine.InsertQuarter();
+
+					CHECK(GetOutput() == "You can't insert a quarter, the machine is sold out\n");
+				}
+			}
+
 		}
 
 		WHEN("refill in has quarter state")
 		{
-			machine.InsertQuarter();
-			machine.Refill(2);
-
-
-			// протестировать остальные случаи в этом состоянии
-
-			THEN("can buy one ball and balls not sold out")
+			WHEN("refill with 2 balls")
 			{
-				ClearOutput();
-				machine.TurnCrank();
+				machine.InsertQuarter();
+				machine.Refill(2);
 
-				CHECK(GetOutput() == "You turned...\n"
-									 "A gumball comes rolling out the slot...\n");
+				THEN("can buy one ball and balls not sold out")
+				{
+					ClearOutput();
+					machine.TurnCrank();
+
+					CHECK(GetOutput() == "You turned...\n"
+										 "A gumball comes rolling out the slot...\n");
+				}
+			}
+
+			WHEN("refill with 0 balls")
+			{
+				machine.InsertQuarter();
+				machine.Refill(0);
+
+				THEN("machine is in sold out state")
+				{
+					ClearOutput();
+					machine.InsertQuarter();
+
+					CHECK(GetOutput() == "You can't insert a quarter, the machine is sold out\n");
+				}
+			}
+		}
+
+		WHEN("refill in sold out state")
+		{
+			machine.Refill(0);
+
+			WHEN("refill with 2 balls")
+			{
+				machine.Refill(2);
+
+				THEN("can buy ball")
+				{
+					machine.InsertQuarter();
+					ClearOutput();
+					machine.TurnCrank();
+
+					CHECK(GetOutput() == "You turned...\n"
+										 "A gumball comes rolling out the slot...\n");
+				}
+			}
+
+			WHEN("insert quarter and refill")
+			{
+				machine.Refill(1);
+				machine.InsertQuarter();
+				machine.Refill(0);
+				machine.Refill(2);
+
+				THEN("can buy ball")
+				{
+					ClearOutput();
+					machine.TurnCrank();
+
+					CHECK(GetOutput() == "You turned...\n"
+										 "A gumball comes rolling out the slot...\n");
+				}
 			}
 		}
 	}

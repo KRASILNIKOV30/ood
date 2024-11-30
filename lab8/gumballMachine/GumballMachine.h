@@ -119,6 +119,18 @@ public:
 	}
 	void Refill(unsigned const ballsNum) override
 	{
+		m_gumballMachine.SetBalls(ballsNum);
+		if (ballsNum != 0)
+		{
+			if (m_gumballMachine.GetCoinCount() > 0)
+			{
+				m_gumballMachine.SetHasQuarterState();
+			}
+			else
+			{
+				m_gumballMachine.SetNoQuarterState();
+			}
+		}
 	}
 
 private:
@@ -165,6 +177,11 @@ public:
 	}
 	void Refill(unsigned const ballsNum) override
 	{
+		m_gumballMachine.SetBalls(ballsNum);
+		if (ballsNum == 0)
+		{
+			m_gumballMachine.SetSoldOutState();
+		}
 	}
 
 private:
@@ -204,6 +221,10 @@ public:
 	void Refill(unsigned const ballsNum) override
 	{
 		m_gumballMachine.SetBalls(ballsNum);
+		if (ballsNum == 0)
+		{
+			m_gumballMachine.SetSoldOutState();
+		}
 	}
 
 private:
