@@ -8,3 +8,5 @@
  * (https://ru.wikipedia.org/wiki/Алгоритм_Брезенхэма)
  */
 void DrawLine(Image& image, Point from, Point to, char color);
+
+void DrawCircle(Image& image, Point center, int radius, char color);

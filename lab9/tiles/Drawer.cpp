@@ -107,3 +107,25 @@ void DrawLine(Image& image, Point from, Point to, char color)
 		DrawSlopeLine(image, from, to, color);
 	}
 }
+
+void DrawCircle(Image& image, const Point center, const int radius, const char color)
+{
+	int x = 0;
+	int y = radius;
+	int delta = 3 - 2 * y;
+
+	while (y >= x)
+	{
+		image.SetPixel({ center.x + x, center.y + y }, color);
+		image.SetPixel({ center.x - x, center.y + y }, color);
+		image.SetPixel({ center.x + x, center.y - y }, color);
+		image.SetPixel({ center.x - x, center.y - y }, color);
+		image.SetPixel({ center.x + y, center.y + x }, color);
+		image.SetPixel({ center.x - y, center.y + x }, color);
+		image.SetPixel({ center.x + y, center.y - x }, color);
+		image.SetPixel({ center.x - y, center.y - x }, color);
+
+		delta += delta < 0 ? 4 * x + 6 : 4 * (x - y--) + 10;
+		++x;
+	}
+}
