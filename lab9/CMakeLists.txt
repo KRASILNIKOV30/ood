@@ -7,6 +7,7 @@ add_executable(tiles_tests
         tiles/Cow.h
         tiles/Tile.h
         tests/Tile_tests.cpp
+        tests/Image_tests.cpp
 )
 
 add_executable(tiles

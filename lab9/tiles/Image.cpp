@@ -1,5 +1,6 @@
 #include "Image.h"
 #include <cassert>
+#include <cmath>
 #include <ostream>
 #include <sstream>
 #include <stdexcept>
@@ -9,37 +10,54 @@
  * Конструирует изображение заданного размера. Если размеры не являются положительными,
  * выбрасывает исключение std::out_of_range.
  */
-Image::Image(Size size, char color)
+Image::Image(const Size size, const char color)
+	: m_size(size)
 {
-	/* Реализуйте конструктор самостоятельно */
+	if (size.width < 0 || size.height < 0)
+	{
+		throw std::out_of_range("Invalid size");
+	}
+	const int tilesInRow = std::ceil(static_cast<double>(size.width) / Tile::SIZE);
+	const int tilesInColumn = std::ceil(static_cast<double>(size.height) / Tile::SIZE);
+	const CoW tile{Tile(color)};
+	const auto row = std::vector(tilesInRow, tile);
+	m_tiles = std::vector(tilesInColumn, row);
 }
 
-// Возвращает размер изображения в пикселях.
 Size Image::GetSize() const noexcept
 {
-	/* Реализуйте метод самостоятельно. */
-
-	return { 0, 0 };
+	return m_size;
 }
 
 /**
- * Возвращает «цвет» пикселя в указанных координатах.Если координаты выходят за пределы
+ * Возвращает «цвет» пикселя в указанных координатах. Если координаты выходят за пределы
  * изображения, возвращает «пробел».
  */
-char Image::GetPixel(Point p) const noexcept
+char Image::GetPixel(const Point p) const noexcept
 {
-	/* Реализуйте метод самостоятельно. */
-
-	return ' ';
+	if (!IsPointInImage(p))
+	{
+		return ' ';
+	}
+	return m_tiles[p.y / Tile::SIZE][p.x / Tile::SIZE]->GetPixel({ p.x % Tile::SIZE, p.y % Tile::SIZE });
 }
 
 /**
  * Задаёт «цвет» пикселя в указанных координатах. Если координаты выходят за пределы изображения
  * действие игнорируется.
  */
-void Image::SetPixel(Point p, char color)
+void Image::SetPixel(const Point p, const char color)
 {
-	/* Реализуйте метод самостоятельно. */
+	if (!IsPointInImage(p))
+	{
+		return;
+	}
+	m_tiles[p.y / Tile::SIZE][p.x / Tile::SIZE].Write()->SetPixel({ p.x % Tile::SIZE, p.y % Tile::SIZE }, color);
+}
+
+bool Image::IsPointInImage(Point p) const noexcept
+{
+	return IsPointInSize(p, m_size);
 }
 
 /**
@@ -47,10 +65,10 @@ void Image::SetPixel(Point p, char color)
  */
 void Print(const Image& img, std::ostream& out)
 {
-	const auto size = img.GetSize();
-	for (int y = 0; y < size.height; ++y)
+	const auto [width, height] = img.GetSize();
+	for (int y = 0; y < height; ++y)
 	{
-		for (int x = 0; x < size.width; ++x)
+		for (int x = 0; x < width; ++x)
 		{
 			out.put(img.GetPixel({ x, y }));
 		}

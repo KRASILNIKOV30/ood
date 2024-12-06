@@ -12,14 +12,7 @@ public:
 	// Конструктор по умолчанию. Заполняет тайл указанным цветом.
 	explicit Tile(const char color = ' ') noexcept
 	{
-		for (int i = 0; i < SIZE; i++)
-		{
-			for (int j = 0; j < SIZE; j++)
-			{
-				m_data[i][j] = color;
-			}
-		}
-
+		m_data.fill(color);
 		// -------------- не удалять ------------
 		assert(m_instanceCount >= 0);
 		++m_instanceCount; // Увеличиваем счётчик тайлов (для целей тестирования).
@@ -52,7 +45,7 @@ public:
 	{
 		if (IsPointInTile(p))
 		{
-			m_data[p.y][p.x] = color;
+			m_data[SIZE * p.y + p.x] = color;
 		}
 	}
 
@@ -65,7 +58,7 @@ public:
 		{
 			return ' ';
 		}
-		return m_data[p.y][p.x];
+		return m_data[SIZE * p.y + p.x];
 	}
 
 	// Возвращает количество экземпляра класса Tile в программе.
@@ -88,5 +81,5 @@ private:
 	// -------------- не удалять ------------
 
 	/* Разместите здесь поля для хранения пикселей тайла. */
-	std::array<std::array<char, SIZE>, SIZE> m_data{};
+	std::array<char, SIZE * SIZE> m_data{};
 };

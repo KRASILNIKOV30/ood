@@ -1,7 +1,13 @@
 #pragma once
+#include "Cow.h"
+
+
 #include <iosfwd>
 #include <string>
 #include "Geom.h"
+#include "Tile.h"
+
+#include <vector>
 
 class Image
 {
@@ -13,13 +19,13 @@ public:
 	explicit Image(Size size, char color = ' ');
 
 	// Возвращает размер изображения в пикселях.
-	Size GetSize() const noexcept;
+	[[nodiscard]] Size GetSize() const noexcept;
 
 	/**
-	 * Возвращает «цвет» пикселя в указанных координатах.Если координаты выходят за пределы
+	 * Возвращает «цвет» пикселя в указанных координатах. Если координаты выходят за пределы
 	 * изображения, возвращает «пробел».
 	 */
-	char GetPixel(Point p) const noexcept;
+	[[nodiscard]] char GetPixel(Point p) const noexcept;
 
 	/**
 	 * Задаёт «цвет» пикселя в указанных координатах. Если координаты выходят за пределы изображения
@@ -28,6 +34,11 @@ public:
 	void SetPixel(Point p, char color);
 
 private:
+	bool IsPointInImage(Point p) const noexcept;
+
+private:
+	Size m_size;
+	std::vector<std::vector<CoW<Tile>>> m_tiles;
 };
 
 /**
