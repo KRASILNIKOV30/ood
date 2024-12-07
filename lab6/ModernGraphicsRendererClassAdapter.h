@@ -45,7 +45,6 @@ public:
 private:
 	static modern_graphics_lib::RGBAColor CreateRGBAColor(const uint32_t color)
 	{
-		// Не преобразовывать в строку (Исправлено)
 		constexpr uint32_t blue_offset{ 0x00 };
 		constexpr uint32_t green_offset{ 0x08 };
 		constexpr uint32_t red_offset{ 0x10 };

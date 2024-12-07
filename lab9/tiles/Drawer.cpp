@@ -13,7 +13,7 @@ int Sign(int value)
 /**
  * Рисует крутую прямую (для которой |to.y - from.x| >= |to.x - from.x|).
  */
-void DrawSteepLine(Image& image, Point from, Point to, char color)
+void DrawSteepLine(Image& image, Point from, Point to, const uint32_t color)
 {
 	const int deltaX = std::abs(to.x - from.x);
 	const int deltaY = std::abs(to.y - from.y);
@@ -50,7 +50,7 @@ void DrawSteepLine(Image& image, Point from, Point to, char color)
 /**
  * Рисует пологую прямую (для которой |to.y - from.x| < |to.y - from.y|).
  */
-void DrawSlopeLine(Image& image, Point from, Point to, char color)
+void DrawSlopeLine(Image& image, Point from, Point to, const uint32_t color)
 {
 	const int deltaX = std::abs(to.x - from.x);
 	const int deltaY = std::abs(to.y - from.y);
@@ -93,7 +93,7 @@ void DrawSlopeLine(Image& image, Point from, Point to, char color)
  * Для рисования используется алгоритм Брезенхема.
  * (https://ru.wikipedia.org/wiki/Алгоритм_Брезенхема)
  */
-void DrawLine(Image& image, Point from, Point to, char color)
+void DrawLine(Image& image, const Point from, const Point to, const uint32_t color)
 {
 	const int deltaX = std::abs(to.x - from.x);
 	const int deltaY = std::abs(to.y - from.y);
@@ -108,7 +108,25 @@ void DrawLine(Image& image, Point from, Point to, char color)
 	}
 }
 
-void DrawCircle(Image& image, const Point center, const int radius, const char color)
+void DrawRect(Image& image, const Point leftTop, Size size, const uint32_t color)
+{
+	const auto [width, height] = size;
+	DrawLine(image, leftTop, leftTop + Point{ width, 0 }, color);
+	DrawLine(image, leftTop + Point{ width, 0 }, leftTop + Point{ width, height }, color);
+	DrawLine(image, leftTop + Point{ width, height }, leftTop + Point{ 0, height }, color);
+	DrawLine(image, leftTop + Point{ 0, height }, leftTop, color);
+}
+
+void FillRect(Image& image, Point leftTop, Size size, const uint32_t color)
+{
+	const auto [width, height] = size;
+	for (auto [x, y] = leftTop; y <= leftTop.y + height; ++y)
+	{
+		DrawLine(image, Point{ x, y }, Point{ x + width, y }, color);
+	}
+}
+
+void DrawCircle(Image& image, const Point center, const int radius, const uint32_t color)
 {
 	int x = 0;
 	int y = radius;
@@ -125,7 +143,36 @@ void DrawCircle(Image& image, const Point center, const int radius, const char c
 		image.SetPixel({ center.x + y, center.y - x }, color);
 		image.SetPixel({ center.x - y, center.y - x }, color);
 
-		delta += delta < 0 ? 4 * x + 6 : 4 * (x - y--) + 10;
+		delta += delta < 0
+			? 4 * x + 6
+			: 4 * (x - y--) + 10;
+		++x;
+	}
+}
+
+void FillCircle(Image& image, const Point center,const  int radius, const uint32_t color)
+{
+	int x = 0;
+	int y = radius;
+	int delta = 3 - 2 * radius;
+
+	while (y >= x)
+	{
+		for (int i = center.x - x; i <= center.x + x; ++i)
+		{
+			image.SetPixel({ i, center.y + y }, color);
+			image.SetPixel({ i, center.y - y }, color);
+		}
+
+		for (int i = center.x - y; i <= center.x + y; ++i)
+		{
+			image.SetPixel({ i, center.y + x }, color);
+			image.SetPixel({ i, center.y - x }, color);
+		}
+
+		delta += delta < 0
+			? 4 * x + 6
+			: 4 * (x - y--) + 10;
 		++x;
 	}
 }

@@ -1,4 +1,5 @@
 add_executable(tiles_tests
+        tiles/Color.h
         tiles/Image.cpp
         tiles/Image.h
         tiles/Geom.h
@@ -11,6 +12,7 @@ add_executable(tiles_tests
 )
 
 add_executable(tiles
+        tiles/Color.h
         tiles/main.cpp
         tiles/Image.cpp
         tiles/Image.h

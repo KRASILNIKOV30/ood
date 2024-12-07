@@ -3,6 +3,8 @@
 #include <cassert>
 #include "Geom.h"
 
+#include <cstdint>
+
 class Tile
 {
 public:
@@ -10,7 +12,7 @@ public:
 	constexpr static int SIZE = 8;
 
 	// Конструктор по умолчанию. Заполняет тайл указанным цветом.
-	explicit Tile(const char color = ' ') noexcept
+	explicit Tile(const uint32_t color = ' ') noexcept
 	{
 		m_data.fill(color);
 		// -------------- не удалять ------------
@@ -41,7 +43,7 @@ public:
 	 * Изменяет цвет пикселя тайла.
 	 * Если координаты выходят за пределы тайла, метод ничего не делает.
 	 */
-	void SetPixel(const Point p, const char color) noexcept
+	void SetPixel(const Point p, const uint32_t color) noexcept
 	{
 		if (IsPointInTile(p))
 		{
@@ -52,7 +54,7 @@ public:
 	/**
 	 * Возвращает цвет пикселя. Если координаты выходят за пределы тайла, возвращается пробел.
 	 */
-	[[nodiscard]] char GetPixel(const Point p) const noexcept
+	[[nodiscard]] uint32_t GetPixel(const Point p) const noexcept
 	{
 		if (!IsPointInTile(p))
 		{
@@ -81,5 +83,5 @@ private:
 	// -------------- не удалять ------------
 
 	/* Разместите здесь поля для хранения пикселей тайла. */
-	std::array<char, SIZE * SIZE> m_data{};
+	std::array<uint32_t, SIZE * SIZE> m_data{};
 };

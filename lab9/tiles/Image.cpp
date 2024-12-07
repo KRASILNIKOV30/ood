@@ -1,16 +1,19 @@
 #include "Image.h"
+#include "./Color.h"
 #include <cassert>
 #include <cmath>
+#include <format>
 #include <ostream>
 #include <sstream>
 #include <stdexcept>
 #include <vector>
+#include <fstream>
 
 /**
  * Конструирует изображение заданного размера. Если размеры не являются положительными,
  * выбрасывает исключение std::out_of_range.
  */
-Image::Image(const Size size, const char color)
+Image::Image(const Size size, const uint32_t color)
 	: m_size(size)
 {
 	if (size.width < 0 || size.height < 0)
@@ -33,7 +36,7 @@ Size Image::GetSize() const noexcept
  * Возвращает «цвет» пикселя в указанных координатах. Если координаты выходят за пределы
  * изображения, возвращает «пробел».
  */
-char Image::GetPixel(const Point p) const noexcept
+uint32_t Image::GetPixel(const Point p) const noexcept
 {
 	if (!IsPointInImage(p))
 	{
@@ -46,7 +49,7 @@ char Image::GetPixel(const Point p) const noexcept
  * Задаёт «цвет» пикселя в указанных координатах. Если координаты выходят за пределы изображения
  * действие игнорируется.
  */
-void Image::SetPixel(const Point p, const char color)
+void Image::SetPixel(const Point p, const uint32_t color)
 {
 	if (!IsPointInImage(p))
 	{
@@ -76,6 +79,25 @@ void Print(const Image& img, std::ostream& out)
 	}
 }
 
+void Save(const Image& img, std::filesystem::path const& filename)
+{
+	std::ofstream file(filename.string());
+
+	const auto [width, height] = img.GetSize();
+	file << "P3" << std::endl;
+	file << width << ' ' << height << std::endl;
+	file << "255" << std::endl;
+	
+	for (int y = 0; y < height; ++y)
+	{
+		for (int x = 0; x < width; ++x)
+		{
+			const auto [r, g, b] = createRGBColor(img.GetPixel({ x, y }));
+			file << std::format("{} {} {}", r, g, b) << std::endl;
+		}
+	}
+}
+
 /**
  * Загружает изображение из pixels. Линии изображения разделяются символами\n.
  * Размеры картинки определяются по количеству переводов строки и самой длинной линии.
@@ -100,7 +122,7 @@ Image LoadImage(const std::string& pixels)
 			break;
 
 		int x = 0;
-		for (const char ch : line)
+		for (const uint32_t ch : line)
 		{
 			img.SetPixel({ x++, y }, ch);
 		}
