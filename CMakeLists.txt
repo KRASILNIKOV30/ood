@@ -9,6 +9,7 @@ add_subdirectory(lab5_cmake)
 add_subdirectory(lab7)
 add_subdirectory(lab8)
 add_subdirectory(lab9)
+add_subdirectory(lab10)
 
 add_library(catch2 INTERFACE)
 add_library(coutBuffer INTERFACE)

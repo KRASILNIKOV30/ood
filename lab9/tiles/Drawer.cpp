@@ -158,6 +158,7 @@ void FillCircle(Image& image, const Point center,const  int radius, const uint32
 
 	while (y >= x)
 	{
+		// оптимизировать отрисовку
 		for (int i = center.x - x; i <= center.x + x; ++i)
 		{
 			image.SetPixel({ i, center.y + y }, color);

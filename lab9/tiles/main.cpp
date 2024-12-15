@@ -63,6 +63,13 @@ int main()
 	}
 
 	{
+		Image img({21, 21});
+		DrawCircle(img, {10, 10}, 3, '#');
+		Print(img, std::cout);
+	}
+
+
+	{
 		Save(DrawLandscape(), "landscape.ppm");
 	}
 }
