@@ -17,7 +17,7 @@ SCENARIO("GroupShape functionality with SVG output")
 		REQUIRE_THROWS_AS(GroupShape({}), std::logic_error);
 
         std::shared_ptr<IShape> ellipse = std::make_shared<Ellipse>(Frame{{0, 0}, 100, 50}, 0xFF0000, 0x000000);
-        std::shared_ptr<IShape> rectangle = std::make_shared<Rectangle>(Frame{{100, 100}, 200, 150}, 0x00FF00, 0x000000);
+        std::shared_ptr<IShape> rectangle = std::make_shared<Circle>(Frame{{100, 100}, 200, 150}, 0x00FF00, 0x000000);
         std::shared_ptr<IShape> triangle = std::make_shared<Triangle>(Frame{{200, 200}, 120, 100}, 0x0000FF, 0x000000);
 
         GroupShape group({ ellipse, rectangle, triangle });
@@ -110,7 +110,7 @@ SCENARIO("GroupShape fill style functionality with color changes")
         Color commonLineColor = 0x000000;
 
         std::shared_ptr<IShape> ellipse = std::make_shared<Ellipse>(Frame{{0, 0}, 100, 50}, commonFillColor, commonLineColor);
-        std::shared_ptr<IShape> rectangle = std::make_shared<Rectangle>(Frame{{100, 100}, 200, 150}, commonFillColor, commonLineColor);
+        std::shared_ptr<IShape> rectangle = std::make_shared<Circle>(Frame{{100, 100}, 200, 150}, commonFillColor, commonLineColor);
         std::shared_ptr<IShape> triangle = std::make_shared<Triangle>(Frame{{200, 200}, 120, 100}, commonFillColor, commonLineColor);
 
         GroupShape group({ ellipse, rectangle, triangle });
@@ -152,7 +152,7 @@ SCENARIO("GroupShape line style updates automatically when new shape with differ
         Color commonFillColor = 0xFF0000;
 
         std::shared_ptr<IShape> ellipse = std::make_shared<Ellipse>(Frame{{0, 0}, 100, 50}, commonFillColor, commonLineColor);
-        std::shared_ptr<IShape> rectangle = std::make_shared<Rectangle>(Frame{{100, 100}, 200, 150}, commonFillColor, commonLineColor);
+        std::shared_ptr<IShape> rectangle = std::make_shared<Circle>(Frame{{100, 100}, 200, 150}, commonFillColor, commonLineColor);
         std::shared_ptr<IShape> triangle = std::make_shared<Triangle>(Frame{{200, 200}, 120, 100}, commonFillColor, commonLineColor);
 
         GroupShape group({ ellipse, rectangle, triangle });
@@ -167,7 +167,7 @@ SCENARIO("GroupShape line style updates automatically when new shape with differ
         WHEN("A new shape with a different line style is added to the group")
     	{
             Color newLineColor = 0x00FF00;
-            auto newRectangle = std::make_shared<Rectangle>(Frame{{300, 300}, 100, 50}, commonFillColor, newLineColor);
+            auto newRectangle = std::make_shared<Circle>(Frame{{300, 300}, 100, 50}, commonFillColor, newLineColor);
             group.AddShape(newRectangle);
 
             THEN("The group's line style should now reflect the new shape's line style")
@@ -184,7 +184,7 @@ SCENARIO("GroupShape line style updates automatically when new shape with differ
         	AND_WHEN("Add new shape to group")
         	{
         		Color newLineColor = 0x00FF00;
-        		auto newRectangle = std::make_shared<Rectangle>(Frame{{300, 300}, 100, 50}, commonFillColor, newLineColor);
+        		auto newRectangle = std::make_shared<Circle>(Frame{{300, 300}, 100, 50}, commonFillColor, newLineColor);
         		newRectangle->GetLineStyle().SetEnabled(false);
         		group.AddShape(newRectangle);
 
@@ -204,7 +204,7 @@ SCENARIO("GroupShape correctly resizes and repositions its shapes when SetFrame 
 	{
         Frame initialFrame = {{0, 0}, 100, 100};
         std::shared_ptr<IShape> ellipse = std::make_shared<Ellipse>(Frame{{0, 0}, 100, 100}, 0xFF0000, 0x000000);
-        std::shared_ptr<IShape> rectangle = std::make_shared<Rectangle>(Frame{{50, 100}, 150, 100}, 0x00FF00, 0x000000);
+        std::shared_ptr<IShape> rectangle = std::make_shared<Circle>(Frame{{50, 100}, 150, 100}, 0x00FF00, 0x000000);
         std::shared_ptr<IShape> triangle = std::make_shared<Triangle>(Frame{{50, 50}, 100, 200}, 0x0000FF, 0x000000);
 
         GroupShape group({ ellipse, rectangle, triangle });
@@ -244,7 +244,7 @@ SCENARIO("get group by pointer")
 	GIVEN("A GroupShape with several shapes")
 	{
 		std::shared_ptr<IShape> ellipse = std::make_shared<Ellipse>(Frame{{0, 0}, 100, 50}, 0xFF0000, 0x000000);
-		std::shared_ptr<IShape> rectangle = std::make_shared<Rectangle>(Frame{{100, 100}, 200, 150}, 0x00FF00, 0x000000);
+		std::shared_ptr<IShape> rectangle = std::make_shared<Circle>(Frame{{100, 100}, 200, 150}, 0x00FF00, 0x000000);
 		std::shared_ptr<IShape> triangle = std::make_shared<Triangle>(Frame{{200, 200}, 120, 100}, 0x0000FF, 0x000000);
 
 		std::shared_ptr<IShape> shape = std::make_shared<GroupShape>(std::initializer_list{ellipse, rectangle, triangle});

@@ -2,10 +2,10 @@
 #include "Shape.h"
 #include "../Clonable.h"
 
-class Rectangle final : public Clonable<Shape, IShape, Rectangle, Frame const&, Color const&, Color const&>
+class Circle final : public Clonable<Shape, IShape, Circle, Frame const&, Color const&, Color const&>
 {
 public:
-	Rectangle(Frame const& frame, Color const& fillColor, Color const& lineColor)
+	Circle(Frame const& frame, Color const& fillColor, Color const& lineColor)
 		: Clonable(frame, fillColor, lineColor)
 	{}
 
