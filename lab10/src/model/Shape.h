@@ -1,8 +1,8 @@
 #pragma once
 #include "../Frame.h"
-#include <string>
+#include "IShape.h"
 
-class Shape
+class Shape : public IShape
 {
 public:
 	// ReSharper disable once CppNonExplicitConvertingConstructor
@@ -11,14 +11,10 @@ public:
 	{
 	}
 
-	virtual ~Shape() = default;
-
-	[[nodiscard]] Frame GetFrame() const
+	[[nodiscard]] Frame GetFrame() const override
 	{
 		return m_frame;
 	}
-
-	[[nodiscard]] virtual std::string GetType() const = 0;
 
 private:
 	Frame m_frame;

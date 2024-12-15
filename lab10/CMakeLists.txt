@@ -14,6 +14,7 @@ qt_add_executable(shapes
         src/model/Triangle.h
         src/model/Rectangle.h
         src/model/Ellipse.h
+        src/model/IShape.h
 )
 
 add_executable(shapes_tests
@@ -23,6 +24,7 @@ add_executable(shapes_tests
         src/model/Rectangle.h
         src/model/Ellipse.h
         src/tests/Shapes_tests.cpp
+        src/model/IShape.h
 )
 
 target_link_libraries(shapes PRIVATE Qt6::Widgets)
