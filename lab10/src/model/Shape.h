@@ -5,9 +5,9 @@
 class Shape : public IShape
 {
 public:
-	// ReSharper disable once CppNonExplicitConvertingConstructor
-	Shape(const Frame& frame)
+	Shape(std::string id, const Frame& frame)
 		: m_frame(frame)
+		, m_id(std::move(id))
 	{
 	}
 
@@ -16,6 +16,12 @@ public:
 		return m_frame;
 	}
 
+	[[nodiscard]] std::string GetId() const override
+	{
+		return m_id;
+	}
+
 private:
 	Frame m_frame;
+	std::string m_id;
 };

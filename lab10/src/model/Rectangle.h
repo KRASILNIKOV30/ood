@@ -4,8 +4,8 @@
 class Rectangle final : public Shape
 {
 public:
-	explicit Rectangle(const Frame& frame)
-		: Shape(frame)
+	explicit Rectangle(std::string const& id, const Frame& frame)
+		: Shape(id, frame)
 	{
 	}
 

@@ -4,8 +4,8 @@
 class Triangle final : public Shape
 {
 public:
-	explicit Triangle(const Frame& frame)
-		: Shape(frame)
+	explicit Triangle(std::string const& id, const Frame& frame)
+		: Shape(id, frame)
 	{
 	}
 

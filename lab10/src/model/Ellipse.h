@@ -4,8 +4,8 @@
 class Ellipse final : public Shape
 {
 public:
-	explicit Ellipse(const Frame& frame)
-		: Shape(frame)
+	explicit Ellipse(std::string const& id, const Frame& frame)
+		: Shape(id, frame)
 	{
 	}
 

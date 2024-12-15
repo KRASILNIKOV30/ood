@@ -1,60 +1,49 @@
-#define CATCH_CONFIG_MAIN
-#include "../model/Ellipse.h"
 #include "../model/Rectangle.h"
-#include "../model/Triangle.h"
-
+#include "../model/Shapes.h"
 #include <catch.hpp>
 
-SCENARIO("Rectangle tests")
+SCENARIO("shapes tests")
 {
-	GIVEN("rectangle")
+	GIVEN("an empty shapes model")
 	{
-		const Rectangle rectangle({ { 10, 20 }, { 30, 40 } });
+		Shapes shapes;
 
-		THEN("can get frame")
+		WHEN("add shape")
 		{
-			CHECK(rectangle.GetFrame() == Frame{ { 10, 20 }, { 30, 40 } });
-		}
+			shapes.AddShape(std::make_unique<Rectangle>("rect", Frame{ { 10, 20 }, { 30, 40 } }));
 
-		AND_THEN("can get type")
-		{
-			CHECK(rectangle.GetType() == "rectangle");
-		}
-	}
-}
+			THEN("can get this shape")
+			{
+				auto const shape = shapes.GetShape("rect");
+				CHECK(shape->GetType() == "rectangle");
+				CHECK(shape->GetFrame() == Frame{ { 10, 20 }, { 30, 40 } });
+				CHECK(shape->GetId() == "rect");
+			}
 
-SCENARIO("Triangle tests")
-{
-	GIVEN("triangle")
-	{
-		const Triangle triangle({ { 10, 20 }, { 30, 40 } });
+			AND_WHEN("find shape with non-existent id")
+			{
+				auto const shape = shapes.GetShape("non-existent id");
 
-		THEN("can get frame")
-		{
-			CHECK(triangle.GetFrame() == Frame{ { 10, 20 }, { 30, 40 } });
-		}
+				THEN("shape not found")
+				{
+					CHECK(shape == nullptr);
+				}
+			}
 
-		AND_THEN("can get type")
-		{
-			CHECK(triangle.GetType() == "triangle");
-		}
-	}
-}
+			AND_WHEN("add shape with the same id")
+			{
+				shapes.AddShape(std::make_unique<Rectangle>("rect", Frame{ { 10, 20 }, { 30, 40 } }));
 
-SCENARIO("Ellipse tests")
-{
-	GIVEN("ellipse")
-	{
-		const Ellipse ellipse({ { 10, 20 }, { 30, 40 } });
-
-		THEN("can get frame")
-		{
-			CHECK(ellipse.GetFrame() == Frame{ { 10, 20 }, { 30, 40 } });
-		}
-
-		AND_THEN("can get type")
-		{
-			CHECK(ellipse.GetType() == "ellipse");
+				THEN("shape is not added")
+				{
+					int counter = 0;
+					shapes.ForEach([&](const IShape*) {
+						counter++;
+						return true;
+					});
+					CHECK(counter == 1);
+				}
+			}
 		}
 	}
 }
