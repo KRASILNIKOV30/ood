@@ -18,6 +18,7 @@ qt_add_executable(shapes
         src/model/IShapes.h
         src/model/Shapes.h
         src/model/Shapes.cpp
+        src/repository/Repository.h
 )
 
 add_executable(shapes_tests
@@ -31,6 +32,7 @@ add_executable(shapes_tests
         src/model/Shapes.h
         src/model/Shapes.cpp
         src/tests/Shapes_tests.cpp
+        src/repository/Repository.h
 )
 
 target_link_libraries(shapes PRIVATE Qt6::Widgets)

@@ -44,6 +44,38 @@ SCENARIO("shapes tests")
 					CHECK(counter == 1);
 				}
 			}
+
+			AND_WHEN("remove shape")
+			{
+				shapes.RemoveShape("rect");
+
+				THEN("shape is removed")
+				{
+					CHECK(shapes.GetShape("rect") == nullptr);
+					int counter = 0;
+					shapes.ForEach([&](const IShape*) {
+						counter++;
+						return true;
+					});
+					CHECK(counter == 0);
+				}
+			}
+
+			AND_WHEN("remove shape with non-existent id")
+			{
+				CHECK_THROWS(shapes.RemoveShape("non-existent-id"));
+
+				THEN("shape is not removed")
+				{
+					CHECK_FALSE(shapes.GetShape("rect") == nullptr);
+					int counter = 0;
+					shapes.ForEach([&](const IShape*) {
+						counter++;
+						return true;
+					});
+					CHECK(counter == 1);
+				}
+			}
 		}
 	}
 }

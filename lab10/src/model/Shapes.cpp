@@ -1,46 +1,39 @@
 #include "Shapes.h"
 
-void Shapes::AddShape(IShapePtr&& shape)
+void Shapes::AddShape(IShapePtr&& shape, const std::optional<size_t> position)
 {
-	const auto id = shape->GetId();
-	m_shapes.push_back(std::move(shape));
-
-	const auto inserted = m_shapesMap.emplace(id, --m_shapes.end()).second;
-	if (!inserted)
-	{
-		m_shapes.pop_back();
-	}
+	const auto pos = position.has_value()
+		? position.value()
+		: GetSize();
+	m_shapes.Insert(shape->GetId(), std::move(shape), pos);
 }
-void Shapes::RemoveShape(std::string const& id)
-{
-	auto mapIt = m_shapesMap.find(id);
-	if (mapIt == m_shapesMap.end())
-	{
-		return;
-	}
 
-	m_shapes.erase(mapIt->second);
-	m_shapesMap.erase(mapIt);
+size_t Shapes::RemoveShape(std::string const& id)
+{
+	const auto position = m_shapes.Remove(id);
+	if (!position.has_value())
+	{
+		throw std::invalid_argument("shape does not exist");
+	}
+	return position.value();
 }
 
 const IShape* Shapes::GetShape(std::string const& id) const
 {
-	const auto mapIt = m_shapesMap.find(id);
-	if (mapIt == m_shapesMap.end())
+	auto const shape = m_shapes.Find(id);
+	if (!shape.has_value())
 	{
 		return nullptr;
 	}
-
-	return mapIt->second->get();
+	return shape.value();
 }
 
 void Shapes::ForEach(const std::function<bool(const IShape*)> callback) const
 {
-	for (const auto& shape : m_shapes)
-	{
-		if (!callback(shape.get()))
-		{
-			return;
-		}
-	}
+	m_shapes.ForEach(callback);
+}
+
+size_t Shapes::GetSize() const
+{
+	return m_shapes.GetSize();
 }
