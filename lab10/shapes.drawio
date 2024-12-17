@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" version="25.0.3">
   <diagram name="Page-1" id="VeWxsNO1nGXc-LU979vA">
-    <mxGraphModel dx="4086" dy="3271" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3997" dy="3352" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -1179,9 +1179,6 @@
             <mxPoint x="392" y="-586" as="sourcePoint" />
             <mxPoint x="552" y="-586" as="targetPoint" />
           </mxGeometry>
-        </mxCell>
-        <mxCell id="hcrkktSZZJHVs4RmWN8k-104" value="Добавить отдельную прослойку AppModel, которая будет хранить юз кейсы и хранить историю команд. Чтобы несколько вью могли работать с одной и той же моделью, при этом история команд должна быть общая" style="shape=note;strokeWidth=2;fontSize=14;size=20;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#666600;" parent="1" vertex="1">
-          <mxGeometry x="-130" y="-1191.5" width="227" height="185" as="geometry" />
         </mxCell>
         <mxCell id="cOaUuyhmUuSxkf9LrPIT-5" value="1. Идентификатор типа&lt;div&gt;2. Визитор&lt;/div&gt;&lt;div&gt;3. std::variant&lt;/div&gt;&lt;div&gt;4. dynamic_cast&lt;/div&gt;" style="shape=note;strokeWidth=2;fontSize=14;size=20;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#666600;" parent="1" vertex="1">
           <mxGeometry x="-1332" y="-1589" width="226" height="120" as="geometry" />

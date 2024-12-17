@@ -28,9 +28,24 @@ const IShape* Shapes::GetShape(std::string const& id) const
 	return shape.value();
 }
 
+IShape* Shapes::GetShape(const std::string& id)
+{
+	return const_cast<IShape*>(const_cast<const Shapes*>(this)->GetShape(id));
+}
+
 void Shapes::ForEach(const std::function<bool(const IShape*)> callback) const
 {
 	m_shapes.ForEach(callback);
+}
+
+ScopedConnection Shapes::DoOnAddShape(const AddShapeSlot& slot)
+{
+	return {};
+}
+
+ScopedConnection Shapes::DoOnRemoveShape(const RemoveShapeSlot& slot)
+{
+	return {};
 }
 
 size_t Shapes::GetSize() const
