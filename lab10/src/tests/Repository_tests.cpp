@@ -7,8 +7,8 @@ class Item
 {
 public:
 	Item(std::string id, std::string name)
-		: m_name(std::move(name))
-		, m_id(std::move(id))
+		: m_id(std::move(id))
+		, m_name(std::move(name))
 	{
 	}
 	[[nodiscard]] std::string GetId() const

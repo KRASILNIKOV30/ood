@@ -17,4 +17,6 @@ public:
 
 private:
 	Repository<IShape> m_shapes;
+	AddShapeSignal m_addShapeSignal;
+	RemoveShapeSignal m_removeShapeSignal;
 };

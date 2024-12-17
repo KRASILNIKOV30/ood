@@ -1,5 +1,8 @@
+#include "../model/Ellipse.h"
 #include "../model/Rectangle.h"
 #include "../model/Shapes.h"
+#include "../model/Triangle.h"
+
 #include <catch.hpp>
 
 SCENARIO("shapes tests")
@@ -74,6 +77,30 @@ SCENARIO("shapes tests")
 						return true;
 					});
 					CHECK(counter == 1);
+				}
+			}
+		}
+
+		WHEN("add handler on shape adding")
+		{
+			shapes.AddShape(std::make_unique<Rectangle>("rect", Frame{ { 10, 20 }, { 30, 40 } }));
+			shapes.AddShape(std::make_unique<Ellipse>("ellipse", Frame{ { 10, 20 }, { 30, 40 } }));
+
+			IShape* shape = nullptr;
+			size_t pos = 0;
+			auto connection = shapes.DoOnAddShape([&](IShape* s, const size_t p) {
+				shape = s;
+				pos = p;
+			});
+
+			AND_WHEN("add shape")
+			{
+				shapes.AddShape(std::make_unique<Triangle>("triangle", Frame{ { 10, 20 }, { 30, 40 } }));
+
+				THEN("handler was called")
+				{
+					CHECK(shape == shapes.GetShape("triangle"));
+					CHECK(pos == 2);
 				}
 			}
 		}

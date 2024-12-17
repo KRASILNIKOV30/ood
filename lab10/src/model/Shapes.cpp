@@ -3,7 +3,9 @@
 void Shapes::AddShape(IShapePtr&& shape, const std::optional<size_t> position)
 {
 	const auto pos = position.value_or(GetSize());
+	IShape* shapePtr = shape.get();
 	m_shapes.Insert(std::move(shape), pos);
+	m_addShapeSignal(shapePtr, pos);
 }
 
 size_t Shapes::RemoveShape(std::string const& id)
@@ -38,7 +40,7 @@ void Shapes::ForEach(const std::function<bool(const IShape*)> callback) const
 
 ScopedConnection Shapes::DoOnAddShape(const AddShapeSlot& slot)
 {
-	return {};
+	return m_addShapeSignal.connect(slot);
 }
 
 ScopedConnection Shapes::DoOnRemoveShape(const RemoveShapeSlot& slot)
