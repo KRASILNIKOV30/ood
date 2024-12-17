@@ -38,7 +38,20 @@ add_executable(shapes_tests
         src/tests/Repository_tests.cpp
 )
 
-target_link_libraries(shapes PRIVATE Qt6::Widgets)
+include(FetchContent)
 
+FetchContent_Declare(GSL
+        GIT_REPOSITORY "https://github.com/microsoft/GSL"
+        GIT_TAG "v4.1.0"
+        GIT_SHALLOW ON
+)
+
+FetchContent_MakeAvailable(GSL)
+
+target_link_libraries(shapes PRIVATE Microsoft.GSL::GSL)
+target_link_libraries(shapes_tests PRIVATE Microsoft.GSL::GSL)
+
+target_link_libraries(shapes PRIVATE Qt6::Widgets)
 target_link_libraries(shapes_tests PUBLIC catch2)
+
 add_test(shapes_tests COMMAND shapes_tests)

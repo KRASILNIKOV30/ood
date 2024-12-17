@@ -2,10 +2,8 @@
 
 void Shapes::AddShape(IShapePtr&& shape, const std::optional<size_t> position)
 {
-	const auto pos = position.has_value()
-		? position.value()
-		: GetSize();
-	m_shapes.Insert(shape->GetId(), std::move(shape), pos);
+	const auto pos = position.value_or(GetSize());
+	m_shapes.Insert(std::move(shape), pos);
 }
 
 size_t Shapes::RemoveShape(std::string const& id)
