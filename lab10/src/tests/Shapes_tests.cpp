@@ -88,7 +88,7 @@ SCENARIO("shapes tests")
 
 			IShape* shape = nullptr;
 			size_t pos = 0;
-			auto connection = shapes.DoOnAddShape([&](IShape* s, const size_t p) {
+			auto connection = shapes.DoOnAddShape([&](auto s, auto p) {
 				shape = s;
 				pos = p;
 			});
@@ -101,6 +101,28 @@ SCENARIO("shapes tests")
 				{
 					CHECK(shape == shapes.GetShape("triangle"));
 					CHECK(pos == 2);
+				}
+			}
+		}
+
+		WHEN("add handler on shape removing")
+		{
+			shapes.AddShape(std::make_unique<Rectangle>("rect", Frame{ { 10, 20 }, { 30, 40 } }));
+			shapes.AddShape(std::make_unique<Ellipse>("ellipse", Frame{ { 10, 20 }, { 30, 40 } }));
+			shapes.AddShape(std::make_unique<Triangle>("triangle", Frame{ { 10, 20 }, { 30, 40 } }));
+
+			std::string id;
+			auto connection = shapes.DoOnRemoveShape([&](auto const& removedId) {
+				id = removedId;
+			});
+
+			AND_WHEN("remove shape")
+			{
+				shapes.RemoveShape("ellipse");
+
+				THEN("handler was called")
+				{
+					CHECK(id == "ellipse");
 				}
 			}
 		}

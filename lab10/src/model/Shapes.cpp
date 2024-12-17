@@ -15,6 +15,7 @@ size_t Shapes::RemoveShape(std::string const& id)
 	{
 		throw std::invalid_argument("shape does not exist");
 	}
+	m_removeShapeSignal(id);
 	return position.value();
 }
 
@@ -45,7 +46,7 @@ ScopedConnection Shapes::DoOnAddShape(const AddShapeSlot& slot)
 
 ScopedConnection Shapes::DoOnRemoveShape(const RemoveShapeSlot& slot)
 {
-	return {};
+	return m_removeShapeSignal.connect(slot);
 }
 
 size_t Shapes::GetSize() const
