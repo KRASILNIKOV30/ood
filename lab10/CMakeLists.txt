@@ -20,6 +20,9 @@ qt_add_executable(shapes
         src/model/Shapes.cpp
         src/repository/Repository.h
         src/signals/SignallingValue.h
+        src/appModel/IShapeAppModel.h
+        src/appModel/ShapeAppModel.h
+        src/appModel/IShapesAppModel.h
 )
 
 add_executable(shapes_tests
@@ -36,6 +39,10 @@ add_executable(shapes_tests
         src/repository/Repository.h
         src/signals/SignallingValue.h
         src/tests/Repository_tests.cpp
+        src/appModel/IShapeAppModel.h
+        src/appModel/ShapeAppModel.h
+        src/tests/ShapeAppModel_tests.cpp
+        src/appModel/IShapesAppModel.h
 )
 
 include(FetchContent)
