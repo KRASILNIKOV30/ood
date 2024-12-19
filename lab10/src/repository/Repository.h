@@ -23,8 +23,13 @@ public:
 	void Insert(std::unique_ptr<T>&& item, std::optional<size_t> position = std::nullopt);
 	std::optional<size_t> Remove(std::string const& id);
 	void ForEach(std::function<bool(const T* item)> callback) const;
+
 	std::optional<const T*> Find(std::string const& id) const;
 	std::optional<T*> Find(std::string const& id);
+	const T* Get(std::string const& id) const;
+	T* Get(std::string const& id);
+	const T* Get(size_t position) const;
+	T* Get(size_t position);
 
 private:
 	void IncreaseIndexes(size_t insertedAt);
@@ -128,6 +133,39 @@ std::optional<T*> Repository<T>::Find(std::string const& id)
 		return std::nullopt;
 	}
 	return const_cast<T*>(optVal.value());
+}
+
+template <class T>
+	requires ItemWithId<T>
+const T* Repository<T>::Get(std::string const& id) const
+{
+	const auto& mapIt = m_itemsMap.find(id);
+	if (mapIt == m_itemsMap.end())
+	{
+		throw std::runtime_error("No such item");
+	}
+	return m_items.at(mapIt->second).get();
+}
+
+template <class T>
+	requires ItemWithId<T>
+T* Repository<T>::Get(std::string const& id)
+{
+	return const_cast<T*>(const_cast<const Repository*>(this)->Get(id));
+}
+
+template <class T>
+	requires ItemWithId<T>
+const T* Repository<T>::Get(size_t position) const
+{
+	return m_items.at(position).get();
+}
+
+template <class T>
+	requires ItemWithId<T>
+T* Repository<T>::Get(size_t position)
+{
+	return m_items.at(position).get();
 }
 
 template <class T>

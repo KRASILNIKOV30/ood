@@ -150,6 +150,14 @@ SCENARIO("repository tests")
 					CHECK(result == "FABCDE");
 				}
 			}
+
+			THEN("can get one of that items")
+			{
+				CHECK(*repository.Get("1") == "A");
+				CHECK(*repository.Get(1) == "B");
+				CHECK_THROWS(repository.Get("6"));
+				CHECK_THROWS(repository.Get(5));
+			}
 		}
 	}
 }

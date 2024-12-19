@@ -11,6 +11,28 @@ SCENARIO("shapes tests")
 	{
 		Shapes shapes;
 
+		WHEN("create shapes")
+		{
+			const auto rectId = shapes.AddShape("rectangle");
+			const auto triangleId = shapes.AddShape("triangle");
+			const auto ellipseId = shapes.AddShape("ellipse");
+
+			THEN("shapes was created")
+			{
+				const auto rect = shapes.GetShape(rectId);
+				CHECK(rect->GetFrame() == DEFAULT_FRAME);
+				CHECK(rect->GetType() == "rectangle");
+
+				const auto triangle = shapes.GetShape(triangleId);
+				CHECK(triangle->GetFrame() == DEFAULT_FRAME);
+				CHECK(triangle->GetType() == "triangle");
+
+				const auto ellipse = shapes.GetShape(ellipseId);
+				CHECK(ellipse->GetFrame() == DEFAULT_FRAME);
+				CHECK(ellipse->GetType() == "ellipse");
+			}
+		}
+
 		WHEN("add shape")
 		{
 			shapes.AddShape(std::make_unique<Rectangle>("rect", Frame{ { 10, 20 }, { 30, 40 } }));

@@ -12,6 +12,7 @@ public:
 	using AddShapeSlot = AddShapeSignal::slot_type;
 	using RemoveShapeSlot = RemoveShapeSignal::slot_type;
 
+	virtual std::string AddShape(std::string const& type) = 0;
 	virtual void AddShape(IShapePtr&& shape, std::optional<size_t> position) = 0;
 	virtual size_t RemoveShape(std::string const& id) = 0;
 

@@ -1,5 +1,4 @@
 #pragma once
-#include "../model/IShape.h"
 #include "../signals/SignallingValue.h"
 #include "IShapeAppModel.h"
 
@@ -18,10 +17,12 @@ public:
 
 	[[nodiscard]] virtual const IShapeAppModel* GetShape(std::string const& id) const = 0;
 	virtual IShapeAppModel* GetShape(std::string const& id) = 0;
+	[[nodiscard]] virtual const IShapeAppModel* GetShape(size_t position) const = 0;
+	virtual IShapeAppModel* GetShape(size_t position) = 0;
 	virtual void ForEach(std::function<bool(const IShapeAppModel*)> callback) const = 0;
 
 	virtual void Undo() const = 0;
 	virtual void Redo() const = 0;
 
-	virtual ~IShapesAppModel() = 0;
+	virtual ~IShapesAppModel() = default;
 };

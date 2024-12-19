@@ -23,6 +23,17 @@ qt_add_executable(shapes
         src/appModel/IShapeAppModel.h
         src/appModel/ShapeAppModel.h
         src/appModel/IShapesAppModel.h
+        src/appModel/ShapesAppModel.cpp
+        src/appModel/ShapesAppModel.h
+        src/history/AbstractUndoableEdit.cpp
+        src/history/AbstractUndoableEdit.h
+        src/history/CompoundEdit.cpp
+        src/history/CompoundEdit.h
+        src/history/IUndoableEdit.h
+        src/history/IUndoableEdit_fwd.h
+        src/history/UndoManager.cpp
+        src/history/UndoManager.h
+        src/model/ShapeFactory.h
 )
 
 add_executable(shapes_tests
@@ -43,6 +54,18 @@ add_executable(shapes_tests
         src/appModel/ShapeAppModel.h
         src/tests/ShapeAppModel_tests.cpp
         src/appModel/IShapesAppModel.h
+        src/appModel/ShapesAppModel.cpp
+        src/appModel/ShapesAppModel.h
+        src/history/AbstractUndoableEdit.cpp
+        src/history/AbstractUndoableEdit.h
+        src/history/CompoundEdit.cpp
+        src/history/CompoundEdit.h
+        src/history/IUndoableEdit.h
+        src/history/IUndoableEdit_fwd.h
+        src/history/UndoManager.cpp
+        src/history/UndoManager.h
+        src/tests/ShapesAppModel_tests.cpp
+        src/model/ShapeFactory.h
 )
 
 include(FetchContent)

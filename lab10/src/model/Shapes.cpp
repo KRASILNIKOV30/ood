@@ -1,5 +1,13 @@
 #include "Shapes.h"
 
+std::string Shapes::AddShape(const std::string& type)
+{
+	auto shape = m_factory.CreateShape(type);
+	const auto id = shape->GetId();
+	AddShape(std::move(shape));
+	return id;
+}
+
 void Shapes::AddShape(IShapePtr&& shape, const std::optional<size_t> position)
 {
 	const auto pos = position.value_or(GetSize());
