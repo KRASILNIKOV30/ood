@@ -24,10 +24,9 @@ public:
 	void Undo() const override;
 	void Redo() const override;
 
-	~ShapesAppModel() override = default;
-
 private:
-	void AddShape(IShape* shape, size_t position);
+	void DoAddShape(IShape* shape, size_t position);
+	void DoRemoveShape(std::string const& id);
 
 private:
 	Repository<IShapeAppModel> m_shapes;

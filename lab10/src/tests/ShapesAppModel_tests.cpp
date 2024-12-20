@@ -21,23 +21,18 @@ SCENARIO("shapes app model tests")
 				CHECK(shape->GetFrame() == DEFAULT_FRAME);
 			}
 
-			AND_WHEN("find shape with non-existent id")
+			AND_WHEN("get shape with non-existent id")
 			{
-				auto const shape = shapes.GetShape("non-existent id");
-
-				THEN("shape not found")
-				{
-					CHECK(shape == nullptr);
-				}
+				CHECK_THROWS(shapes.GetShape("non-existent id"));
 			}
 
 			AND_WHEN("remove shape")
 			{
-				shapes.RemoveShape("rect");
+				shapes.RemoveShape("0");
 
 				THEN("shape is removed")
 				{
-					CHECK(shapes.GetShape("rect") == nullptr);
+					CHECK_THROWS(shapes.GetShape("0"));
 					int counter = 0;
 					shapes.ForEach([&](const IShapeAppModel*) {
 						counter++;
@@ -53,7 +48,7 @@ SCENARIO("shapes app model tests")
 
 				THEN("shape is not removed")
 				{
-					CHECK_FALSE(shapes.GetShape("rect") == nullptr);
+					CHECK_FALSE(shapes.GetShape("0") == nullptr);
 					int counter = 0;
 					shapes.ForEach([&](const IShapeAppModel*) {
 						counter++;
