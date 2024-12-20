@@ -36,6 +36,11 @@ qt_add_executable(shapes
         src/model/ShapeFactory.h
         src/history/edit/AddShapeEdit.h
         src/history/edit/RemoveShapeEdit.h
+        src/viewModel/IShapeViewModel.h
+        src/viewModel/ShapeViewModel.h
+        src/viewModel/IShapesViewModel.h
+        src/viewModel/ShapesViewModel.h
+        src/viewModel/ShapesViewModel.cpp
 )
 
 add_executable(shapes_tests
@@ -71,6 +76,10 @@ add_executable(shapes_tests
         src/history/edit/AddShapeEdit.h
         src/tests/UndoManager_tests.cpp
         src/history/edit/RemoveShapeEdit.h
+        src/viewModel/IShapeViewModel.h
+        src/viewModel/IShapesViewModel.h
+        src/viewModel/ShapesViewModel.h
+        src/viewModel/ShapesViewModel.cpp
 )
 
 include(FetchContent)

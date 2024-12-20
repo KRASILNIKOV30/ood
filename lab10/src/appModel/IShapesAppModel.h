@@ -29,3 +29,5 @@ public:
 
 	virtual ~IShapesAppModel() = default;
 };
+
+using IShapesAppModelPtr = std::shared_ptr<IShapesAppModel>;
