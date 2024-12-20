@@ -2,18 +2,17 @@
 
 std::string Shapes::AddShape(const std::string& type)
 {
-	auto shape = m_factory.CreateShape(type);
+	const auto shape = m_factory.CreateShape(type);
 	const auto id = shape->GetId();
-	AddShape(std::move(shape));
+	AddShape(shape);
 	return id;
 }
 
-void Shapes::AddShape(IShapePtr&& shape, const std::optional<size_t> position)
+void Shapes::AddShape(IShapePtr const& shape, const std::optional<size_t> position)
 {
 	const auto pos = position.value_or(GetSize());
-	IShape* shapePtr = shape.get();
-	m_shapes.Insert(std::move(shape), pos);
-	m_addShapeSignal(shapePtr, pos);
+	m_shapes.Insert(shape, pos);
+	m_addShapeSignal(shape, pos);
 }
 
 size_t Shapes::RemoveShape(std::string const& id)
@@ -26,8 +25,12 @@ size_t Shapes::RemoveShape(std::string const& id)
 	m_removeShapeSignal(id);
 	return position.value();
 }
+size_t Shapes::RemoveLastShape()
+{
+	return RemoveShape(m_shapes.Get(m_shapes.GetSize() - 1)->GetId());
+}
 
-const IShape* Shapes::GetShape(std::string const& id) const
+IShapePtr Shapes::GetShape(std::string const& id) const
 {
 	auto const shape = m_shapes.Find(id);
 	if (!shape.has_value())
@@ -37,12 +40,12 @@ const IShape* Shapes::GetShape(std::string const& id) const
 	return shape.value();
 }
 
-IShape* Shapes::GetShape(const std::string& id)
+IShapePtr Shapes::GetShape(const std::string& id)
 {
-	return const_cast<IShape*>(const_cast<const Shapes*>(this)->GetShape(id));
+	return const_cast<const Shapes*>(this)->GetShape(id);
 }
 
-void Shapes::ForEach(const std::function<bool(const IShape*)> callback) const
+void Shapes::ForEach(const std::function<bool(IShapePtr)> callback) const
 {
 	m_shapes.ForEach(callback);
 }

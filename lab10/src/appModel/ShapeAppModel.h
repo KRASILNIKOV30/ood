@@ -1,4 +1,6 @@
 #pragma once
+#include <utility>
+
 #include "../Frame.h"
 #include "../model/Shape.h"
 #include "IShapeAppModel.h"
@@ -6,8 +8,8 @@
 class ShapeAppModel final : public IShapeAppModel
 {
 public:
-	ShapeAppModel(IShape* shape)
-		: m_shape(shape)
+	ShapeAppModel(IShapePtr  shape)
+		: m_shape(std::move(shape))
 	{
 	}
 
@@ -27,5 +29,5 @@ public:
 	}
 
 private:
-	IShape* m_shape;
+	IShapePtr m_shape;
 };

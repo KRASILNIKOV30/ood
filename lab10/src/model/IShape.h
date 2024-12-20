@@ -14,4 +14,4 @@ public:
 	virtual ~IShape() = default;
 };
 
-using IShapePtr = std::unique_ptr<IShape>;
+using IShapePtr = std::shared_ptr<IShape>;

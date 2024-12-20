@@ -13,4 +13,5 @@ public:
 	virtual ~IShapeAppModel() = default;
 };
 
-using IShapeAppModelPtr = std::unique_ptr<IShapeAppModel>;
+using IShapeAppModelPtr = std::shared_ptr<IShapeAppModel>;
+using IShapeAppModelConstPtr = const IShapeAppModelPtr;

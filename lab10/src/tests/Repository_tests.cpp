@@ -49,7 +49,7 @@ SCENARIO("repository tests")
 			{
 				CHECK(repository.GetSize() == 1);
 				CHECK(*repository.Find("1").value() == "apple");
-				repository.ForEach([&](const auto* str) {
+				repository.ForEach([&](const auto& str) {
 					CHECK(*str == "apple");
 					return true;
 				});
@@ -64,7 +64,7 @@ SCENARIO("repository tests")
 					CHECK(repository.GetSize() == 0);
 					CHECK_FALSE(repository.Find("1").has_value());
 					int counter = 0;
-					repository.ForEach([&](const auto*) {
+					repository.ForEach([&](const auto&) {
 						++counter;
 						return true;
 					});
@@ -80,7 +80,7 @@ SCENARIO("repository tests")
 				{
 					CHECK(repository.GetSize() == 1);
 					int counter = 0;
-					repository.ForEach([&](const auto*) {
+					repository.ForEach([&](const auto&) {
 						++counter;
 						return true;
 					});
@@ -101,7 +101,7 @@ SCENARIO("repository tests")
 			{
 				CHECK(repository.GetSize() == 5);
 				std::string result;
-				repository.ForEach([&](const auto* str) {
+				repository.ForEach([&](const auto& str) {
 					result += str->GetName();
 					return true;
 				});
@@ -121,7 +121,7 @@ SCENARIO("repository tests")
 					CHECK(*repository.Find("4").value() == "D");
 					CHECK(*repository.Find("5").value() == "E");
 					std::string result;
-					repository.ForEach([&](const auto* item) {
+					repository.ForEach([&](const auto& item) {
 						result += item->GetName();
 						return true;
 					});
@@ -143,7 +143,7 @@ SCENARIO("repository tests")
 					CHECK(*repository.Find("5").value() == "E");
 					CHECK(*repository.Find("6").value() == "F");
 					std::string result;
-					repository.ForEach([&](const auto* item) {
+					repository.ForEach([&](const auto& item) {
 						result += item->GetName();
 						return true;
 					});

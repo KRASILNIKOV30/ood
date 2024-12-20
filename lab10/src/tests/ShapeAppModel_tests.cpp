@@ -7,8 +7,8 @@ SCENARIO("shape app model tests")
 {
 	GIVEN("a shape from a domain shape")
 	{
-		const IShapePtr domainShape = std::make_unique<Rectangle>("rectId", Frame{ { 10, 20 }, { 30, 40 } });
-		const IShapeAppModelPtr shape = std::make_unique<ShapeAppModel>(domainShape.get());
+		const IShapePtr domainShape = std::make_shared<Rectangle>("rectId", Frame{ { 10, 20 }, { 30, 40 } });
+		const IShapeAppModelPtr shape = std::make_shared<ShapeAppModel>(domainShape);
 
 		THEN("can get frame")
 		{

@@ -1,5 +1,7 @@
 #include "ShapesAppModel.h"
 
+#include "../history/edit/AddShapeEdit.h"
+#include "../history/edit/RemoveShapeEdit.h"
 #include "ShapeAppModel.h"
 
 ShapesAppModel::ShapesAppModel(IShapes* shapes)
@@ -16,61 +18,86 @@ ShapesAppModel::ShapesAppModel(IShapes* shapes)
 void ShapesAppModel::AddShape(const std::string& shapeType)
 {
 	m_shapesDomainModel->AddShape(shapeType);
+	m_history.AddEdit(std::make_unique<AddShapeEdit>(shapeType, m_shapesDomainModel));
 }
 
 void ShapesAppModel::RemoveShape(const std::string& id)
 {
-	m_shapesDomainModel->RemoveShape(id);
+	IShapePtr shape(m_shapesDomainModel->GetShape(id));
+	const size_t pos = m_shapesDomainModel->RemoveShape(id);
+	m_history.AddEdit(std::make_unique<RemoveShapeEdit>(shape, pos, m_shapesDomainModel));
 }
 
-ScopedConnection ShapesAppModel::DoOnAddShape(AddShapeSlot& slot)
+ScopedConnection ShapesAppModel::DoOnAddShape(const AddShapeSlot& slot)
 {
-	return {};
+	return m_addShapeSignal.connect(slot);
 }
 
-ScopedConnection ShapesAppModel::DoOnRemoveShape(RemoveShapeSlot& slot)
+ScopedConnection ShapesAppModel::DoOnRemoveShape(const RemoveShapeSlot& slot)
 {
-	return {};
+	return m_removeShapeSignal.connect(slot);
 }
 
-const IShapeAppModel* ShapesAppModel::GetShape(const std::string& id) const
-{
-	return m_shapes.Get(id);
-}
-
-IShapeAppModel* ShapesAppModel::GetShape(const std::string& id)
+IShapeAppModelPtr ShapesAppModel::GetShape(const std::string& id) const
 {
 	return m_shapes.Get(id);
 }
 
-const IShapeAppModel* ShapesAppModel::GetShape(size_t position) const
+IShapeAppModelPtr ShapesAppModel::GetShape(const std::string& id)
 {
-	return nullptr;
+	return m_shapes.Get(id);
 }
 
-IShapeAppModel* ShapesAppModel::GetShape(size_t position)
+IShapeAppModelPtr ShapesAppModel::GetShape(const size_t position) const
 {
 	return m_shapes.Get(position);
 }
 
-void ShapesAppModel::ForEach(std::function<bool(const IShapeAppModel*)> callback) const
+IShapeAppModelPtr ShapesAppModel::GetShape(const size_t position)
+{
+	return m_shapes.Get(position);
+}
+
+void ShapesAppModel::ForEach(std::function<bool(IShapeAppModelPtr)> callback) const
 {
 	m_shapes.ForEach(callback);
 }
-
-void ShapesAppModel::Undo() const
+size_t ShapesAppModel::GetSize() const
 {
+	return m_shapes.GetSize();
 }
 
-void ShapesAppModel::Redo() const
+void ShapesAppModel::Undo()
 {
+	if (CanUndo())
+	{
+		m_history.Undo();
+	}
 }
 
-void ShapesAppModel::DoAddShape(IShape* shape, const size_t position)
+void ShapesAppModel::Redo()
 {
-	std::unique_ptr<IShapeAppModel> appShape = std::make_unique<ShapeAppModel>(shape);
-	m_addShapeSignal(appShape.get(), position);
-	m_shapes.Insert(std::move(appShape));
+	if (CanRedo())
+	{
+		m_history.Redo();
+	}
+}
+
+bool ShapesAppModel::CanUndo() const
+{
+	return m_history.CanUndo();
+}
+
+bool ShapesAppModel::CanRedo() const
+{
+	return m_history.CanRedo();
+}
+
+void ShapesAppModel::DoAddShape(IShapePtr const& shape, const size_t position)
+{
+	auto appShape = std::make_shared<ShapeAppModel>(shape);
+	m_addShapeSignal(appShape, position);
+	m_shapes.Insert(std::move(appShape), position);
 }
 
 void ShapesAppModel::DoRemoveShape(std::string const& id)

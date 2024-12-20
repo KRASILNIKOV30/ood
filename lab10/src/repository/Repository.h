@@ -18,18 +18,21 @@ template <class T>
 class Repository
 {
 public:
-	[[nodiscard]] size_t GetSize() const;
-	void Insert(T&& item, std::optional<size_t> position = std::nullopt);
-	void Insert(std::unique_ptr<T>&& item, std::optional<size_t> position = std::nullopt);
-	std::optional<size_t> Remove(std::string const& id);
-	void ForEach(std::function<bool(const T* item)> callback) const;
+	using PtrType = std::shared_ptr<T>;
+	using ConstPtrType = const PtrType;
 
-	std::optional<const T*> Find(std::string const& id) const;
-	std::optional<T*> Find(std::string const& id);
-	const T* Get(std::string const& id) const;
-	T* Get(std::string const& id);
-	const T* Get(size_t position) const;
-	T* Get(size_t position);
+	[[nodiscard]] size_t GetSize() const;
+	void Insert(T const& item, std::optional<size_t> position = std::nullopt);
+	void Insert(std::shared_ptr<T> const& item, std::optional<size_t> position = std::nullopt);
+	std::optional<size_t> Remove(std::string const& id);
+	void ForEach(std::function<bool(ConstPtrType item)> callback) const;
+
+	std::optional<ConstPtrType> Find(std::string const& id) const;
+	std::optional<PtrType> Find(std::string const& id);
+	ConstPtrType Get(std::string const& id) const;
+	PtrType Get(std::string const& id);
+	ConstPtrType Get(size_t position) const;
+	PtrType Get(size_t position);
 
 private:
 	void IncreaseIndexes(size_t insertedAt);
@@ -37,7 +40,7 @@ private:
 
 private:
 	using ItemsMap = std::unordered_map<std::string, size_t>;
-	using Items = std::vector<std::unique_ptr<T>>;
+	using Items = std::vector<std::shared_ptr<T>>;
 
 	ItemsMap m_itemsMap;
 	Items m_items;
@@ -52,18 +55,18 @@ size_t Repository<T>::GetSize() const
 
 template <class T>
 	requires ItemWithId<T>
-void Repository<T>::Insert(T&& item, const std::optional<size_t> position)
+void Repository<T>::Insert(T const& item, const std::optional<size_t> position)
 {
-	Insert(std::make_unique<T>(std::move(item)), position);
+	Insert(std::make_shared<T>(item), position);
 }
 
 template <class T>
 	requires ItemWithId<T>
-void Repository<T>::Insert(std::unique_ptr<T>&& item, const std::optional<size_t> position)
+void Repository<T>::Insert(std::shared_ptr<T> const& item, const std::optional<size_t> position)
 {
 	bool commit = false;
 	const auto pos = position.value_or(GetSize());
-	const auto it = m_items.insert(m_items.begin() + pos, std::move(item));
+	const auto it = m_items.insert(m_items.begin() + pos, item);
 
 	auto finalizer = gsl::finally([&] {
 		if (!commit)
@@ -100,11 +103,11 @@ std::optional<size_t> Repository<T>::Remove(std::string const& id)
 
 template <class T>
 	requires ItemWithId<T>
-void Repository<T>::ForEach(std::function<bool(const T* item)> callback) const
+void Repository<T>::ForEach(std::function<bool(ConstPtrType item)> callback) const
 {
 	for (const auto& item : m_items)
 	{
-		if (!callback(item.get()))
+		if (!callback(item))
 		{
 			return;
 		}
@@ -113,59 +116,58 @@ void Repository<T>::ForEach(std::function<bool(const T* item)> callback) const
 
 template <class T>
 	requires ItemWithId<T>
-std::optional<const T*> Repository<T>::Find(std::string const& id) const
+std::optional<typename Repository<T>::ConstPtrType> Repository<T>::Find(std::string const& id) const
 {
 	const auto& mapIt = m_itemsMap.find(id);
 	if (mapIt == m_itemsMap.end())
 	{
 		return std::nullopt;
 	}
-	return m_items.at(mapIt->second).get();
+	return m_items.at(mapIt->second);
 }
 
 template <class T>
 	requires ItemWithId<T>
-std::optional<T*> Repository<T>::Find(std::string const& id)
+std::optional<typename Repository<T>::PtrType> Repository<T>::Find(std::string const& id)
 {
 	auto optVal = const_cast<const Repository*>(this)->Find(id);
 	if (!optVal.has_value())
 	{
 		return std::nullopt;
 	}
-	return const_cast<T*>(optVal.value());
+	return optVal.value();
 }
-
 template <class T>
 	requires ItemWithId<T>
-const T* Repository<T>::Get(std::string const& id) const
+typename Repository<T>::ConstPtrType Repository<T>::Get(std::string const& id) const
 {
 	const auto& mapIt = m_itemsMap.find(id);
 	if (mapIt == m_itemsMap.end())
 	{
 		throw std::runtime_error("No such item");
 	}
-	return m_items.at(mapIt->second).get();
+	return m_items.at(mapIt->second);
 }
 
 template <class T>
 	requires ItemWithId<T>
-T* Repository<T>::Get(std::string const& id)
+typename Repository<T>::PtrType Repository<T>::Get(std::string const& id)
 {
-	return const_cast<T*>(const_cast<const Repository*>(this)->Get(id));
+	return const_cast<const Repository*>(this)->Get(id);
 }
 
 template <class T>
 	requires ItemWithId<T>
-const T* Repository<T>::Get(size_t position) const
+typename Repository<T>::ConstPtrType Repository<T>::Get(size_t position) const
 {
-	return m_items.at(position).get();
+	return m_items.at(position);
 }
 
 template <class T>
 	requires ItemWithId<T>
-T* Repository<T>::Get(size_t position)
+typename Repository<T>::PtrType Repository<T>::Get(const size_t position)
 {
-	return m_items.at(position).get();
+	return const_cast<const Repository*>(this)->Get(position);
 }
 
 template <class T>

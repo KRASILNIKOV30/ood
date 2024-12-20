@@ -4,6 +4,7 @@
 #include "../model/Triangle.h"
 
 #include <catch.hpp>
+#include <utility>
 
 SCENARIO("shapes tests")
 {
@@ -30,6 +31,14 @@ SCENARIO("shapes tests")
 				const auto ellipse = shapes.GetShape(ellipseId);
 				CHECK(ellipse->GetFrame() == DEFAULT_FRAME);
 				CHECK(ellipse->GetType() == "ellipse");
+			}
+
+			AND_THEN("can delete last shape")
+			{
+				const auto pos = shapes.RemoveLastShape();
+				CHECK(pos == 2);
+				CHECK(shapes.GetSize() == 2);
+				CHECK(shapes.GetShape(ellipseId) == nullptr);
 			}
 		}
 
@@ -62,7 +71,7 @@ SCENARIO("shapes tests")
 				THEN("shape is not added")
 				{
 					int counter = 0;
-					shapes.ForEach([&](const IShape*) {
+					shapes.ForEach([&](const auto&) {
 						counter++;
 						return true;
 					});
@@ -78,7 +87,7 @@ SCENARIO("shapes tests")
 				{
 					CHECK(shapes.GetShape("rect") == nullptr);
 					int counter = 0;
-					shapes.ForEach([&](const IShape*) {
+					shapes.ForEach([&](const auto&) {
 						counter++;
 						return true;
 					});
@@ -94,7 +103,7 @@ SCENARIO("shapes tests")
 				{
 					CHECK_FALSE(shapes.GetShape("rect") == nullptr);
 					int counter = 0;
-					shapes.ForEach([&](const IShape*) {
+					shapes.ForEach([&](const auto&) {
 						counter++;
 						return true;
 					});
@@ -108,9 +117,9 @@ SCENARIO("shapes tests")
 			shapes.AddShape(std::make_unique<Rectangle>("rect", Frame{ { 10, 20 }, { 30, 40 } }));
 			shapes.AddShape(std::make_unique<Ellipse>("ellipse", Frame{ { 10, 20 }, { 30, 40 } }));
 
-			IShape* shape = nullptr;
+			IShapePtr shape;
 			size_t pos = 0;
-			auto connection = shapes.DoOnAddShape([&](auto s, auto p) {
+			auto connection = shapes.DoOnAddShape([&](auto const& s, auto p) {
 				shape = s;
 				pos = p;
 			});
