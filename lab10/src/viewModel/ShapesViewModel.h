@@ -3,10 +3,10 @@
 #include "../repository/Repository.h"
 #include "IShapesViewModel.h"
 
-class ShapesViewModel final : IShapesViewModel
+class ShapesViewModel final : public IShapesViewModel
 {
 public:
-	ShapesViewModel(IShapesAppModelPtr shapesAppModel);
+	ShapesViewModel(IShapesAppModelPtr const& shapesAppModel);
 	void AddShape(const std::string& shapeType) override;
 	void RemoveShape() override;
 	void OnCanvasClick() override;
@@ -17,6 +17,7 @@ public:
 	IShapeViewModelPtr GetShape(size_t position) override;
 	void ForEach(std::function<bool(IShapeViewModelPtr)> callback) const override;
 	[[nodiscard]] size_t GetSize() const override;
+	[[nodiscard]] std::optional<std::string> GetSelectedShapeId() const override;
 
 	void Undo() override;
 	void Redo() override;

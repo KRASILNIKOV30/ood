@@ -1,6 +1,7 @@
 #pragma once
 #include "../signals/SignallingValue.h"
 #include "IShapeViewModel.h"
+#include <optional>
 
 class IShapesViewModel
 {
@@ -25,6 +26,7 @@ public:
 	virtual IShapeViewModelPtr GetShape(size_t position) = 0;
 	virtual void ForEach(std::function<bool(IShapeViewModelPtr)> callback) const = 0;
 	[[nodiscard]] virtual size_t GetSize() const = 0;
+	[[nodiscard]] virtual std::optional<std::string> GetSelectedShapeId() const = 0;
 
 	virtual void Undo() = 0;
 	virtual void Redo() = 0;
@@ -33,3 +35,5 @@ public:
 
 	virtual ~IShapesViewModel() = default;
 };
+
+using IShapesViewModelPtr = std::shared_ptr<IShapesViewModel>;

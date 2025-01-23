@@ -1,9 +1,10 @@
 #include "ShapesViewModel.h"
 
 #include "ShapeViewModel.h"
+#include <utility>
 
-ShapesViewModel::ShapesViewModel(IShapesAppModelPtr shapesAppModel)
-	: m_shapesAppModel(std::move(shapesAppModel))
+ShapesViewModel::ShapesViewModel(IShapesAppModelPtr const& shapesAppModel)
+	: m_shapesAppModel(shapesAppModel)
 {
 	m_addShapeSignalConnection = m_shapesAppModel->DoOnAddShape([&](const auto& shape, const auto pos) {
 		DoAddShape(shape, pos);
@@ -75,6 +76,10 @@ size_t ShapesViewModel::GetSize() const
 {
 	return m_shapes.GetSize();
 }
+std::optional<std::string> ShapesViewModel::GetSelectedShapeId() const
+{
+	return m_selectedId.GetValue();
+}
 
 void ShapesViewModel::Undo()
 {
@@ -99,11 +104,11 @@ bool ShapesViewModel::CanRedo() const
 void ShapesViewModel::DoAddShape(IShapeAppModelPtr const& shape, size_t position)
 {
 	const auto shapeViewModel = std::make_shared<ShapeViewModel>(shape);
-	m_addShapeSignal(shapeViewModel, position);
 	m_shapes.Insert(shapeViewModel, position);
 	m_onShapeClickConnections.push_back(shapeViewModel->DoOnClick([&] {
 		m_selectedId = shapeViewModel->GetId();
 	}));
+	m_addShapeSignal(shapeViewModel, position);
 }
 
 void ShapesViewModel::DoRemoveShape(std::string const& id)

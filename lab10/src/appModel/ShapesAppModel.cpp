@@ -95,9 +95,9 @@ bool ShapesAppModel::CanRedo() const
 
 void ShapesAppModel::DoAddShape(IShapePtr const& shape, const size_t position)
 {
-	auto appShape = std::make_shared<ShapeAppModel>(shape);
+	const auto appShape = std::make_shared<ShapeAppModel>(shape);
+	m_shapes.Insert(appShape, position);
 	m_addShapeSignal(appShape, position);
-	m_shapes.Insert(std::move(appShape), position);
 }
 
 void ShapesAppModel::DoRemoveShape(std::string const& id)

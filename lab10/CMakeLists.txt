@@ -41,6 +41,16 @@ qt_add_executable(shapes
         src/viewModel/IShapesViewModel.h
         src/viewModel/ShapesViewModel.h
         src/viewModel/ShapesViewModel.cpp
+        src/view/IShapeView.h
+        src/view/Painter.h
+        src/view/shapes/TriangleView.h
+        src/view/ShapeView.h
+        src/view/ShapeView.cpp
+        src/view/ShapeViewFactory.h
+        src/view/shapes/RectangleView.h
+        src/view/shapes/EllipseView.h
+        src/view/Selection.h
+        src/view/IPainter.h
 )
 
 add_executable(shapes_tests
@@ -80,6 +90,7 @@ add_executable(shapes_tests
         src/viewModel/IShapesViewModel.h
         src/viewModel/ShapesViewModel.h
         src/viewModel/ShapesViewModel.cpp
+        src/view/IShapeView.h
 )
 
 include(FetchContent)

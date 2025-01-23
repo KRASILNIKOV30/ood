@@ -17,6 +17,8 @@ public:
 
 	virtual void SetSelected(bool selected) = 0;
 	virtual void Click() = 0;
+	// virtual void Drag(Point p) = 0;
+	// virtual void Drop(Point p) = 0;
 	virtual ScopedConnection DoOnClick(ClickSignalSlot const& slot) = 0;
 
 	virtual ~IShapeViewModel() = default;
