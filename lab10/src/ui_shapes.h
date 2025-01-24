@@ -2,6 +2,7 @@
 #define SHAPES_H
 
 #include "view/Painter.h"
+#include "view/Selection.h"
 
 #include <QMenuBar>
 #include <QObject>
@@ -14,15 +15,18 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_PaintClass
+class Ui_PaintClass : public QObject
 {
+	Q_OBJECT
 public:
 	QPushButton* m_rectangle;
 	QPushButton* m_triangle;
 	QPushButton* m_circle;
 	QToolBar* m_toolbar;
 	QWidget* m_layout;
-	IPainterPtr m_painter;
+	std::shared_ptr<IPainter> m_painter;
+	std::unique_ptr<Selection> m_selection;
+	IShapeView* m_shapeView;
 
 	void setupUi(QMainWindow* window, const IShapesViewModelPtr& model)
 	{
@@ -53,6 +57,9 @@ public:
 		m_layout->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
 
 		m_painter = std::make_shared<Painter>(m_layout, model, m_rectangle, m_triangle, m_circle);
+		m_selection = std::make_unique<Selection>(m_layout, m_painter.get());
+
+		connect(m_rectangle, &QPushButton::clicked, this, [&]() { m_painter->AddShape("rectangle"); });
 
 		window->setCentralWidget(m_layout);
 

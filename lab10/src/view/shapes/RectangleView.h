@@ -1,41 +1,33 @@
 #pragma once
-#include "../../Frame.h"
 #include "../ShapeView.h"
-#include <QPainterPath>
-#include <QPoint>
-#include <QWidget>
 
 class RectangleView final : public ShapeView
 {
 public:
-	RectangleView(QWidget* parent, const IShapeViewModelPtr& shape)
-		: ShapeView(parent, shape)
+	explicit RectangleView(const IShapeViewModelPtr& shape)
+		: ShapeView(shape)
+		, m_frame(shape->GetFrame())
 	{
-		const auto [position, size] = shape->GetFrame();
+	}
+
+	void Draw(wxDC& dc) const override
+	{
+		const auto [position, size] = m_frame;
 		const auto [x, y] = position;
 		const auto [width, height] = size;
 
-		m_topLeft = QPoint(x, y);
-		m_bottomRight = QPoint(x + width, y + height);
-
-		// setFixedSize(width, height);
-		// setMask(GetRegion());
+		dc.DrawRectangle(x, y, width, height);
 	}
 
-protected:
-	[[nodiscard]] QPainterPath GetPath() const override
+	[[nodiscard]] bool HitTest(Point p) const override
 	{
-		QPainterPath path;
-		path.addRect(QRect(m_topLeft, m_bottomRight));
-		return path;
-	}
+		const auto [position, size] = m_frame;
+		const auto [x, y] = position;
+		const auto [width, height] = size;
 
-	[[nodiscard]] QRegion GetRegion() const
-	{
-		return QRect(m_topLeft, m_bottomRight);
+		return (p.x >= x && p.x <= x + width && p.y >= y && p.y <= y + height);
 	}
 
 private:
-	QPoint m_topLeft;
-	QPoint m_bottomRight;
+	Frame m_frame;
 };

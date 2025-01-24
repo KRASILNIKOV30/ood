@@ -1,12 +1,6 @@
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets)
-
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC OFF)
-
-qt_add_executable(shapes
+add_executable(shapes
         src/main.cpp
         src/ui_shapes.h
         src/Frame.h
@@ -42,15 +36,15 @@ qt_add_executable(shapes
         src/viewModel/ShapesViewModel.h
         src/viewModel/ShapesViewModel.cpp
         src/view/IShapeView.h
-        src/view/Painter.h
-        src/view/shapes/TriangleView.h
         src/view/ShapeView.h
-        src/view/ShapeView.cpp
-        src/view/ShapeViewFactory.h
         src/view/shapes/RectangleView.h
-        src/view/shapes/EllipseView.h
-        src/view/Selection.h
-        src/view/IPainter.h
+        src/view/ShapeViewFactory.h
+        src/view/canvas/ICanvas.h
+        src/view/canvas/Canvas.cpp
+        src/view/canvas/Canvas.h
+        src/view/selection/ISelection.h
+        src/view/selection/Selection.cpp
+        src/view/selection/Selection.h
 )
 
 add_executable(shapes_tests
@@ -101,12 +95,17 @@ FetchContent_Declare(GSL
         GIT_SHALLOW ON
 )
 
+find_package(wxWidgets REQUIRED COMPONENTS core base)
+if (wxWidgets_USE_FILE)
+    include(${wxWidgets_USE_FILE})
+endif ()
+
 FetchContent_MakeAvailable(GSL)
 
 target_link_libraries(shapes PRIVATE Microsoft.GSL::GSL)
 target_link_libraries(shapes_tests PRIVATE Microsoft.GSL::GSL)
 
-target_link_libraries(shapes PRIVATE Qt6::Widgets)
+target_link_libraries(shapes PRIVATE ${wxWidgets_LIBRARIES})
 target_link_libraries(shapes_tests PUBLIC catch2)
 
 add_test(shapes_tests COMMAND shapes_tests)
