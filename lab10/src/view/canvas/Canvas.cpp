@@ -71,7 +71,7 @@ void Canvas::OnMouseDown(wxMouseEvent& event)
 	Point p{ event.GetX(), event.GetY() };
 
 	m_shapes.ForEach([&](const IShapeViewPtr& shapeView) {
-		return !shapeView->CheckClick(p);
+		return !shapeView->CheckMouseDown(p);
 	});
 }
 

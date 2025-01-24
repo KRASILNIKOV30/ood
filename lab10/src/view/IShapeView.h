@@ -9,7 +9,7 @@ public:
 	[[nodiscard]] virtual std::string GetId() const = 0;
 	virtual Frame GetFrame() = 0;
 	virtual void Draw(wxDC& dc) const = 0;
-	[[nodiscard]] virtual bool CheckClick(Point p) const = 0;
+	[[nodiscard]] virtual bool CheckMouseDown(Point p) const = 0;
 
 	virtual ~IShapeView() = default;
 };

@@ -22,7 +22,7 @@ public:
 		return m_shape->GetId();
 	}
 
-	[[nodiscard]] bool CheckClick(Point p) const override
+	[[nodiscard]] bool CheckMouseDown(Point p) const override
 	{
 		const auto clicked = HitTest(p);
 		if (clicked)

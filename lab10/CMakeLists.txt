@@ -47,6 +47,7 @@ add_executable(shapes
         src/view/selection/Selection.h
         src/view/shapes/TriangleView.h
         src/view/shapes/EllipseView.h
+        src/EditSink.h
 )
 
 add_executable(shapes_tests
@@ -87,6 +88,7 @@ add_executable(shapes_tests
         src/viewModel/ShapesViewModel.h
         src/viewModel/ShapesViewModel.cpp
         src/view/IShapeView.h
+        src/EditSink.h
 )
 
 include(FetchContent)

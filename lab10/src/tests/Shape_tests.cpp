@@ -9,7 +9,7 @@ SCENARIO("Rectangle tests")
 {
 	GIVEN("rectangle")
 	{
-		const Rectangle rectangle("rectId", { { 10, 20 }, { 30, 40 } });
+		Rectangle rectangle("rectId", { { 10, 20 }, { 30, 40 } });
 
 		THEN("can get frame")
 		{
@@ -24,6 +24,63 @@ SCENARIO("Rectangle tests")
 		AND_THEN("can get id")
 		{
 			CHECK(rectangle.GetId() == "rectId");
+		}
+
+		WHEN("move")
+		{
+			constexpr Frame frame{ { 100, 20 }, { 30, 40 } };
+			rectangle.Reframe(frame);
+
+			THEN("shape moved")
+			{
+				CHECK(rectangle.GetFrame() == frame);
+			}
+		}
+
+		WHEN("resize")
+		{
+			constexpr Frame frame{ { 10, 20 }, { 300, 400 } };
+			rectangle.Reframe(frame);
+
+			THEN("shape resized")
+			{
+				CHECK(rectangle.GetFrame() == frame);
+			}
+		}
+
+		WHEN("subscribe on reframe")
+		{
+			int counter = 0;
+			Frame subscribedFrame{ { 10, 20 }, { 30, 40 } };
+			const auto connection = rectangle.DoOnReframe([&](const auto& frame) {
+				subscribedFrame = frame;
+				counter++;
+			});
+
+			WHEN("reframe")
+			{
+				Frame newFrame{ { 100, 200 }, { 300, 400 } };
+				rectangle.Reframe(newFrame);
+
+				THEN("frame changed")
+				{
+					rectangle.Reframe(newFrame);
+					CHECK(subscribedFrame == newFrame);
+					CHECK(counter == 1);
+				}
+			}
+
+			WHEN("reframe with the same frame")
+			{
+				Frame newFrame{ { 10, 20 }, { 30, 40 } };
+				rectangle.Reframe(newFrame);
+
+				THEN("frame changed")
+				{
+					rectangle.Reframe(newFrame);
+					CHECK(counter == 0);
+				}
+			}
 		}
 	}
 }

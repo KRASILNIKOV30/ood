@@ -1,14 +1,13 @@
 #pragma once
-#include <utility>
-
 #include "../Frame.h"
 #include "../model/Shape.h"
 #include "IShapeAppModel.h"
+#include <utility>
 
 class ShapeAppModel final : public IShapeAppModel
 {
 public:
-	ShapeAppModel(IShapePtr  shape)
+	ShapeAppModel(IShapePtr shape)
 		: m_shape(std::move(shape))
 	{
 	}

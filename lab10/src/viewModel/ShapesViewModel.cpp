@@ -106,7 +106,7 @@ void ShapesViewModel::DoAddShape(IShapeAppModelPtr const& shape, size_t position
 	const auto shapeViewModel = std::make_shared<ShapeViewModel>(shape);
 	m_shapes.Insert(shapeViewModel, position);
 	const auto id = shapeViewModel->GetId();
-	m_onShapeClickConnections.push_back(shapeViewModel->DoOnClick([=] {
+	m_onShapeClickConnections.push_back(shapeViewModel->DoOnClick([id, this] {
 		m_selectedId = id;
 	}));
 	m_selectedId = id;
