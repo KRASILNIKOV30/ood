@@ -45,6 +45,8 @@ add_executable(shapes
         src/view/selection/ISelection.h
         src/view/selection/Selection.cpp
         src/view/selection/Selection.h
+        src/view/shapes/TriangleView.h
+        src/view/shapes/EllipseView.h
 )
 
 add_executable(shapes_tests
