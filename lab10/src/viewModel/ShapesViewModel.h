@@ -29,8 +29,8 @@ public:
 	ScopedConnection DoOnSelectionChange(const SelectionChangeSlot& slot) override;
 	ScopedConnection DoOnUpdate(UpdateSlot const& slot) override;
 
-	void ResizeSelected(const Frame& frame) override;
-	void ApplyResizeSelected(const Frame& frame) override;
+	void ReframeSelected(const Frame& frame) override;
+	void ApplyReframeSelected(const Frame& frame) override;
 	void ResetSelection() override;
 
 private:

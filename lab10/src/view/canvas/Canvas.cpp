@@ -22,10 +22,10 @@ Canvas::Canvas(wxWindow* parent, IShapesViewModelPtr const& shapes)
 		Refresh();
 	});
 	m_resizeConnection = m_selection->DoOnReframe([&](const auto& frame) {
-		m_model->ResizeSelected(frame);
+		m_model->ReframeSelected(frame);
 	});
 	m_applyResizeConnection = m_selection->DoOnApplyReframe([&](const auto& frame) {
-		m_model->ApplyResizeSelected(frame);
+		m_model->ApplyReframeSelected(frame);
 	});
 }
 

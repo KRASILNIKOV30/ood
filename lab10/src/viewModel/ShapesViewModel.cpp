@@ -50,7 +50,7 @@ ScopedConnection ShapesViewModel::DoOnUpdate(UpdateSlot const& slot)
 {
 	return m_updateSignal.connect(slot);
 }
-void ShapesViewModel::ResizeSelected(const Frame& frame)
+void ShapesViewModel::ReframeSelected(const Frame& frame)
 {
 	const auto shape = GetSelectedShape();
 	if (!shape.has_value())
@@ -76,7 +76,7 @@ std::optional<IShapeViewModelPtr> ShapesViewModel::GetSelectedShape() const
 	return shape;
 }
 
-void ShapesViewModel::ApplyResizeSelected(const Frame& frame)
+void ShapesViewModel::ApplyReframeSelected(const Frame& frame)
 {
 	const auto shape = GetSelectedShape();
 	if (!shape.has_value())

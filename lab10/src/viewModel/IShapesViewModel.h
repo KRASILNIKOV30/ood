@@ -30,8 +30,8 @@ public:
 	virtual void ForEach(std::function<bool(IShapeViewModelPtr)> callback) const = 0;
 	[[nodiscard]] virtual size_t GetSize() const = 0;
 	[[nodiscard]] virtual std::optional<std::string> GetSelectedShapeId() const = 0;
-	virtual void ResizeSelected(Frame const& frame) = 0;
-	virtual void ApplyResizeSelected(Frame const& frame) = 0;
+	virtual void ReframeSelected(Frame const& frame) = 0;
+	virtual void ApplyReframeSelected(Frame const& frame) = 0;
 	virtual void ResetSelection() = 0;
 
 	virtual void Undo() = 0;

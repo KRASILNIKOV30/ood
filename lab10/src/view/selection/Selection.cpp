@@ -39,6 +39,8 @@ bool Selection::CheckMouseDown(Point p)
 	const auto [x, y] = position;
 	const auto [width, height] = size;
 
+	wxRegion region = wxRegion(x, y, width, height);
+
 	wxRegion topLeft(x - POINT_WIDTH, y - POINT_WIDTH, POINT_WIDTH * 2, POINT_WIDTH * 2);
 	wxRegion topRight(x + width - POINT_WIDTH, y - POINT_WIDTH, POINT_WIDTH * 2, POINT_WIDTH * 2);
 	wxRegion bottomLeft(x - POINT_WIDTH, y + height - POINT_WIDTH, POINT_WIDTH * 2, POINT_WIDTH * 2);
@@ -88,6 +90,11 @@ bool Selection::CheckMouseDown(Point p)
 	if (right.Contains(p.x, p.y) == wxInRegion)
 	{
 		m_resizeType = ResizeType::Right;
+		return true;
+	}
+	if (region.Contains(p.x, p.y) == wxInRegion)
+	{
+		m_resizeType = ResizeType::Free;
 		return true;
 	}
 	m_startPoint.reset();
@@ -143,6 +150,8 @@ Frame Selection::Reframe(const Point delta) const
 		return ResizeFrame(size, position, -delta.x, 0, delta.x, 0);
 	case ResizeType::Right:
 		return ResizeFrame(size, position, delta.x, 0, 0, 0);
+	case ResizeType::Free:
+		return ResizeFrame(size, position, 0, 0, delta.x, delta.y);
 	}
 
 	throw std::invalid_argument("Invalid resize type");

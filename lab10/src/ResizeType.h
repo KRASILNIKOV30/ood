@@ -9,5 +9,6 @@ enum class ResizeType
 	Top,
 	Bottom,
 	Left,
-	Right
+	Right,
+	Free
 };
