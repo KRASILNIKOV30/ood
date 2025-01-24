@@ -1,9 +1,6 @@
 #pragma once
-#include "IUndoableEdit_fwd.h"
+#include "./IUndoableEdit_fwd.h"
 #include <string>
-
-namespace undo
-{
 
 class IUndoableEdit
 {
@@ -24,5 +21,3 @@ public:
 
 	virtual ~IUndoableEdit() = default;
 };
-
-}

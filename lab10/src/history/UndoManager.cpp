@@ -1,9 +1,6 @@
 #include "./UndoManager.h"
 #include <cassert>
 
-namespace undo
-{
-
 bool UndoManager::CanUndo() const
 {
 	if (m_inProgress)
@@ -160,5 +157,3 @@ void UndoManager::EndImpl()
 {
 	TrimEdits(m_indexOfNextAdd, m_edits.size());
 }
-
-} // namespace undo

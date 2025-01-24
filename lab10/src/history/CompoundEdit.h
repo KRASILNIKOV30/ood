@@ -3,9 +3,6 @@
 #include <optional>
 #include <vector>
 
-namespace undo
-{
-
 class CompoundEdit : public AbstractUndoableEdit
 {
 public:
@@ -35,5 +32,3 @@ private:
 };
 
 typedef std::unique_ptr<CompoundEdit> CompoundEditUniquePtr;
-
-}

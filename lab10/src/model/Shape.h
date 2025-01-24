@@ -22,7 +22,7 @@ public:
 		return m_id;
 	}
 
-	void Reframe(const Frame frame) override
+	void Reframe(Frame const& frame) override
 	{
 		m_frame = frame;
 	}

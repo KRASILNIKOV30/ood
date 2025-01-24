@@ -1,8 +1,7 @@
 #pragma once
-#include "../../../../lab5_cmake/history/AbstractUndoableEdit.h"
 #include "../../model/IShapes.h"
 
-class AddShapeEdit final : public undo::AbstractUndoableEdit
+class AddShapeEdit final : public AbstractUndoableEdit
 {
 public:
 	AddShapeEdit(std::string shapeType, IShapes* shapes)

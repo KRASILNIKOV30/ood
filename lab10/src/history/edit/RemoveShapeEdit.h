@@ -1,10 +1,8 @@
 #pragma once
+#include "../../model/IShapes.h"
 #include <utility>
 
-#include "../../../../lab5_cmake/history/AbstractUndoableEdit.h"
-#include "../../model/IShapes.h"
-
-class RemoveShapeEdit final : public undo::AbstractUndoableEdit
+class RemoveShapeEdit final : public AbstractUndoableEdit
 {
 public:
 	RemoveShapeEdit(IShapePtr shape, const size_t position, IShapes* shapes)

@@ -1,7 +1,5 @@
 #include "./AbstractUndoableEdit.h"
 
-namespace undo
-{
 
 using namespace std;
 
@@ -119,4 +117,3 @@ void AbstractUndoableEdit::SetName(const std::string& name)
 	m_name = name;
 }
 
-} // namespace undo

@@ -2,9 +2,6 @@
 #include <optional>
 #include <ranges>
 
-namespace undo
-{
-
 CompoundEdit::CompoundEdit(const std::optional<std::string>& customName)
 {
 	if (customName)
@@ -119,6 +116,4 @@ IUndoableEditPtr CompoundEdit::GetEdit(const size_t index) const
 	}
 
 	return m_edits[index];
-}
-
 }

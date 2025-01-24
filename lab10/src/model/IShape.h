@@ -1,16 +1,16 @@
 #pragma once
 #include "../Frame.h"
-
+#include "../signals/SignallingValue.h"
 #include <memory>
 #include <string>
+
+using ReframeSignal = Signal<void(Frame const& frame)>;
+using ReframeSlot = ReframeSignal::slot_type;
 
 class IShape
 {
 public:
-	using ReframeSignal = Signal<void(Frame const& frame)>;
-	using ReframeSlot = ReframeSignal::slot_type;
-
-	virtual void Reframe(Frame frame) = 0;
+	virtual void Reframe(Frame const& frame) = 0;
 	virtual ScopedConnection DoOnReframe(ReframeSlot const& slot) = 0;
 
 	[[nodiscard]] virtual Frame GetFrame() const = 0;

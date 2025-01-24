@@ -1,8 +1,5 @@
 #pragma once
-#include "IUndoableEdit.h"
-
-namespace undo
-{
+#include "./IUndoableEdit.h"
 
 class AbstractUndoableEdit : public IUndoableEdit
 {
@@ -34,5 +31,3 @@ private:
 	bool m_canBeReplaced = true;
 	std::string m_name;
 };
-
-}

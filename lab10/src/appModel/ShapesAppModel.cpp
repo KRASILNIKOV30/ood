@@ -1,8 +1,7 @@
-#include "ShapesAppModel.h"
-
+#include "./ShapesAppModel.h"
 #include "../history/edit/AddShapeEdit.h"
 #include "../history/edit/RemoveShapeEdit.h"
-#include "ShapeAppModel.h"
+#include "./ShapeAppModel.h"
 
 ShapesAppModel::ShapesAppModel(IShapes* shapes)
 	: m_shapesDomainModel(shapes)
@@ -95,7 +94,7 @@ bool ShapesAppModel::CanRedo() const
 
 void ShapesAppModel::DoAddShape(IShapePtr const& shape, const size_t position)
 {
-	const auto appShape = std::make_shared<ShapeAppModel>(shape);
+	const auto appShape = std::make_shared<ShapeAppModel>(shape, [&](const auto& edit) { m_history.AddEdit(edit); });
 	m_shapes.Insert(appShape, position);
 	m_addShapeSignal(appShape, position);
 }

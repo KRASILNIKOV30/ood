@@ -1,8 +1,6 @@
 #include "../history/UndoManager.h"
 #include <catch.hpp>
 
-using namespace undo;
-
 class TestEdit final : public AbstractUndoableEdit
 {
 public:

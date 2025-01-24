@@ -1,5 +1,5 @@
 #pragma once
-#include "../../../lab5_cmake/history/UndoManager.h"
+#include "../history/UndoManager.h"
 #include "../model/IShapes.h"
 #include "../repository/Repository.h"
 #include "IShapeAppModel.h"
@@ -36,7 +36,7 @@ private:
 
 private:
 	Repository<IShapeAppModel> m_shapes;
-	undo::UndoManager m_history;
+	UndoManager m_history;
 	IShapes* m_shapesDomainModel;
 	AddShapeSignal m_addShapeSignal;
 	RemoveShapeSignal m_removeShapeSignal;
