@@ -32,6 +32,7 @@ public:
 	[[nodiscard]] virtual std::optional<std::string> GetSelectedShapeId() const = 0;
 	virtual void ResizeSelected(Frame const& frame) = 0;
 	virtual void ApplyResizeSelected(Frame const& frame) = 0;
+	virtual void ResetSelection() = 0;
 
 	virtual void Undo() = 0;
 	virtual void Redo() = 0;

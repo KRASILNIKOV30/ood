@@ -85,6 +85,10 @@ void ShapesViewModel::ApplyResizeSelected(const Frame& frame)
 	}
 	shape.value()->ApplyReframe(frame);
 }
+void ShapesViewModel::ResetSelection()
+{
+	m_selectedId = std::nullopt;
+}
 
 IShapeViewModelPtr ShapesViewModel::GetShape(const std::string& id) const
 {

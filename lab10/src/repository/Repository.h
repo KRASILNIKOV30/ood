@@ -10,7 +10,9 @@
 
 template <typename T>
 concept ItemWithId = requires(T const& t) {
-	{ t.GetId() } -> std::same_as<std::string>;
+	{
+		t.GetId()
+	} -> std::same_as<std::string>;
 };
 
 template <class T>
@@ -25,7 +27,7 @@ public:
 	void Insert(T const& item, std::optional<size_t> position = std::nullopt);
 	void Insert(std::shared_ptr<T> const& item, std::optional<size_t> position = std::nullopt);
 	std::optional<size_t> Remove(std::string const& id);
-	void ForEach(std::function<bool(ConstPtrType item)> callback) const;
+	void ForEach(std::function<bool(ConstPtrType item)> callback, bool reverse = false) const;
 
 	std::optional<ConstPtrType> Find(std::string const& id) const;
 	std::optional<PtrType> Find(std::string const& id);
@@ -103,13 +105,26 @@ std::optional<size_t> Repository<T>::Remove(std::string const& id)
 
 template <class T>
 	requires ItemWithId<T>
-void Repository<T>::ForEach(std::function<bool(ConstPtrType item)> callback) const
+void Repository<T>::ForEach(std::function<bool(ConstPtrType item)> callback, bool reverse) const
 {
-	for (const auto& item : m_items)
+	if (reverse)
 	{
-		if (!callback(item))
+		for (auto it = m_items.rbegin(); it != m_items.rend(); ++it)
 		{
-			return;
+			if (!callback(*it))
+			{
+				return;
+			}
+		}
+	}
+	else
+	{
+		for (const auto& item : m_items)
+		{
+			if (!callback(item))
+			{
+				return;
+			}
 		}
 	}
 }

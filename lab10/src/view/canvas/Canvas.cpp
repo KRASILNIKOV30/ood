@@ -84,9 +84,16 @@ void Canvas::OnMouseDown(wxMouseEvent& event)
 		return;
 	}
 
+	bool shapeClicked = false;
 	m_shapes.ForEach([&](const IShapeViewPtr& shapeView) {
-		return !shapeView->CheckMouseDown(p);
-	});
+		shapeClicked = shapeView->CheckMouseDown(p);
+		return !shapeClicked;
+	},
+		true);
+	if (!shapeClicked)
+	{
+		m_model->ResetSelection();
+	}
 }
 
 void Canvas::OnMouseMove(wxMouseEvent& event)
@@ -98,7 +105,8 @@ void Canvas::OnMouseMove(wxMouseEvent& event)
 	m_shapes.ForEach([&](const IShapeViewPtr& shapeView) {
 		shapeView->MouseMove(p);
 		return true;
-	});
+	},
+		true);
 }
 
 void Canvas::OnMouseUp(wxMouseEvent& event)
@@ -110,7 +118,8 @@ void Canvas::OnMouseUp(wxMouseEvent& event)
 	m_shapes.ForEach([&](const IShapeViewPtr& shapeView) {
 		shapeView->MouseUp(p);
 		return true;
-	});
+	},
+		true);
 }
 
 void Canvas::OnKeyDown(wxKeyEvent& event)

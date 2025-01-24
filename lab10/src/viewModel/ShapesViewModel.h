@@ -31,6 +31,7 @@ public:
 
 	void ResizeSelected(const Frame& frame) override;
 	void ApplyResizeSelected(const Frame& frame) override;
+	void ResetSelection() override;
 
 private:
 	void DoAddShape(IShapeAppModelPtr const& shape, size_t position);
