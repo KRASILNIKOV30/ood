@@ -18,6 +18,9 @@ Canvas::Canvas(wxWindow* parent, IShapesViewModelPtr const& shapes)
 	m_selectedIdConnection = m_model->DoOnSelectionChange([&](const auto& id) {
 		Refresh();
 	});
+	m_updateConnection = m_model->DoOnUpdate([&]() {
+		Refresh();
+	});
 }
 
 void Canvas::AddShape(const std::string& type)
@@ -58,20 +61,40 @@ void Canvas::OnPaint(wxPaintEvent& event)
 {
 	wxPaintDC dc(this);
 
-	DrawSelection(dc);
 	m_shapes.ForEach([&](const IShapeViewPtr& shapeView) {
 		shapeView->Draw(dc);
 		return true;
 	});
+	DrawSelection(dc);
 }
 
 void Canvas::OnMouseDown(wxMouseEvent& event)
 {
 	SetFocus();
-	Point p{ event.GetX(), event.GetY() };
+	const Point p{ event.GetX(), event.GetY() };
 
 	m_shapes.ForEach([&](const IShapeViewPtr& shapeView) {
 		return !shapeView->CheckMouseDown(p);
+	});
+}
+
+void Canvas::OnMouseMove(wxMouseEvent& event)
+{
+	const Point p{ event.GetX(), event.GetY() };
+
+	m_shapes.ForEach([&](const IShapeViewPtr& shapeView) {
+		shapeView->MouseMove(p);
+		return true;
+	});
+}
+
+void Canvas::OnMouseUp(wxMouseEvent& event)
+{
+	const Point p{ event.GetX(), event.GetY() };
+
+	m_shapes.ForEach([&](const IShapeViewPtr& shapeView) {
+		shapeView->MouseUp(p);
+		return true;
 	});
 }
 
@@ -92,4 +115,6 @@ wxBEGIN_EVENT_TABLE(Canvas, wxPanel)
 	EVT_PAINT(Canvas::OnPaint)
 		EVT_LEFT_DOWN(Canvas::OnMouseDown)
 			EVT_KEY_DOWN(Canvas::OnKeyDown)
-				wxEND_EVENT_TABLE()
+				EVT_MOTION(Canvas::OnMouseMove)
+					EVT_LEFT_UP(Canvas::OnMouseUp)
+						wxEND_EVENT_TABLE()

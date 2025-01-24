@@ -46,6 +46,10 @@ ScopedConnection ShapesViewModel::DoOnSelectionChange(const SelectionChangeSlot&
 {
 	return m_selectedId.Connect1(slot, false);
 }
+ScopedConnection ShapesViewModel::DoOnUpdate(UpdateSlot const& slot)
+{
+	return m_updateSignal.connect(slot);
+}
 
 IShapeViewModelPtr ShapesViewModel::GetShape(const std::string& id) const
 {
@@ -108,6 +112,9 @@ void ShapesViewModel::DoAddShape(IShapeAppModelPtr const& shape, size_t position
 	const auto id = shapeViewModel->GetId();
 	m_onShapeClickConnections.push_back(shapeViewModel->DoOnClick([id, this] {
 		m_selectedId = id;
+	}));
+	m_reframeShapeConnections.push_back(shapeViewModel->DoOnReframe([&](const auto& frame) {
+		m_updateSignal();
 	}));
 	m_selectedId = id;
 	m_addShapeSignal(shapeViewModel, position);

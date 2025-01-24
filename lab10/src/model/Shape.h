@@ -29,7 +29,7 @@ public:
 
 	ScopedConnection DoOnReframe(ReframeSlot const& slot) override
 	{
-		return m_frame.Connect1(slot, false);
+		return m_frame.Connect1(slot, true);
 	}
 
 private:

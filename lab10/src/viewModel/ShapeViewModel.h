@@ -8,6 +8,9 @@ public:
 	ShapeViewModel(IShapeAppModelPtr shape)
 		: m_shape(std::move(shape))
 	{
+		m_reframeConnection = m_shape->DoOnReframe([&](const auto& frame) {
+			m_frame = frame;
+		});
 	}
 
 	[[nodiscard]] std::string GetId() const override
@@ -17,7 +20,7 @@ public:
 
 	[[nodiscard]] Frame GetFrame() const override
 	{
-		return m_shape->GetFrame();
+		return m_frame.GetValue();
 	}
 
 	[[nodiscard]] std::string GetType() const override
@@ -25,23 +28,55 @@ public:
 		return m_shape->GetType();
 	}
 
-	void SetSelected(const bool selected) override
-	{
-		m_selected = selected;
-	}
-
-	void Click() override
-	{
-		m_clickSignal();
-	}
-
 	ScopedConnection DoOnClick(const ClickSignalSlot& slot) override
 	{
 		return m_clickSignal.connect(slot);
 	}
 
+	ScopedConnection DoOnReframe(const ReframeSlot& slot) override
+	{
+		return m_frame.Connect1(slot, false);
+	}
+
+	void Click(const Point p) override
+	{
+		m_clickSignal();
+		m_startPosition = p;
+	}
+
+	void Drag(const Point p) override
+	{
+		if (!m_startPosition.has_value())
+		{
+			return;
+		}
+		const auto start = m_startPosition.value();
+		const auto [position, size] = m_frame.GetValue();
+		const auto delta = p - start;
+		const auto newPos = position + delta;
+		m_frame = { newPos, size };
+		m_startPosition = p;
+	}
+
+	void Drop(const Point p) override
+	{
+		if (!m_startPosition.has_value())
+		{
+			return;
+		}
+		const auto start = m_startPosition.value();
+		const auto [position, size] = m_frame.GetValue();
+		const auto newPos = position + p - start;
+		m_frame = { newPos, size };
+		m_shape->Reframe(m_frame.GetValue());
+		m_startPosition.reset();
+	}
+
 private:
+	SignallingValue<Frame> m_frame;
+	ScopedConnection m_reframeConnection;
 	ClickSignal m_clickSignal;
 	IShapeAppModelPtr m_shape;
 	bool m_selected = false;
+	std::optional<Point> m_startPosition = std::nullopt;
 };

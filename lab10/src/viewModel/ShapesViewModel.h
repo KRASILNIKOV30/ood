@@ -27,6 +27,7 @@ public:
 	ScopedConnection DoOnAddShape(const AddShapeSlot& slot) override;
 	ScopedConnection DoOnRemoveShape(const RemoveShapeSlot& slot) override;
 	ScopedConnection DoOnSelectionChange(const SelectionChangeSlot& slot) override;
+	ScopedConnection DoOnUpdate(UpdateSlot const& slot) override;
 
 private:
 	void DoAddShape(IShapeAppModelPtr const& shape, size_t position);
@@ -38,7 +39,9 @@ private:
 	SignallingValue<std::optional<std::string>> m_selectedId;
 	AddShapeSignal m_addShapeSignal;
 	RemoveShapeSignal m_removeShapeSignal;
+	UpdateSignal m_updateSignal;
 	ScopedConnection m_addShapeSignalConnection;
 	ScopedConnection m_removeShapeSignalConnection;
 	std::vector<ScopedConnection> m_onShapeClickConnections;
+	std::vector<ScopedConnection> m_reframeShapeConnections;
 };

@@ -17,6 +17,16 @@ struct Point
 	int y;
 };
 
+inline Point operator+(const Point& left, const Point& right)
+{
+	return { left.x + right.x, left.y + right.y };
+}
+
+inline Point operator-(const Point& left, const Point& right)
+{
+	return { left.x - right.x, left.y - right.y };
+}
+
 inline bool operator==(const Point& lhs, const Point& rhs)
 {
 	return lhs.x == rhs.x && lhs.y == rhs.y;

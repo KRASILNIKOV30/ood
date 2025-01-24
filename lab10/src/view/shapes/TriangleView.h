@@ -6,39 +6,40 @@ class TriangleView final : public ShapeView
 public:
 	explicit TriangleView(const IShapeViewModelPtr& shape)
 		: ShapeView(shape)
-		, m_frame(shape->GetFrame())
 	{
 	}
 
 	void Draw(wxDC& dc) const override
 	{
-		const auto points = GetPoints();
-		dc.DrawPolygon(3, points);
-	}
+		dc.SetPen(wxPen(*wxBLACK));
+		dc.SetBrush(*wxRED);
 
-	[[nodiscard]] bool HitTest(const Point p) const override
-	{
-		const auto points = GetPoints();
-		const wxRegion region(3, points);
-		return region.Contains(p.x, p.y) == wxInRegion;
-	}
-
-private:
-	[[nodiscard]] wxPoint* GetPoints() const
-	{
-		const auto [position, size] = m_frame;
+		const auto [position, size] = GetFrame();
 		const auto [x, y] = position;
 		const auto [width, height] = size;
 
-		static wxPoint points[3] = {
+		wxPoint points[3] = {
 			{ x + width / 2, y },
 			{ x, y + height },
 			{ x + width, y + height }
 		};
 
-		return points;
+		dc.DrawPolygon(3, points);
 	}
 
-private:
-	Frame m_frame;
+	[[nodiscard]] bool HitTest(const Point p) const override
+	{
+		const auto [position, size] = GetFrame();
+		const auto [x, y] = position;
+		const auto [width, height] = size;
+
+		wxPoint points[3] = {
+			{ x + width / 2, y },
+			{ x, y + height },
+			{ x + width, y + height }
+		};
+
+		const wxRegion region(3, points);
+		return region.Contains(p.x, p.y) == wxInRegion;
+	}
 };

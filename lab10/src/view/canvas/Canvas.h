@@ -22,6 +22,8 @@ private:
 
 	void OnPaint(wxPaintEvent& event);
 	void OnMouseDown(wxMouseEvent& event);
+	void OnMouseMove(wxMouseEvent& event);
+	void OnMouseUp(wxMouseEvent& event);
 	void OnKeyDown(wxKeyEvent& event);
 
 private:
@@ -30,6 +32,7 @@ private:
 	ScopedConnection m_addShapesConnection;
 	ScopedConnection m_removeShapesConnection;
 	ScopedConnection m_selectedIdConnection;
+	ScopedConnection m_updateConnection;
 	ISelectionPtr m_selection = std::make_shared<Selection>();
 
 	wxDECLARE_EVENT_TABLE();

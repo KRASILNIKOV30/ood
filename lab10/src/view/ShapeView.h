@@ -12,7 +12,7 @@ public:
 	{
 	}
 
-	Frame GetFrame() override
+	[[nodiscard]] Frame GetFrame() const override
 	{
 		return m_shape->GetFrame();
 	}
@@ -27,13 +27,24 @@ public:
 		const auto clicked = HitTest(p);
 		if (clicked)
 		{
-			m_shape->Click();
+			m_shape->Click(p);
 		}
 		return clicked;
 	}
 
 	[[nodiscard]] virtual bool HitTest(Point p) const = 0;
 
+	void MouseMove(Point const p) const override
+	{
+		m_shape->Drag(p);
+	}
+
+	void MouseUp(Point const p) const override
+	{
+		m_shape->Drop(p);
+	}
+
 private:
 	IShapeViewModelPtr m_shape;
+	ScopedConnection m_reframeConnection;
 };

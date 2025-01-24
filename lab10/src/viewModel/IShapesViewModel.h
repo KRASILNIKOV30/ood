@@ -12,6 +12,8 @@ public:
 	using RemoveShapeSlot = RemoveShapeSignal::slot_type;
 	using SelectionChangeSignal = Signal<void(std::optional<std::string> const& id)>;
 	using SelectionChangeSlot = SelectionChangeSignal::slot_type;
+	using UpdateSignal = EmptySignal;
+	using UpdateSlot = UpdateSignal::slot_type;
 
 	virtual void AddShape(std::string const& shapeType) = 0;
 	virtual void RemoveShape() = 0;
@@ -19,6 +21,7 @@ public:
 	virtual ScopedConnection DoOnAddShape(const AddShapeSlot& slot) = 0;
 	virtual ScopedConnection DoOnRemoveShape(const RemoveShapeSlot& slot) = 0;
 	virtual ScopedConnection DoOnSelectionChange(const SelectionChangeSlot& slot) = 0;
+	virtual ScopedConnection DoOnUpdate(const UpdateSlot&) = 0;
 
 	[[nodiscard]] virtual IShapeViewModelPtr GetShape(std::string const& id) const = 0;
 	virtual IShapeViewModelPtr GetShape(std::string const& id) = 0;

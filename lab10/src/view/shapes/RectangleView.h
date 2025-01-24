@@ -6,13 +6,15 @@ class RectangleView final : public ShapeView
 public:
 	explicit RectangleView(const IShapeViewModelPtr& shape)
 		: ShapeView(shape)
-		, m_frame(shape->GetFrame())
 	{
 	}
 
 	void Draw(wxDC& dc) const override
 	{
-		const auto [position, size] = m_frame;
+		dc.SetPen(wxPen(*wxBLACK));
+		dc.SetBrush(*wxGREEN);
+
+		const auto [position, size] = GetFrame();
 		const auto [x, y] = position;
 		const auto [width, height] = size;
 
@@ -21,13 +23,10 @@ public:
 
 	[[nodiscard]] bool HitTest(Point p) const override
 	{
-		const auto [position, size] = m_frame;
+		const auto [position, size] = GetFrame();
 		const auto [x, y] = position;
 		const auto [width, height] = size;
 
 		return (p.x >= x && p.x <= x + width && p.y >= y && p.y <= y + height);
 	}
-
-private:
-	Frame m_frame;
 };
