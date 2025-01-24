@@ -6,6 +6,7 @@ Canvas::Canvas(wxWindow* parent, IShapesViewModelPtr const& shapes)
 	: wxPanel(parent)
 	, m_model(shapes)
 {
+	wxNavigationEnabled<wxWindow>::SetFocus();
 	wxWindow::SetBackgroundStyle(wxBG_STYLE_PAINT);
 
 	m_addShapesConnection = m_model->DoOnAddShape([&](const auto& shape, size_t pos) {
@@ -34,6 +35,7 @@ void Canvas::DoAddShape(const IShapeViewModelPtr& shapeModel, size_t pos)
 void Canvas::DoRemoveShape(const std::string& id)
 {
 	m_shapes.Remove(id);
+	Refresh();
 }
 
 void Canvas::DrawSelection(wxDC& dc)
@@ -43,8 +45,12 @@ void Canvas::DrawSelection(wxDC& dc)
 	{
 		return;
 	}
-	const auto shape = m_shapes.Get(selectedShapeId.value());
-	const auto frame = shape->GetFrame();
+	const auto shape = m_shapes.Find(selectedShapeId.value());
+	if (!shape.has_value())
+	{
+		return;
+	}
+	const auto frame = shape.value()->GetFrame();
 	m_selection->Draw(dc, frame);
 }
 
@@ -61,6 +67,7 @@ void Canvas::OnPaint(wxPaintEvent& event)
 
 void Canvas::OnMouseDown(wxMouseEvent& event)
 {
+	SetFocus();
 	Point p{ event.GetX(), event.GetY() };
 
 	m_shapes.ForEach([&](const IShapeViewPtr& shapeView) {
@@ -68,7 +75,21 @@ void Canvas::OnMouseDown(wxMouseEvent& event)
 	});
 }
 
+void Canvas::OnKeyDown(wxKeyEvent& event)
+{
+	if (event.GetModifiers() == wxMOD_CONTROL && event.GetKeyCode() == 'Z')
+	{
+		m_model->Undo();
+	}
+	if (event.GetModifiers() == wxMOD_CONTROL && event.GetKeyCode() == 'Y')
+	{
+		m_model->Redo();
+	}
+	event.Skip();
+}
+
 wxBEGIN_EVENT_TABLE(Canvas, wxPanel)
 	EVT_PAINT(Canvas::OnPaint)
 		EVT_LEFT_DOWN(Canvas::OnMouseDown)
-			wxEND_EVENT_TABLE()
+			EVT_KEY_DOWN(Canvas::OnKeyDown)
+				wxEND_EVENT_TABLE()

@@ -22,6 +22,7 @@ private:
 
 	void OnPaint(wxPaintEvent& event);
 	void OnMouseDown(wxMouseEvent& event);
+	void OnKeyDown(wxKeyEvent& event);
 
 private:
 	Repository<IShapeView> m_shapes;

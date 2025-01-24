@@ -4,7 +4,7 @@
 #include <utility>
 
 ShapesViewModel::ShapesViewModel(IShapesAppModelPtr const& shapesAppModel)
-																																						: m_shapesAppModel(shapesAppModel)
+	: m_shapesAppModel(shapesAppModel)
 {
 	m_addShapeSignalConnection = m_shapesAppModel->DoOnAddShape([&](const auto& shape, const auto pos) {
 		DoAddShape(shape, pos);
@@ -109,6 +109,7 @@ void ShapesViewModel::DoAddShape(IShapeAppModelPtr const& shape, size_t position
 	m_onShapeClickConnections.push_back(shapeViewModel->DoOnClick([=] {
 		m_selectedId = id;
 	}));
+	m_selectedId = id;
 	m_addShapeSignal(shapeViewModel, position);
 }
 
