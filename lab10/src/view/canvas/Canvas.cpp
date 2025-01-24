@@ -21,6 +21,12 @@ Canvas::Canvas(wxWindow* parent, IShapesViewModelPtr const& shapes)
 	m_updateConnection = m_model->DoOnUpdate([&]() {
 		Refresh();
 	});
+	m_resizeConnection = m_selection->DoOnReframe([&](const auto& frame) {
+		m_model->ResizeSelected(frame);
+	});
+	m_applyResizeConnection = m_selection->DoOnApplyReframe([&](const auto& frame) {
+		m_model->ApplyResizeSelected(frame);
+	});
 }
 
 void Canvas::AddShape(const std::string& type)
@@ -73,6 +79,11 @@ void Canvas::OnMouseDown(wxMouseEvent& event)
 	SetFocus();
 	const Point p{ event.GetX(), event.GetY() };
 
+	if (m_selection->CheckMouseDown(p))
+	{
+		return;
+	}
+
 	m_shapes.ForEach([&](const IShapeViewPtr& shapeView) {
 		return !shapeView->CheckMouseDown(p);
 	});
@@ -81,6 +92,8 @@ void Canvas::OnMouseDown(wxMouseEvent& event)
 void Canvas::OnMouseMove(wxMouseEvent& event)
 {
 	const Point p{ event.GetX(), event.GetY() };
+
+	m_selection->MouseMove(p);
 
 	m_shapes.ForEach([&](const IShapeViewPtr& shapeView) {
 		shapeView->MouseMove(p);
@@ -91,6 +104,8 @@ void Canvas::OnMouseMove(wxMouseEvent& event)
 void Canvas::OnMouseUp(wxMouseEvent& event)
 {
 	const Point p{ event.GetX(), event.GetY() };
+
+	m_selection->MouseUp(p);
 
 	m_shapes.ForEach([&](const IShapeViewPtr& shapeView) {
 		shapeView->MouseUp(p);
@@ -107,6 +122,10 @@ void Canvas::OnKeyDown(wxKeyEvent& event)
 	if (event.GetModifiers() == wxMOD_CONTROL && event.GetKeyCode() == 'Y')
 	{
 		m_model->Redo();
+	}
+	if (event.GetKeyCode() == WXK_DELETE)
+	{
+		m_model->RemoveShape();
 	}
 	event.Skip();
 }

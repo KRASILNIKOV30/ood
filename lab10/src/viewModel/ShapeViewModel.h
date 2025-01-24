@@ -54,7 +54,7 @@ public:
 		const auto [position, size] = m_frame.GetValue();
 		const auto delta = p - start;
 		const auto newPos = position + delta;
-		m_frame = { newPos, size };
+		Reframe({ newPos, size });
 		m_startPosition = p;
 	}
 
@@ -67,9 +67,19 @@ public:
 		const auto start = m_startPosition.value();
 		const auto [position, size] = m_frame.GetValue();
 		const auto newPos = position + p - start;
-		m_frame = { newPos, size };
-		m_shape->Reframe(m_frame.GetValue());
+		Reframe({ newPos, size });
+		ApplyReframe(m_frame.GetValue());
 		m_startPosition.reset();
+	}
+
+	void Reframe(const Frame& frame) override
+	{
+		m_frame = frame;
+	}
+
+	void ApplyReframe(const Frame& frame) override
+	{
+		m_shape->Reframe(frame);
 	}
 
 private:

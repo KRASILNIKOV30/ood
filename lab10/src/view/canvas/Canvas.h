@@ -33,6 +33,8 @@ private:
 	ScopedConnection m_removeShapesConnection;
 	ScopedConnection m_selectedIdConnection;
 	ScopedConnection m_updateConnection;
+	ScopedConnection m_resizeConnection;
+	ScopedConnection m_applyResizeConnection;
 	ISelectionPtr m_selection = std::make_shared<Selection>();
 
 	wxDECLARE_EVENT_TABLE();

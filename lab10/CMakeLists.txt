@@ -49,6 +49,7 @@ add_executable(shapes
         src/view/shapes/EllipseView.h
         src/EditSink.h
         src/history/edit/ReframeEdit.h
+        src/ResizeType.h
 )
 
 add_executable(shapes_tests

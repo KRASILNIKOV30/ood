@@ -22,6 +22,9 @@ public:
 	virtual void Drag(Point p) = 0;
 	virtual void Drop(Point p) = 0;
 
+	virtual void Reframe(Frame const& frame) = 0;
+	virtual void ApplyReframe(Frame const& frame) = 0;
+
 	virtual ~IShapeViewModel() = default;
 };
 

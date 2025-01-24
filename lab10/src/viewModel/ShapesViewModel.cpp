@@ -50,6 +50,41 @@ ScopedConnection ShapesViewModel::DoOnUpdate(UpdateSlot const& slot)
 {
 	return m_updateSignal.connect(slot);
 }
+void ShapesViewModel::ResizeSelected(const Frame& frame)
+{
+	const auto shape = GetSelectedShape();
+	if (!shape.has_value())
+	{
+		return;
+	}
+	shape.value()->Reframe(frame);
+}
+
+std::optional<IShapeViewModelPtr> ShapesViewModel::GetSelectedShape() const
+{
+	const auto idOpt = GetSelectedShapeId();
+	if (!idOpt.has_value())
+	{
+		return std::nullopt;
+	}
+	const auto& id = idOpt.value();
+	const auto shape = m_shapes.Find(id);
+	if (!shape.has_value())
+	{
+		return std::nullopt;
+	}
+	return shape;
+}
+
+void ShapesViewModel::ApplyResizeSelected(const Frame& frame)
+{
+	const auto shape = GetSelectedShape();
+	if (!shape.has_value())
+	{
+		return;
+	}
+	shape.value()->ApplyReframe(frame);
+}
 
 IShapeViewModelPtr ShapesViewModel::GetShape(const std::string& id) const
 {
