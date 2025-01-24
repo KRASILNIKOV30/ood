@@ -3,13 +3,14 @@
 #include "../repository/Repository.h"
 #include "IShapesViewModel.h"
 
+using Ids = std::vector<std::string>;
+
 class ShapesViewModel final : public IShapesViewModel
 {
 public:
 	ShapesViewModel(IShapesAppModelPtr const& shapesAppModel);
 	void AddShape(const std::string& shapeType) override;
-	void RemoveShape() override;
-	void OnCanvasClick() override;
+	void RemoveSelectedShapes() override;
 
 	[[nodiscard]] IShapeViewModelPtr GetShape(const std::string& id) const override;
 	IShapeViewModelPtr GetShape(const std::string& id) override;
@@ -17,7 +18,7 @@ public:
 	IShapeViewModelPtr GetShape(size_t position) override;
 	void ForEach(std::function<bool(IShapeViewModelPtr)> callback) const override;
 	[[nodiscard]] size_t GetSize() const override;
-	[[nodiscard]] std::optional<std::string> GetSelectedShapeId() const override;
+	[[nodiscard]] Ids GetSelectedShapeId() const override;
 
 	void Undo() override;
 	void Redo() override;
@@ -32,16 +33,20 @@ public:
 	void ReframeSelected(const Frame& frame) override;
 	void ApplyReframeSelected(const Frame& frame) override;
 	void ResetSelection() override;
+	std::optional<Frame> GetSelectedFrame() const override;
 
 private:
+	void ReselectShape(std::string const& id);
+	void SelectShape(std::string const& id);
 	void DoAddShape(IShapeAppModelPtr const& shape, size_t position);
 	void DoRemoveShape(std::string const& id);
-	std::optional<IShapeViewModelPtr> GetSelectedShape() const;
+	std::vector<IShapeViewModelPtr> GetSelectedShapes() const;
 
 private:
 	IShapesAppModelPtr m_shapesAppModel;
 	Repository<IShapeViewModel> m_shapes;
-	SignallingValue<std::optional<std::string>> m_selectedId;
+	Ids m_selectedIds;
+	SelectionChangeSignal m_selectionChangeSignal;
 	AddShapeSignal m_addShapeSignal;
 	RemoveShapeSignal m_removeShapeSignal;
 	UpdateSignal m_updateSignal;
@@ -50,3 +55,16 @@ private:
 	std::vector<ScopedConnection> m_onShapeClickConnections;
 	std::vector<ScopedConnection> m_reframeShapeConnections;
 };
+
+inline bool operator==(Ids const& left, Ids const& right)
+{
+	bool result = left.size() == right.size();
+	if (result)
+	{
+		for (size_t i = 0; i < left.size(); i++)
+		{
+			result &= left[i] == right[i];
+		}
+	}
+	return result;
+}

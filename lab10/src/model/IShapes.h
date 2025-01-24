@@ -21,7 +21,7 @@ public:
 	[[nodiscard]] virtual IShapePtr GetShape(std::string const& id) = 0;
 	[[nodiscard]] virtual size_t GetSize() const = 0;
 	virtual void ForEach(std::function<bool(IShapePtr)> callback) const = 0;
-
+	// [[nodiscard]]
 	virtual ScopedConnection DoOnAddShape(AddShapeSlot const& slot) = 0;
 	virtual ScopedConnection DoOnRemoveShape(RemoveShapeSlot const& slot) = 0;
 

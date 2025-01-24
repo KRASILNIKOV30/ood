@@ -22,12 +22,12 @@ public:
 		return m_shape->GetId();
 	}
 
-	[[nodiscard]] bool CheckMouseDown(Point p) const override
+	[[nodiscard]] bool CheckMouseDown(Point p, bool ctrl) const override
 	{
 		const auto clicked = HitTest(p);
 		if (clicked)
 		{
-			m_shape->Click(p);
+			m_shape->Click(p, ctrl);
 		}
 		return clicked;
 	}

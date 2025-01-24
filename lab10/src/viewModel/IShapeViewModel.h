@@ -8,7 +8,7 @@
 class IShapeViewModel
 {
 public:
-	using ClickSignal = EmptySignal;
+	using ClickSignal = Signal<void(bool ctrl)>;
 	using ClickSignalSlot = ClickSignal::slot_type;
 
 	virtual ScopedConnection DoOnReframe(ReframeSlot const& slot) = 0;
@@ -18,7 +18,7 @@ public:
 	[[nodiscard]] virtual Frame GetFrame() const = 0;
 	[[nodiscard]] virtual std::string GetType() const = 0;
 
-	virtual void Click(Point p) = 0;
+	virtual void Click(Point p, bool ctrl) = 0;
 	virtual void Drag(Point p) = 0;
 	virtual void Drop(Point p) = 0;
 

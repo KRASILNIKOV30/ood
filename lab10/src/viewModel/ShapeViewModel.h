@@ -38,9 +38,9 @@ public:
 		return m_frame.Connect1(slot, false);
 	}
 
-	void Click(const Point p) override
+	void Click(const Point p, bool ctrl) override
 	{
-		m_clickSignal();
+		m_clickSignal(ctrl);
 		m_startPosition = p;
 	}
 

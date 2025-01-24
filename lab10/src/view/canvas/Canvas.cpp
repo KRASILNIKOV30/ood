@@ -15,7 +15,7 @@ Canvas::Canvas(wxWindow* parent, IShapesViewModelPtr const& shapes)
 	m_removeShapesConnection = m_model->DoOnRemoveShape([&](const auto& id) {
 		DoRemoveShape(id);
 	});
-	m_selectedIdConnection = m_model->DoOnSelectionChange([&](const auto& id) {
+	m_selectedIdConnection = m_model->DoOnSelectionChange([&] {
 		Refresh();
 	});
 	m_updateConnection = m_model->DoOnUpdate([&]() {
@@ -49,18 +49,11 @@ void Canvas::DoRemoveShape(const std::string& id)
 
 void Canvas::DrawSelection(wxDC& dc)
 {
-	const auto selectedShapeId = m_model->GetSelectedShapeId();
-	if (!selectedShapeId.has_value())
+	const auto frame = m_model->GetSelectedFrame();
+	if (frame.has_value())
 	{
-		return;
+		m_selection->Draw(dc, frame.value());
 	}
-	const auto shape = m_shapes.Find(selectedShapeId.value());
-	if (!shape.has_value())
-	{
-		return;
-	}
-	const auto frame = shape.value()->GetFrame();
-	m_selection->Draw(dc, frame);
 }
 
 void Canvas::OnPaint(wxPaintEvent& event)
@@ -86,7 +79,7 @@ void Canvas::OnMouseDown(wxMouseEvent& event)
 
 	bool shapeClicked = false;
 	m_shapes.ForEach([&](const IShapeViewPtr& shapeView) {
-		shapeClicked = shapeView->CheckMouseDown(p);
+		shapeClicked = shapeView->CheckMouseDown(p, event.m_controlDown);
 		return !shapeClicked;
 	},
 		true);
@@ -134,7 +127,7 @@ void Canvas::OnKeyDown(wxKeyEvent& event)
 	}
 	if (event.GetKeyCode() == WXK_DELETE)
 	{
-		m_model->RemoveShape();
+		m_model->RemoveSelectedShapes();
 	}
 	event.Skip();
 }
