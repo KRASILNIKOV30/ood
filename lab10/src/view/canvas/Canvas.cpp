@@ -72,9 +72,13 @@ void Canvas::OnMouseDown(wxMouseEvent& event)
 	SetFocus();
 	const Point p{ event.GetX(), event.GetY() };
 
-	if (m_selection->CheckMouseDown(p))
+	const auto frame = m_model->GetSelectedFrame();
+	if (frame.has_value())
 	{
-		return;
+		if (m_selection->CheckMouseDown(p))
+		{
+			return;
+		}
 	}
 
 	bool shapeClicked = false;
