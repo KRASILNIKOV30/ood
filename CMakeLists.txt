@@ -11,7 +11,10 @@ add_subdirectory(lab8)
 add_subdirectory(lab9)
 add_subdirectory(lab10)
 
-add_library(catch2 INTERFACE)
+add_subdirectory(exam/src)
+
+add_library(catch2 INTERFACE
+        exam/src/main.cpp)
 add_library(coutBuffer INTERFACE)
 target_include_directories(catch2 INTERFACE external/catch2/)
 target_include_directories(coutBuffer INTERFACE external/core/)
